@@ -8,7 +8,7 @@ const SUPABASE_URL = "https://jdvmhhrzaxrigojwgfv.supabase.co";
 
 // 2. Paste your PUBLIC/PUBLISHABLE key here
 // It starts with: sb_publishable_...
-const SUPABASE_PUBLISHABLE_KEY = "PASTE_YOUR_PUBLISHABLE_KEY_HERE";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_S11K_1s9Th4fG0XIif-A9A_YmUxQl38";
 
 
 // Create Supabase client
