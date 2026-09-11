@@ -169,7 +169,7 @@ reportForm.addEventListener("submit", async function (event) {
   // SUCCESS
   // =========================================
 
-  caseIdBox.textContent = data.case_id;
+  caseIdBox.textContent = newCaseId;
 
   caseResult.classList.remove("hidden");
 
