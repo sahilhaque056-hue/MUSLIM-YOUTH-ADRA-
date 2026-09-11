@@ -1,326 +1,310 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>MUSLIM YOUTH ADRA</title>
+  <title>MUSLIM YOUTH ADRA</title>
 
-    <meta name="description"
-          content="MUSLIM YOUTH ADRA - Responsible documentation and reporting of online hate and harassment.">
-
-    <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- Header -->
-    <header class="header">
-        <div class="logo">
-            MUSLIM <span>YOUTH</span> ADRA
-        </div>
-
-        <a href="#report" class="header-btn">
-            Report Content
-        </a>
-    </header>
-
-
-    <!-- Hero -->
-    <main>
-
-        <section class="hero">
-
-            <div class="hero-content">
-
-                <div class="badge">
-                    🛡️ RESPONSIBLE REPORTING
-                </div>
-
-                <h1>
-                    MUSLIM YOUTH <span>ADRA</span>
-                </h1>
-
-                <p>
-                    Help document online hate, harassment and threatening
-                    content responsibly and guide reports through official channels.
-                </p>
-
-                <div class="hero-buttons">
-                    <a href="#report" class="primary-btn">
-                        Report Content
-                    </a>
-
-                    <a href="#how" class="secondary-btn">
-                        How It Works
-                    </a>
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- How it works -->
-        <section class="section" id="how">
-
-            <div class="section-title">
-                <p class="small-title">HOW IT WORKS</p>
-
-                <h2>
-                    Document. Verify. Report.
-                </h2>
-
-                <p>
-                    Our goal is to help users preserve evidence and use
-                    appropriate official reporting channels.
-                </p>
-            </div>
-
-
-            <div class="steps">
-
-                <div class="step-card">
-                    <div class="step-number">01</div>
-
-                    <h3>Document</h3>
-
-                    <p>
-                        Save the original post or reel URL and relevant
-                        evidence.
-                    </p>
-                </div>
-
-
-                <div class="step-card">
-                    <div class="step-number">02</div>
-
-                    <h3>Review</h3>
-
-                    <p>
-                        Provide accurate information and avoid false or
-                        retaliatory reports.
-                    </p>
-                </div>
-
-
-                <div class="step-card">
-                    <div class="step-number">03</div>
-
-                    <h3>Report</h3>
-
-                    <p>
-                        Use the appropriate official platform or authority
-                        reporting channel.
-                    </p>
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- Report -->
-        <section class="report-section" id="report">
-
-            <div class="report-box">
-
-                <div class="section-title">
-                    <p class="small-title">REPORT CONTENT</p>
-
-                    <h2>
-                        Submit a Report
-                    </h2>
-
-                    <p>
-                        Please provide accurate information. Do not submit
-                        private or unnecessary personal information.
-                    </p>
-                </div>
-
-
-                <form id="reportForm">
-
-                    <div class="form-group">
-
-                        <label for="url">
-                            Content URL
-                        </label>
-
-                        <input
-                            type="url"
-                            id="url"
-                            placeholder="https://www.instagram.com/..."
-                            required
-                        >
-
-                    </div>
-
-
-                    <div class="form-row">
-
-                        <div class="form-group">
-
-                            <label for="platform">
-                                Platform
-                            </label>
-
-                            <select id="platform" required>
-
-                                <option value="">
-                                    Select platform
-                                </option>
-
-                                <option value="Instagram">
-                                    Instagram
-                                </option>
-
-                                <option value="Facebook">
-                                    Facebook
-                                </option>
-
-                                <option value="YouTube">
-                                    YouTube
-                                </option>
-
-                                <option value="X">
-                                    X
-                                </option>
-
-                                <option value="Other">
-                                    Other
-                                </option>
-
-                            </select>
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label for="category">
-                                Category
-                            </label>
-
-                            <select id="category" required>
-
-                                <option value="">
-                                    Select category
-                                </option>
-
-                                <option value="Hate Speech">
-                                    Hate Speech
-                                </option>
-
-                                <option value="Religious Harassment">
-                                    Religious Harassment
-                                </option>
-
-                                <option value="Threat / Violence">
-                                    Threat / Violence
-                                </option>
-
-                                <option value="Targeted Abuse">
-                                    Targeted Abuse
-                                </option>
-
-                                <option value="Other">
-                                    Other
-                                </option>
-
-                            </select>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="form-group">
-
-                        <label for="description">
-                            Description
-                        </label>
-
-                        <textarea
-                            id="description"
-                            rows="5"
-                            placeholder="Briefly describe the content..."
-                            required
-                        ></textarea>
-
-                    </div>
-
-
-                    <div class="notice">
-
-                        <strong>⚠ Responsible use</strong>
-
-                        <p>
-                            Do not use this form for revenge, harassment,
-                            false accusations or sharing someone's private
-                            information.
-                        </p>
-
-                    </div>
-
-
-                    <button type="submit" class="submit-btn">
-                        Submit Report
-                    </button>
-
-                </form>
-
-
-                <div id="successMessage" class="success-message">
-
-                    <div class="success-icon">
-                        ✓
-                    </div>
-
-                    <h3>
-                        Report Recorded
-                    </h3>
-
-                    <p id="caseId"></p>
-
-                    <p>
-                        Please use the platform's official reporting system
-                        for further action.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <!-- Footer -->
-    <footer>
-
-        <div class="footer-logo">
-            MUSLIM YOUTH ADRA
-        </div>
-
-        <p>
-            Responsible documentation • Official reporting • Community awareness
+  <!-- HEADER -->
+  <header class="header">
+    <div class="logo">
+      <span>☪</span>
+      <div>
+        <h1>MUSLIM YOUTH ADRA</h1>
+        <p>Report • Document • Take Action</p>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- MAIN -->
+  <main class="container">
+
+    <section class="hero">
+      <h2>Report Online Hate</h2>
+
+      <p>
+        Report hateful, threatening or harassing content found online.
+        Collect the important details and create a proper case record.
+      </p>
+    </section>
+
+
+    <!-- REPORT FORM -->
+    <section class="card">
+
+      <h2>📝 Create a Report</h2>
+
+      <form id="reportForm">
+
+        <!-- URL -->
+        <label for="contentUrl">
+          Post / Reel / Video / Profile URL
+        </label>
+
+        <input
+          type="url"
+          id="contentUrl"
+          placeholder="https://www.instagram.com/..."
+          required
+        >
+
+
+        <!-- PLATFORM -->
+        <label for="platform">
+          Platform
+        </label>
+
+        <select id="platform" required>
+          <option value="">Select platform</option>
+          <option value="Instagram">Instagram</option>
+          <option value="Facebook">Facebook</option>
+          <option value="YouTube">YouTube</option>
+          <option value="X">X (Twitter)</option>
+          <option value="TikTok">TikTok</option>
+          <option value="Other">Other</option>
+        </select>
+
+
+        <!-- CONTENT TYPE -->
+        <label for="contentType">
+          Content Type
+        </label>
+
+        <select id="contentType" required>
+          <option value="">Select content type</option>
+          <option value="Post">Post</option>
+          <option value="Reel">Reel</option>
+          <option value="Story">Story</option>
+          <option value="Video">Video</option>
+          <option value="Comment">Comment</option>
+          <option value="Profile">Profile</option>
+          <option value="Message">Message</option>
+          <option value="Other">Other</option>
+        </select>
+
+
+        <!-- ACCOUNT -->
+        <label for="account">
+          Account / Username
+        </label>
+
+        <input
+          type="text"
+          id="account"
+          placeholder="@username"
+        >
+
+
+        <!-- DATE -->
+        <label for="incidentDate">
+          Date of Incident
+        </label>
+
+        <input
+          type="date"
+          id="incidentDate"
+          required
+        >
+
+
+        <!-- CATEGORY -->
+        <label for="category">
+          Report Category
+        </label>
+
+        <select id="category" required>
+          <option value="">Select category</option>
+          <option value="Religious Hate">
+            Religious Hate
+          </option>
+
+          <option value="Threat / Violence">
+            Threat / Violence
+          </option>
+
+          <option value="Harassment">
+            Harassment
+          </option>
+
+          <option value="Incitement">
+            Incitement / Provocation
+          </option>
+
+          <option value="Abusive Content">
+            Abusive Content
+          </option>
+
+          <option value="Other">
+            Other
+          </option>
+        </select>
+
+
+        <!-- DESCRIPTION -->
+        <label for="description">
+          What happened?
+        </label>
+
+        <textarea
+          id="description"
+          rows="6"
+          placeholder="Explain clearly what the content says or shows..."
+          required
+        ></textarea>
+
+
+        <!-- EVIDENCE -->
+        <label for="evidence">
+          Evidence / Screenshot
+        </label>
+
+        <input
+          type="file"
+          id="evidence"
+          accept="image/*,video/*"
+          multiple
+        >
+
+        <p class="hint">
+          Keep original screenshots/videos safely. Do not edit the original evidence.
         </p>
 
-        <a
-            href="https://www.instagram.com/be.like_sahil?stkn=MTF3eWhrZ3o1NWdzeQ=="
-            target="_blank"
-            rel="noopener noreferrer"
-            class="creator"
+
+        <!-- REPORTER -->
+        <label for="reporterName">
+          Your Name <span>(optional)</span>
+        </label>
+
+        <input
+          type="text"
+          id="reporterName"
+          placeholder="Your name"
         >
-            created by @be.like_sahil
+
+
+        <label for="reporterContact">
+          Contact / Email <span>(optional)</span>
+        </label>
+
+        <input
+          type="text"
+          id="reporterContact"
+          placeholder="Email or phone"
+        >
+
+
+        <!-- SUBMIT -->
+        <button type="submit" class="primary-btn">
+          🚨 Create Case
+        </button>
+
+      </form>
+
+    </section>
+
+
+    <!-- RESULT -->
+    <section id="caseResult" class="card result-card hidden">
+
+      <div class="success-icon">✓</div>
+
+      <h2>Case Created</h2>
+
+      <p>Your case reference number:</p>
+
+      <div id="caseId" class="case-id">
+        MYA-000000
+      </div>
+
+      <p class="small-text">
+        Save this Case ID for your records.
+      </p>
+
+
+      <!-- ACTIONS -->
+      <div class="actions">
+
+        <button
+          type="button"
+          id="printCase"
+          class="secondary-btn"
+        >
+          🖨️ Print / Save Case
+        </button>
+
+
+        <a
+          href="https://www.cybercrime.gov.in/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="secondary-btn link-btn"
+        >
+          🇮🇳 Cyber Crime Portal
         </a>
 
-    </footer>
+
+        <a
+          href="https://www.cybercrime.gov.in/Webform/report_abuse_social_media.aspx"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="secondary-btn link-btn"
+        >
+          📱 Social Media Reports
+        </a>
+
+      </div>
+
+    </section>
 
 
-    <script src="script.js"></script>
+    <!-- IMPORTANT INFORMATION -->
+    <section class="info-card">
+
+      <h3>⚠️ Important</h3>
+
+      <p>
+        This website helps document and report alleged harmful content.
+        It does not decide whether someone is guilty or guarantee removal,
+        police action, or an FIR.
+      </p>
+
+      <p>
+        For immediate physical danger or threats, contact local police or
+        emergency services directly.
+      </p>
+
+    </section>
+
+  </main>
+
+
+  <!-- FOOTER -->
+  <footer>
+
+    <p>
+      MUSLIM YOUTH ADRA
+    </p>
+
+    <a
+      href="https://www.instagram.com/be.like_sahil?stkn=MTF3eWhrZ3o1NWdzeQ=="
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      created by @be.like_sahil
+    </a>
+
+  </footer>
+
+
+  <!-- JAVASCRIPT -->
+  <script src="script.js"></script>
 
 </body>
 </html>
