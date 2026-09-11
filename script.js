@@ -126,34 +126,23 @@ reportForm.addEventListener("submit", async function (event) {
   // =========================================
 
   const { data, error } = await db
-    .from("reports")
-    .insert([
-      {
-        case_id: newCaseId,
-
-        content_url: contentUrl,
-
-        platform: platform,
-
-        content_type: contentType,
-
-        account_username: account || null,
-
-        incident_date: incidentDate,
-
-        category: category,
-
-        description: description,
-
-        reporter_name: reporterName || null,
-
-        reporter_contact: reporterContact || null,
-
-        status: "Submitted"
-      }
-    ])
-    .select()
-    .single();
+  const { error } = await db
+  .from("reports")
+  .insert([
+    {
+      case_id: newCaseId,
+      content_url: contentUrl,
+      platform: platform,
+      content_type: contentType,
+      account_username: account || null,
+      incident_date: incidentDate,
+      category: category,
+      description: description,
+      reporter_name: reporterName || null,
+      reporter_contact: reporterContact || null,
+      status: "Submitted"
+    }
+  ]);
 
 
   // =========================================
