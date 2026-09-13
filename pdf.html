@@ -1,1106 +1,586 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>MUSLIM YOUTH ADRA - Incident Report</title><!-- jsPDF --><script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script><style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MUSLIM YOUTH ADRA — Incident Report</title>
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,Helvetica,sans-serif;
+<!-- jsPDF 2.5.1: official CDNJS UMD build. A second CDN is used if the first fails. -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"
+        onerror="this.onerror=null;this.src='https://unpkg.com/jspdf@2.5.1/dist/jspdf.umd.min.js';"></script>
+
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f3f6f9;color:#17212b;font-family:Arial,Helvetica,sans-serif}
+.page{max-width:980px;margin:20px auto;padding:0 14px}
+.header{background:#102a43;color:#fff;border-radius:16px;padding:24px 22px;margin-bottom:18px}
+.header h1{margin:0 0 6px;font-size:25px}
+.header p{margin:0;opacity:.86;font-size:14px;line-height:1.5}
+.card{background:#fff;border:1px solid #dfe6ed;border-radius:14px;padding:20px;margin-bottom:16px;box-shadow:0 3px 12px rgba(16,42,67,.06)}
+.card h2{font-size:18px;margin:0 0 16px;color:#102a43}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field.full{grid-column:1/-1}
+label{font-size:13px;font-weight:700;color:#34495e}
+input,select,textarea{width:100%;padding:11px 12px;border:1px solid #cbd5df;border-radius:9px;background:#fff;color:#17212b;font:inherit;outline:none}
+input:focus,select:focus,textarea:focus{border-color:#2d6cdf;box-shadow:0 0 0 3px rgba(45,108,223,.10)}
+textarea{min-height:95px;resize:vertical}
+.checks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.check{display:flex;align-items:center;gap:8px;border:1px solid #e0e6ec;border-radius:9px;padding:10px;background:#fafcfe}
+.check input{width:auto}
+.upload{border:2px dashed #b8c6d4;border-radius:12px;padding:16px;background:#fbfdff}
+.upload input{border:0;padding:0}
+.hint{font-size:12px;color:#657786;line-height:1.5;margin-top:8px}
+.previews{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:14px}
+.preview-item{border:1px solid #dfe6ed;border-radius:10px;overflow:hidden;background:#fff}
+.preview-item img{display:block;width:100%;height:130px;object-fit:cover}
+.preview-name{padding:8px;font-size:11px;word-break:break-word;color:#465a6e}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}
+button{border:0;border-radius:10px;padding:12px 17px;font-weight:700;cursor:pointer;font-size:14px}
+.primary{background:#102a43;color:#fff}
+.secondary{background:#e8eef4;color:#102a43}
+.test{background:#2d6cdf;color:#fff}
+button:disabled{opacity:.55;cursor:not-allowed}
+.status{display:none;margin-top:14px;padding:12px;border-radius:10px;font-size:13px;line-height:1.5}
+.status.ok{display:block;background:#eaf8ef;color:#176b36;border:1px solid #bfe5ca}
+.status.err{display:block;background:#fff0f0;color:#9b1c1c;border:1px solid #efbcbc}
+.footer{text-align:center;color:#718096;font-size:12px;padding:10px 0 28px}
+.notice{background:#fff8e7;border:1px solid #f0d58a;color:#6d5415;border-radius:10px;padding:11px 13px;font-size:12px;line-height:1.5}
+@media(max-width:700px){
+ .grid,.checks{grid-template-columns:1fr}
+ .field.full{grid-column:auto}
+ .previews{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .header h1{font-size:21px}
 }
+</style>
+</head>
 
-body{
-    background:#f3faf6;
-    color:#222;
-    min-height:100vh;
-}
+<body>
+<div class="page">
 
-/* HEADER */
+<header class="header">
+  <h1>MUSLIM YOUTH ADRA</h1>
+  <p>Incident / Content Report Form</p>
+</header>
 
-header{
-    background:#087a3d;
-    color:white;
-    padding:14px 18px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-    box-shadow:0 3px 15px rgba(0,0,0,.12);
-}
+<form id="reportForm" novalidate>
 
-.brand{
-    font-size:16px;
-    font-weight:bold;
-}
+<section class="card">
+  <h2>1. Case Information</h2>
+  <div class="grid">
+    <div class="field">
+      <label for="caseNumber">Case Number</label>
+      <input id="caseNumber" name="caseNumber" readonly>
+    </div>
+    <div class="field">
+      <label for="reportDate">Report Date</label>
+      <input id="reportDate" name="reportDate" type="date">
+    </div>
+  </div>
+</section>
 
-.nav{
-    display:flex;
-    gap:7px;
-    flex-wrap:wrap;
-}
+<section class="card">
+  <h2>2. Complainant</h2>
+  <div class="grid">
+    <div class="field">
+      <label for="complainantName">Name</label>
+      <input id="complainantName" name="complainantName" placeholder="Full name">
+    </div>
+    <div class="field">
+      <label for="mobile">Mobile</label>
+      <input id="mobile" name="mobile" type="tel" placeholder="Mobile number">
+    </div>
+    <div class="field">
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" placeholder="Email address">
+    </div>
+    <div class="field">
+      <label for="cityDistrict">City / District</label>
+      <input id="cityDistrict" name="cityDistrict" placeholder="City / District">
+    </div>
+  </div>
+</section>
 
-.nav a,
-.nav button{
-    text-decoration:none;
-    color:white;
-    background:transparent;
-    border:1px solid rgba(255,255,255,.55);
-    padding:7px 10px;
-    border-radius:7px;
-    font-size:10px;
-    cursor:pointer;
-}
+<section class="card">
+  <h2>3. Incident Details</h2>
+  <div class="grid">
+    <div class="field">
+      <label for="incidentDate">Incident Date</label>
+      <input id="incidentDate" name="incidentDate" type="date">
+    </div>
+    <div class="field">
+      <label for="incidentTime">Incident Time</label>
+      <input id="incidentTime" name="incidentTime" type="time">
+    </div>
+    <div class="field">
+      <label for="platform">Platform</label>
+      <select id="platform" name="platform">
+        <option value="">Select platform</option>
+        <option>Instagram</option><option>Facebook</option><option>YouTube</option>
+        <option>X / Twitter</option><option>TikTok</option><option>WhatsApp</option>
+        <option>Telegram</option><option>Website</option><option>Other</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="contentType">Content Type</label>
+      <select id="contentType" name="contentType">
+        <option value="">Select type</option>
+        <option>Post</option><option>Video</option><option>Story</option>
+        <option>Comment</option><option>Profile</option><option>Message</option><option>Other</option>
+      </select>
+    </div>
+    <div class="field full">
+      <label for="postUrl">Post / Video URL</label>
+      <input id="postUrl" name="postUrl" type="url" placeholder="https://...">
+    </div>
+    <div class="field full">
+      <label for="profileUrl">Profile URL</label>
+      <input id="profileUrl" name="profileUrl" type="url" placeholder="https://...">
+    </div>
+  </div>
+</section>
 
-.nav a:hover,
-.nav button:hover{
-    background:white;
-    color:#087a3d;
-}
+<section class="card">
+  <h2>4. Nature of Content</h2>
+  <div class="checks">
+    <label class="check"><input type="checkbox" name="category" value="Hateful / discriminatory"> Hateful / discriminatory</label>
+    <label class="check"><input type="checkbox" name="category" value="Religious targeting"> Religious targeting</label>
+    <label class="check"><input type="checkbox" name="category" value="Abusive"> Abusive</label>
+    <label class="check"><input type="checkbox" name="category" value="Misleading"> Misleading</label>
+    <label class="check"><input type="checkbox" name="category" value="Threatening"> Threatening</label>
+    <label class="check"><input type="checkbox" name="category" value="Incitement"> Incitement</label>
+  </div>
+</section>
 
-/* MAIN */
+<section class="card">
+  <h2>5. Content Description</h2>
+  <div class="grid">
+    <div class="field full">
+      <label for="exactStatement">Exact Statement / Text</label>
+      <textarea id="exactStatement" name="exactStatement" placeholder="Enter the exact words if available"></textarea>
+    </div>
+    <div class="field full">
+      <label for="description">Description of Incident</label>
+      <textarea id="description" name="description" placeholder="Describe what happened"></textarea>
+    </div>
+    <div class="field">
+      <label for="reason">Why is it concerning?</label>
+      <textarea id="reason" name="reason"></textarea>
+    </div>
+    <div class="field">
+      <label for="target">Target / Person / Group</label>
+      <textarea id="target" name="target"></textarea>
+    </div>
+    <div class="field">
+      <label for="language">Language</label>
+      <input id="language" name="language" placeholder="e.g. Hindi, English, Urdu">
+    </div>
+  </div>
+</section>
 
-.container{
-    width:100%;
-    max-width:900px;
-    margin:25px auto;
-    padding:0 15px;
-}
+<section class="card">
+  <h2>6. Evidence / Screenshots</h2>
+  <div class="upload">
+    <label for="evidenceFiles">Upload screenshots / evidence images</label>
+    <input id="evidenceFiles" name="evidenceFiles" type="file"
+           accept="image/jpeg,image/png,image/webp" multiple>
+    <div class="hint">PNG, JPG/JPEG or WebP. You can select multiple screenshots. Images are processed in your browser and embedded into the generated PDF.</div>
+    <div id="previews" class="previews"></div>
+  </div>
 
-.title{
-    text-align:center;
-    color:#075d30;
-    font-size:23px;
-    margin-bottom:5px;
-}
+  <div class="grid" style="margin-top:14px">
+    <div class="field">
+      <label for="evidenceType">Evidence Type</label>
+      <select id="evidenceType" name="evidenceType">
+        <option value="">Select type</option>
+        <option>Screenshot</option><option>Screen recording</option>
+        <option>URL</option><option>Other</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="evidenceNotes">Evidence Notes</label>
+      <textarea id="evidenceNotes" name="evidenceNotes" placeholder="Explain what the uploaded evidence shows"></textarea>
+    </div>
+  </div>
+</section>
 
-.subtitle{
-    text-align:center;
-    color:#777;
-    font-size:11px;
-    margin-bottom:23px;
-}
+<section class="card">
+  <h2>7. Additional Information</h2>
+  <div class="field">
+    <label for="additionalInfo">Additional Information</label>
+    <textarea id="additionalInfo" name="additionalInfo"></textarea>
+  </div>
+</section>
 
-/* NOTICE */
+<section class="card">
+  <h2>8. Declaration</h2>
+  <div class="notice">
+    I confirm that the information provided in this report is based on the information/evidence available to me and is submitted for review. This document is a complainant-prepared incident record; it is not a government-issued complaint, FIR, or legal order.
+  </div>
+</section>
 
-.notice{
-    background:white;
-    border-left:4px solid #087a3d;
-    border-radius:9px;
-    padding:13px 15px;
-    margin-bottom:18px;
-    color:#555;
-    font-size:11px;
-    line-height:1.55;
-}
+<section class="card">
+  <div class="actions">
+    <button id="generateBtn" class="primary" type="button">Generate &amp; Download PDF</button>
+    <button id="testBtn" class="test" type="button">Test PDF Download</button>
+    <button id="clearBtn" class="secondary" type="button">Clear Form</button>
+  </div>
+  <div id="status" class="status"></div>
+</section>
 
-/* CARD */
+</form>
 
-.card{
-    background:white;
-    border:1px solid #e0ece4;
-    border-radius:14px;
-    padding:24px;
-    box-shadow:0 6px 25px rgba(0,70,35,.07);
-    margin-bottom:18px;
-}
+<div class="footer">MUSLIM YOUTH ADRA — Incident Report</div>
+</div>
 
-.section-title{
-    color:#087a3d;
-    font-size:15px;
-    font-weight:bold;
-    padding-bottom:10px;
-    margin-bottom:17px;
-    border-bottom:1px solid #e4eee7;
-}
+<script>
+(function () {
+  "use strict";
 
-.section-number{
-    display:inline-flex;
-    width:25px;
-    height:25px;
-    border-radius:50%;
-    align-items:center;
-    justify-content:center;
-    background:#eaf7ef;
-    color:#087a3d;
-    margin-right:7px;
-    font-size:11px;
-}
+  const $ = (id) => document.getElementById(id);
+  const statusBox = $("status");
+  const fileInput = $("evidenceFiles");
+  const previews = $("previews");
+  let selectedFiles = [];
 
-/* FORM */
+  function showStatus(message, type) {
+    statusBox.textContent = message;
+    statusBox.className = "status " + (type || "ok");
+  }
 
-.grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:15px;
-}
+  function hideStatus() {
+    statusBox.textContent = "";
+    statusBox.className = "status";
+  }
 
-.field{
-    display:flex;
-    flex-direction:column;
-}
+  function value(id) {
+    const el = $(id);
+    return el ? String(el.value || "").trim() : "";
+  }
 
-.full{
-    grid-column:1/-1;
-}
+  function categories() {
+    return Array.from(document.querySelectorAll('input[name="category"]:checked'))
+      .map(el => el.value);
+  }
 
-label{
-    font-size:11px;
-    font-weight:bold;
-    color:#444;
-    margin-bottom:6px;
-}
+  function makeCaseNumber() {
+    const d = new Date();
+    const stamp =
+      d.getFullYear().toString() +
+      String(d.getMonth() + 1).padStart(2, "0") +
+      String(d.getDate()).padStart(2, "0");
+    const random = Math.floor(1000 + Math.random() * 9000);
+    return "MYA-" + stamp + "-" + random;
+  }
 
-input,
-select,
-textarea{
-    width:100%;
-    border:1px solid #d5e4db;
-    background:#fcfefd;
-    border-radius:8px;
-    padding:11px;
-    font-size:12px;
-    outline:none;
-}
+  function setDefaults() {
+    if (!$("caseNumber").value) $("caseNumber").value = makeCaseNumber();
 
-input:focus,
-select:focus,
-textarea:focus{
-    border-color:#087a3d;
-    box-shadow:0 0 0 3px rgba(8,122,61,.07);
-}
+    if (!$("reportDate").value) {
+      const d = new Date();
+      $("reportDate").value =
+        d.getFullYear() + "-" +
+        String(d.getMonth() + 1).padStart(2, "0") + "-" +
+        String(d.getDate()).padStart(2, "0");
+    }
+  }
 
-textarea{
-    min-height:90px;
-    resize:vertical;
-}
+  function renderPreviews() {
+    previews.innerHTML = "";
 
-.small-help{
-    color:#888;
-    font-size:9px;
-    margin-top:5px;
-    line-height:1.4;
-}
+    selectedFiles.forEach((file, index) => {
+      const item = document.createElement("div");
+      item.className = "preview-item";
 
-/* CHECKBOX */
+      const img = document.createElement("img");
+      img.alt = "Evidence " + (index + 1);
 
-.check-group{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:9px;
-}
+      const name = document.createElement("div");
+      name.className = "preview-name";
+      name.textContent = file.name;
 
-.check{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    background:#f7fbf8;
-    border:1px solid #e0ebe4;
-    padding:10px;
-    border-radius:7px;
-}
+      const reader = new FileReader();
+      reader.onload = function (event) {
+        img.src = event.target.result;
+      };
+      reader.readAsDataURL(file);
 
-.check input{
-    width:auto;
-}
+      item.appendChild(img);
+      item.appendChild(name);
+      previews.appendChild(item);
+    });
+  }
 
-.check label{
-    margin:0;
-    font-size:10px;
-    font-weight:normal;
-}
+  fileInput.addEventListener("change", function () {
+    selectedFiles = Array.from(fileInput.files || []);
 
-/* UPLOAD */
+    const maxSize = 12 * 1024 * 1024;
+    const invalid = selectedFiles.find(file =>
+      !/^image\\/(jpeg|png|webp)$/i.test(file.type) || file.size > maxSize
+    );
 
-.upload-box{
-    border:2px dashed #b9d8c5;
-    background:#f8fcf9;
-    padding:18px;
-    border-radius:10px;
-    text-align:center;
-}
-
-.upload-box input{
-    border:none;
-    background:transparent;
-    padding:5px;
-}
-
-.preview-list{
-    display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(130px,1fr));
-    gap:10px;
-    margin-top:12px;
-}
-
-.preview-item{
-    border:1px solid #dce9e0;
-    border-radius:8px;
-    padding:6px;
-    background:white;
-    overflow:hidden;
-}
-
-.preview-item img{
-    width:100%;
-    height:100px;
-    object-fit:cover;
-    border-radius:5px;
-}
-
-.preview-name{
-    font-size:8px;
-    color:#666;
-    margin-top:5px;
-    word-break:break-word;
-}
-
-/* BUTTONS */
-
-.actions{
-    display:flex;
-    gap:9px;
-    flex-wrap:wrap;
-    margin-top:20px;
-}
-
-.btn{
-    border:none;
-    padding:11px 16px;
-    border-radius:8px;
-    font-size:11px;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-.generate{
-    background:#087a3d;
-    color:white;
-}
-
-.generate:hover{
-    background:#056630;
-}
-
-.clear{
-    background:#edf4ef;
-    color:#075d30;
-}
-
-.clear:hover{
-    background:#e1ece4;
-}
-
-/* STATUS */
-
-.success{
-    display:none;
-    margin-top:15px;
-    background:#edf9f1;
-    border:1px solid #cce6d4;
-    color:#176534;
-    padding:11px;
-    border-radius:8px;
-    font-size:11px;
-}
-
-.error{
-    display:none;
-    margin-top:15px;
-    background:#fff1f1;
-    border:1px solid #efcaca;
-    color:#a12626;
-    padding:11px;
-    border-radius:8px;
-    font-size:11px;
-}
-
-/* FOOTER */
-
-footer{
-    text-align:center;
-    color:#999;
-    font-size:10px;
-    padding:20px;
-}
-
-footer a{
-    color:#087a3d;
-    text-decoration:none;
-    font-weight:bold;
-}
-
-/* MOBILE */
-
-@media(max-width:650px){
-
-    .grid{
-        grid-template-columns:1fr;
+    if (invalid) {
+      selectedFiles = [];
+      fileInput.value = "";
+      previews.innerHTML = "";
+      showStatus("Please select PNG/JPG/JPEG/WebP images only, with each image 12 MB or smaller.", "err");
+      return;
     }
 
-    .full{
-        grid-column:auto;
+    hideStatus();
+    renderPreviews();
+  });
+
+  function getReportData() {
+    return {
+      caseNumber: value("caseNumber"),
+      reportDate: value("reportDate"),
+      complainantName: value("complainantName"),
+      mobile: value("mobile"),
+      email: value("email"),
+      cityDistrict: value("cityDistrict"),
+      incidentDate: value("incidentDate"),
+      incidentTime: value("incidentTime"),
+      platform: value("platform"),
+      contentType: value("contentType"),
+      postUrl: value("postUrl"),
+      profileUrl: value("profileUrl"),
+      categories: categories(),
+      exactStatement: value("exactStatement"),
+      description: value("description"),
+      reason: value("reason"),
+      target: value("target"),
+      language: value("language"),
+      evidenceType: value("evidenceType"),
+      evidenceNotes: value("evidenceNotes"),
+      additionalInfo: value("additionalInfo")
+    };
+  }
+
+  function checkJsPDF() {
+    return window.jspdf && typeof window.jspdf.jsPDF === "function";
+  }
+
+  function ensureSpace(doc, y, needed, pageHeight, marginBottom) {
+    if (y + needed > pageHeight - marginBottom) {
+      doc.addPage();
+      return 20;
+    }
+    return y;
+  }
+
+  function addWrappedField(doc, label, text, y, opts) {
+    opts = opts || {};
+    const margin = opts.margin || 15;
+    const pageHeight = opts.pageHeight || 297;
+    const bottom = opts.bottom || 18;
+    const width = opts.width || 180;
+
+    text = text || "—";
+    const lines = doc.splitTextToSize(String(text), width);
+
+    y = ensureSpace(doc, y, 13 + lines.length * 5, pageHeight, bottom);
+
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(9);
+    doc.text(label, margin, y);
+    y += 5;
+
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(9);
+    doc.text(lines, margin, y);
+    y += Math.max(7, lines.length * 4.5 + 3);
+
+    return y;
+  }
+
+  function addSectionTitle(doc, title, y) {
+    const pageHeight = 297;
+    y = ensureSpace(doc, y, 16, pageHeight, 18);
+
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(12);
+    doc.text(title, 15, y);
+    y += 6;
+
+    doc.setDrawColor(210, 218, 226);
+    doc.line(15, y, 195, y);
+    y += 7;
+    return y;
+  }
+
+  function addFooter(doc) {
+    const pageCount = doc.getNumberOfPages();
+
+    for (let page = 1; page <= pageCount; page++) {
+      doc.setPage(page);
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(7.5);
+      doc.setTextColor(105, 115, 125);
+      doc.text(
+        "MUSLIM YOUTH ADRA — Complainant-prepared incident record",
+        15, 289
+      );
+      doc.text("Page " + page + " of " + pageCount, 195, 289, { align: "right" });
     }
 
-    .check-group{
-        grid-template-columns:1fr;
+    doc.setTextColor(0, 0, 0);
+  }
+
+  function fileToJpegDataURL(file, maxWidth) {
+    maxWidth = maxWidth || 1600;
+
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+
+      reader.onerror = () => reject(new Error("Could not read " + file.name));
+
+      reader.onload = function () {
+        const img = new Image();
+
+        img.onerror = () => reject(new Error("Could not decode " + file.name));
+
+        img.onload = function () {
+          let w = img.naturalWidth || img.width;
+          let h = img.naturalHeight || img.height;
+
+          if (!w || !h) {
+            reject(new Error("Invalid image: " + file.name));
+            return;
+          }
+
+          if (w > maxWidth) {
+            const scale = maxWidth / w;
+            w = Math.round(w * scale);
+            h = Math.round(h * scale);
+          }
+
+          const canvas = document.createElement("canvas");
+          canvas.width = w;
+          canvas.height = h;
+
+          const ctx = canvas.getContext("2d");
+          ctx.fillStyle = "#ffffff";
+          ctx.fillRect(0, 0, w, h);
+          ctx.drawImage(img, 0, 0, w, h);
+
+          try {
+            resolve(canvas.toDataURL("image/jpeg", 0.82));
+          } catch (e) {
+            reject(e);
+          }
+        };
+
+        img.src = reader.result;
+      };
+
+      reader.readAsDataURL(file);
+    });
+  }
+
+  async function addEvidenceImage(doc, file, y) {
+    const pageHeight = 297;
+    const margin = 15;
+    const usableWidth = 180;
+    const maxHeight = 115;
+
+    const dataUrl = await fileToJpegDataURL(file);
+    const props = doc.getImageProperties(dataUrl);
+
+    let w = usableWidth;
+    let h = (props.height * w) / props.width;
+
+    if (h > maxHeight) {
+      h = maxHeight;
+      w = (props.width * h) / props.height;
     }
 
-    .card{
-        padding:19px 16px;
+    y = ensureSpace(doc, y, h + 18, pageHeight, 20);
+
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(9);
+    doc.text(file.name, margin, y);
+    y += 5;
+
+    doc.addImage(dataUrl, "JPEG", margin, y, w, h, undefined, "FAST");
+    y += h + 8;
+
+    return y;
+  }
+
+  async function generatePDF() {
+    hideStatus();
+
+    if (!checkJsPDF()) {
+      showStatus(
+        "PDF library could not load. Check your internet connection, then reload the GitHub Pages site. You can also use the Test PDF button.",
+        "err"
+      );
+      return;
     }
 
-    .title{
-        font-size:20px;
-    }
-
-    .brand{
-        font-size:13px;
-    }
-
-    .nav a,
-    .nav button{
-        font-size:9px;
-        padding:6px 7px;
-    }
-}
-
-</style></head><body><header><div class="brand">
-    MUSLIM YOUTH ADRA
-</div>
-
-<div class="nav">
-
-    <a href="pdf.html">
-        Report
-    </a>
-
-    <a href="portals.html">
-        Government Portals
-    </a>
-
-    <button type="button" onclick="logout()">
-        Logout
-    </button>
-
-</div>
-
-</header><main class="container"><h1 class="title">
-    Hate Speech / Content Incident Report
-</h1>
-
-<p class="subtitle">
-    Record reported hateful, abusive, discriminatory or misleading online content
-</p>
-
-
-<div class="notice">
-
-    <strong>Important:</strong>
-    Enter information accurately and preserve original evidence where possible.
-    This report is a record of information provided by the complainant and does
-    not itself determine whether an offence has occurred.
-
-</div>
-
-
-<!-- SECTION 1 -->
-
-<div class="card">
-
-    <div class="section-title">
-        <span class="section-number">1</span>
-        Case Information
-    </div>
-
-    <div class="grid">
-
-        <div class="field">
-
-            <label>Case / Reference Number</label>
-
-            <input
-                type="text"
-                id="caseNumber"
-                placeholder="Example: MYA-2026-001"
-            >
-
-            <div class="small-help">
-                Leave blank to generate a reference number automatically.
-            </div>
-
-        </div>
-
-
-        <div class="field">
-
-            <label>Date of Report</label>
-
-            <input
-                type="date"
-                id="reportDate"
-            >
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- SECTION 2 -->
-
-<div class="card">
-
-    <div class="section-title">
-        <span class="section-number">2</span>
-        Complainant Information
-    </div>
-
-    <div class="grid">
-
-        <div class="field">
-
-            <label>Full Name *</label>
-
-            <input
-                type="text"
-                id="complainant"
-                placeholder="Enter full name"
-            >
-
-        </div>
-
-
-        <div class="field">
-
-            <label>Mobile Number</label>
-
-            <input
-                type="tel"
-                id="mobile"
-                placeholder="Enter mobile number"
-            >
-
-        </div>
-
-
-        <div class="field">
-
-            <label>Email Address</label>
-
-            <input
-                type="email"
-                id="email"
-                placeholder="Enter email address"
-            >
-
-        </div>
-
-
-        <div class="field">
-
-            <label>City / District</label>
-
-            <input
-                type="text"
-                id="district"
-                placeholder="Enter city / district"
-            >
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- SECTION 3 -->
-
-<div class="card">
-
-    <div class="section-title">
-        <span class="section-number">3</span>
-        Incident Details
-    </div>
-
-    <div class="grid">
-
-        <div class="field">
-
-            <label>Incident Date</label>
-
-            <input
-                type="date"
-                id="incidentDate"
-            >
-
-        </div>
-
-
-        <div class="field">
-
-            <label>Approximate Time</label>
-
-            <input
-                type="time"
-                id="incidentTime"
-            >
-
-        </div>
-
-
-        <div class="field">
-
-            <label>Platform / Website</label>
-
-            <select id="platform">
-
-                <option value="">
-                    Select platform
-                </option>
-
-                <option>Facebook</option>
-                <option>Instagram</option>
-                <option>YouTube</option>
-                <option>X / Twitter</option>
-                <option>WhatsApp</option>
-                <option>Telegram</option>
-                <option>Other Website</option>
-                <option>Other</option>
-
-            </select>
-
-        </div>
-
-
-        <div class="field">
-
-            <label>Content Type</label>
-
-            <select id="contentType">
-
-                <option value="">
-                    Select content type
-                </option>
-
-                <option>Video</option>
-                <option>Post</option>
-                <option>Comment</option>
-                <option>Image</option>
-                <option>Story</option>
-                <option>Message</option>
-                <option>Other</option>
-
-            </select>
-
-        </div>
-
-
-        <div class="field full">
-
-            <label>Post / Video URL</label>
-
-            <input
-                type="url"
-                id="postUrl"
-                placeholder="https://..."
-            >
-
-            <div class="small-help">
-                Paste the direct URL of the reported content if available.
-            </div>
-
-        </div>
-
-
-        <div class="field full">
-
-            <label>Account / Profile URL</label>
-
-            <input
-                type="url"
-                id="profileUrl"
-                placeholder="https://..."
-            >
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- SECTION 4 -->
-
-<div class="card">
-
-    <div class="section-title">
-        <span class="section-number">4</span>
-        Nature of Reported Content
-    </div>
-
-
-    <div class="check-group">
-
-        <div class="check">
-            <input type="checkbox" id="hate">
-            <label for="hate">
-                Hateful / discriminatory language
-            </label>
-        </div>
-
-        <div class="check">
-            <input type="checkbox" id="religious">
-            <label for="religious">
-                Religious targeting
-            </label>
-        </div>
-
-        <div class="check">
-            <input type="checkbox" id="abusive">
-            <label for="abusive">
-                Abusive / insulting content
-            </label>
-        </div>
-
-        <div class="check">
-            <input type="checkbox" id="misleading">
-            <label for="misleading">
-                Allegedly misleading / false content
-            </label>
-        </div>
-
-        <div class="check">
-            <input type="checkbox" id="threat">
-            <label for="threat">
-                Threatening language
-            </label>
-        </div>
-
-        <div class="check">
-            <input type="checkbox" id="incitement">
-            <label for="incitement">
-                Alleged incitement / hostility
-            </label>
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- SECTION 5 -->
-
-<div class="card">
-
-    <div class="section-title">
-        <span class="section-number">5</span>
-        Content Description
-    </div>
-
-    <div class="grid">
-
-        <div class="field full">
-
-            <label>
-                Exact Hateful / Offensive Statement
-            </label>
-
-            <textarea
-                id="exactStatement"
-                placeholder="Enter the exact words as they appeared. Do not paraphrase if the original wording is available."
-            ></textarea>
-
-        </div>
-
-
-        <div class="field full">
-
-            <label>
-                Description of Video / Post
-            </label>
-
-            <textarea
-                id="contentDescription"
-                placeholder="Describe what is shown, said or claimed in the video/post."
-            ></textarea>
-
-        </div>
-
-
-        <div class="field full">
-
-            <label>
-                Why Is This Content Being Reported?
-            </label>
-
-            <textarea
-                id="reason"
-                placeholder="Explain factually why you believe the content is hateful, discriminatory, abusive or misleading."
-            ></textarea>
-
-        </div>
-
-
-        <div class="field">
-
-            <label>
-                Targeted Community / Person
-            </label>
-
-            <input
-                type="text"
-                id="target"
-                placeholder="Example: Muslim community"
-            >
-
-        </div>
-
-
-        <div class="field">
-
-            <label>
-                Language Used
-            </label>
-
-            <input
-                type="text"
-                id="language"
-                placeholder="Example: Hindi / English / Bengali"
-            >
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- SECTION 6 -->
-
-<div class="card">
-
-    <div class="section-title">
-        <span class="section-number">6</span>
-        Evidence Information
-    </div>
-
-    <div class="grid">
-
-        <div class="field">
-
-            <label>
-                Evidence Available
-            </label>
-
-            <select id="evidence">
-
-                <option value="">
-                    Select
-                </option>
-
-                <option>Screenshot</option>
-                <option>Screen Recording</option>
-                <option>Video File</option>
-                <option>Post URL</option>
-                <option>Multiple Evidence</option>
-                <option>Other</option>
-
-            </select>
-
-        </div>
-
-
-        <div class="field">
-
-            <label>
-                Evidence File / Screenshot Name
-            </label>
-
-            <input
-                type="text"
-                id="evidenceName"
-                placeholder="Example: screenshot_01.jpg"
-            >
-
-        </div>
-
-
-        <!-- REAL FILE UPLOAD -->
-
-        <div class="field full">
-
-            <label>
-                Upload Screenshot / Evidence Images
-            </label>
-
-            <div class="upload-box">
-
-                <input
-                    type="file"
-                    id="evidenceFiles"
-                    accept="image/jpeg,image/png,image/webp"
-                    multiple
-                >
-
-                <div class="small-help">
-                    You can select multiple screenshots. JPG, PNG and WebP are supported.
-                </div>
-
-            </div>
-
-            <div
-                id="previewList"
-                class="preview-list"
-            ></div>
-
-        </div>
-
-
-        <div class="field full">
-
-            <label>
-                Evidence Notes
-            </label>
-
-            <textarea
-                id="evidenceNotes"
-                placeholder="Mention what evidence was preserved and when it was captured."
-            ></textarea>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- SECTION 7 -->
-
-<div class="card">
-
-    <div class="section-title">
-        <span class="section-number">7</span>
-        Additional Information
-    </div>
-
-    <div class="grid">
-
-        <div class="field full">
-
-            <label>
-                Additional Details / Witness Information
-            </label>
-
-            <textarea
-                id="additional"
-                placeholder="Enter any additional relevant information."
-            ></textarea>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- SECTION 8 -->
-
-<div class="card">
-
-    <div class="section-title">
-        <span class="section-number">8</span>
-        Declaration
-    </div>
-
-    <div class="grid">
-
-        <div class="field full">
-
-            <label>
-                Declaration
-            </label>
-
-            <textarea id="declaration">I confirm that the information entered in this report is provided to the best of my knowledge and belief. I understand that the relevant authorities or platform may independently verify the information and evidence submitted.</textarea>
-
-        </div>
-
-    </div>
-
-
-    <div class="actions">
-
-        <button
-            type="button"
-            class="btn generate"
-            onclick="generatePDF()"
-        >
-            Generate & Download PDF
-        </button>
-
-        <button
-            type="button"
-            class="btn clear"
-            onclick="clearForm()"
-        >
-            Clear Form
-        </button>
-
-    </div>
-
-
-    <div
-        class="success"
-        id="success"
-    >
-        PDF generated and downloaded successfully.
-    </div>
-
-    <div
-        class="error"
-        id="error"
-    ></div>
-
-</div>
-
-</main><footer>Created by
-
-<a
-    href="https://www.instagram.com/be.like_sahil"
-    target="_blank"
-    rel="noopener noreferrer"
->
-    @be.like_sahil
-</a>
-
-</footer><script>
-
-/* =========================================
-   LOGIN PROTECTION
-========================================= */
-
-if(
-    sessionStorage.getItem("mya_logged_in") !== "true"
-){
-    window.location.href="index.html";
-}
-
-
-/* =========================================
-   DATE
-========================================= */
-
-const today =
-    new Date().toISOString().split("T")[0];
-
-document.getElementById("reportDate").value = today;
-
-document.getElementById("incidentDate").value = today;
-
-
-/* =========================================
-   LOGOUT
-========================================= */
-
-function logout(){
-
-    sessionStorage.removeItem("mya_logged_in");
-
-    window.location.href="index.html";
-
-}
-
-
-/* =========================================
-   VALUE HELPER
-========================================= */
-
-function getValue(id){
-
-    const element =
-        document.getElementById(id);
-
-    if(!element) return "";
-
-    return element.value.trim();
-
-}
-
-
-/* =========================================
-   CATEGORIES
-========================================= */
-
-function getCategories(){
-
-    const list=[];
-
-    if(document.getElementById("hate").checked)
-        list.push("Hateful / discriminatory language");
-
-    if(document.getElementById("religious").checked)
-        list.push("Religious targeting");
-
-    if(document.getElementById("abusive").checked)
-        list.push("Abusive / insulting content");
-
-    if(document.getElementById("misleading").checked)
-        list.push("Allegedly misleading / false content");
-
-    if(document.getElementById("threat").checked)
-        list.push("Threatening language");
-
-    if(document.getElementById("incitement").checked)
-        list.push("Alleged incitement / hostility");
-
-    return list.length
-        ? list.join(", ")
-        : "Not specified";
-
-}
-
-
-/* =========================================
-   FILE STORAGE
-========================================= */
-
-let uploadedFiles = [];
-
-
-document
-.getElementById("evidenceFiles")
-.addEventListener("change", function(event){
-
-    uploadedFiles =
-        Array.from(event.target.files || []);
-
-    showPreviews();
-
-});
-
-
-/* =========================================
-   IMAGE PREVIEWS
-========================================= */
-
-function showPreviews(){
-
-    const container =
-        document.getElementById("previewList");
-
-    container.innerHTML="";
-
-    uploadedFiles.forEach(function(file){
-
-        const reader =
-            new FileReader();
-
-        reader.onload=function(e){
-
-            const item =
-                document.createElement("div");
-
-            item.className="preview-item";
-
-            item.inne
+    const button = $("generateBtn");
+    button.disabled = true;
+    button.textContent = "Generating PDF...";
+
+    try {
+      setDefaults();
+
+      const data = getReportData();
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF({
+        orientation: "portrait",
+        unit: "mm",
+        format: "a4",
+        compress: true
+      });
+
+      let y = 18;
+
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(18);
+      doc.text("MUSLIM YOUTH ADRA", 15, y);
+      y += 7;
+
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(12);
+      doc.text("INCIDENT / CONTENT REPORT", 15, y);
+      y += 5;
+
+      doc.setFontSize(8.5);
+      doc.setTextColor(90, 100, 110);
+      doc.text("Case No: " + (data.caseNumber || "—"), 195, y - 5, { align: "right" });
+      doc.setTextColor(0, 0, 0);
+      y += 8;
+
+      doc.setDrawColor(30, 60, 90);
+      doc.setLineWidth(0.6);
+      doc.line(15, y, 195, y);
+      y += 9;
+
+      y = addSectionTitle(doc, "1. Case Information", y);
+      y = addWrappedField(doc, "Case Number", data.caseNumber, y);
+      y = addWrappedField(doc, "Report Date", data.reportDate, y);
+
+      y = addSectionTitle(doc, "2. Complainant", y);
+      y = addWrappedField(doc, "Name", data.complainantName, y);
+      y = addWrappedField(doc, "Mobile", data.mobile, y);
+      y = addWrappedField(doc, "Email", data.email, y);
+      y = addWrappedField(doc, "City / District", data.cityDistrict, y);
+
+      y = addSectionTitle(doc, "3. Incident Details", y);
+      y = addWrappedField(doc, "Incident Date", data.incidentDate, y);
+      y = addWrappedField(doc, "Incident Time", data.incidentTime, y);
+      y = addWrappedField(doc, "Platform", data.platform, y);
+      y = addWrappedField(doc, "Content Type", data.contentType, y);
+      y = addWrappedField(doc, "Post / Video URL", data.postUrl, y);
+      y = addWrappedField(doc, "Profile URL", data.profileUrl, y);
+
+      y = addSectionTitle(doc, "4. Nature of Content", y);
+      y = addWrappedField(doc, "Selected Categories", data.categories.length ? data.categories.join(", ") : "—", y);
+
+      y = addSectionTitle(doc, "5. Content Description", y);
+      y = addWrappedField(doc, "Exact Statement / Text", data.exactStatement, y);
+      y = addWrappedField(doc, "Description of Incident", data.description, y);
+      y = addWrappedField(doc, "Why is it concerning?", data.reason, y);
+      y = addWrappedField(do
