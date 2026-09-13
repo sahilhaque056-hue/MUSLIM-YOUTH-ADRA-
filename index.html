@@ -1,1044 +1,246 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
-
-    <title>MUSLIM YOUTH ADRA | Login</title>
-
+    <title>MUSLIM YOUTH ADRA - Login</title>
 
     <style>
-
-        /* =========================
-           RESET
-        ========================= */
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
         }
-
-
-        /* =========================
-           BODY
-        ========================= */
 
         body {
-
             min-height: 100vh;
-
-            font-family:
-                "Segoe UI",
-                Arial,
-                Helvetica,
-                sans-serif;
-
-            background: #f3f5f7;
-
-            color: #17212b;
-
+            background: linear-gradient(135deg, #f4fff8, #e5f7ec);
             display: flex;
-            flex-direction: column;
-        }
-
-
-        /* =========================
-           TOP GOV STYLE BAR
-        ========================= */
-
-        .top-strip {
-
-            height: 5px;
-
-            background:
-                linear-gradient(
-                    to right,
-                    #e67e22 0%,
-                    #e67e22 33%,
-                    #ffffff 33%,
-                    #ffffff 66%,
-                    #138a4b 66%,
-                    #138a4b 100%
-                );
-        }
-
-
-        /* =========================
-           HEADER
-        ========================= */
-
-        .header {
-
-            background: #ffffff;
-
-            border-bottom: 1px solid #d8dde2;
-
-            padding: 16px 6%;
-        }
-
-
-        .header-inner {
-
-            max-width: 1180px;
-
-            margin: auto;
-
-            display: flex;
-
             align-items: center;
-
-            justify-content: space-between;
-
-            gap: 20px;
-        }
-
-
-        /* BRAND */
-
-        .brand {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 15px;
-        }
-
-
-        .emblem {
-
-            width: 58px;
-
-            height: 58px;
-
-            border: 2px solid #173f67;
-
-            border-radius: 50%;
-
-            display: flex;
-
-            align-items: center;
-
             justify-content: center;
-
-            color: #173f67;
-
-            font-size: 27px;
-
-            background: #f8fafc;
+            padding: 20px;
         }
 
-
-        .brand-text h1 {
-
-            font-family: Georgia, serif;
-
-            font-size: 25px;
-
-            letter-spacing: .4px;
-
-            color: #173f67;
-
-            line-height: 1.1;
-        }
-
-
-        .brand-text h1 span {
-
-            color: #8b671d;
-        }
-
-
-        .brand-text p {
-
-            margin-top: 5px;
-
-            color: #66727d;
-
-            font-size: 12px;
-
-            letter-spacing: .3px;
-        }
-
-
-        .header-right {
-
-            text-align: right;
-
-            color: #6a747e;
-
-            font-size: 12px;
-
-            line-height: 1.6;
-        }
-
-
-        .header-right strong {
-
-            color: #173f67;
-
-            font-size: 13px;
-        }
-
-
-        /* =========================
-           MAIN
-        ========================= */
-
-        .main {
-
-            flex: 1;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            padding: 55px 20px;
-        }
-
-
-        .main-wrapper {
-
+        .login-container {
             width: 100%;
+            max-width: 390px;
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 35px 28px 25px;
+            box-shadow: 0 12px 40px rgba(0, 80, 40, 0.12);
+            border: 1px solid #e1f0e6;
+        }
 
-            max-width: 1050px;
-
-            display: grid;
-
-            grid-template-columns: 1fr 410px;
-
-            gap: 70px;
-
+        .logo {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 18px;
+            border-radius: 50%;
+            background: #087a3d;
+            display: flex;
             align-items: center;
-        }
-
-
-        /* =========================
-           INTRODUCTION
-        ========================= */
-
-        .intro {
-
-            padding: 15px;
-        }
-
-
-        .official-label {
-
-            display: inline-block;
-
-            border-left: 4px solid #b18427;
-
-            padding-left: 12px;
-
-            color: #6c7176;
-
-            font-size: 12px;
-
-            font-weight: 700;
-
-            letter-spacing: 1px;
-
-            text-transform: uppercase;
-
-            margin-bottom: 18px;
-        }
-
-
-        .intro h2 {
-
-            font-family: Georgia, serif;
-
-            color: #173f67;
-
-            font-size: 40px;
-
-            line-height: 1.18;
-
-            font-weight: 600;
-
-            margin-bottom: 18px;
-        }
-
-
-        .intro h2 span {
-
-            color: #8b671d;
-        }
-
-
-        .intro-description {
-
-            max-width: 580px;
-
-            color: #5d6872;
-
-            font-size: 15px;
-
-            line-height: 1.8;
-
-            margin-bottom: 30px;
-        }
-
-
-        /* INFORMATION BOX */
-
-        .info-box {
-
-            border-left: 3px solid #173f67;
-
-            background: #ffffff;
-
-            padding: 18px 20px;
-
-            box-shadow:
-                0 3px 12px rgba(0,0,0,.05);
-
-            max-width: 560px;
-        }
-
-
-        .info-box strong {
-
-            display: block;
-
-            color: #173f67;
-
-            font-size: 14px;
-
-            margin-bottom: 7px;
-        }
-
-
-        .info-box p {
-
-            color: #68737d;
-
-            font-size: 13px;
-
-            line-height: 1.6;
-        }
-
-
-        /* =========================
-           LOGIN CARD
-        ========================= */
-
-        .login-card {
-
-            background: #ffffff;
-
-            border: 1px solid #d5dce2;
-
-            border-top: 4px solid #173f67;
-
-            box-shadow:
-                0 8px 30px rgba(20,40,60,.10);
-
-            padding: 32px;
-
-            border-radius: 3px;
-        }
-
-
-        .login-heading {
-
-            border-bottom: 1px solid #e2e6e9;
-
-            padding-bottom: 18px;
-
-            margin-bottom: 23px;
-        }
-
-
-        .login-heading h3 {
-
-            font-family: Georgia, serif;
-
-            color: #173f67;
-
+            justify-content: center;
+            color: white;
             font-size: 25px;
-
-            font-weight: 600;
-
-            margin-bottom: 6px;
+            font-weight: bold;
         }
 
-
-        .login-heading p {
-
-            color: #78838c;
-
-            font-size: 13px;
-        }
-
-
-        /* =========================
-           FORM
-        ========================= */
-
-        .form-group {
-
-            margin-bottom: 19px;
-        }
-
-
-        .form-group label {
-
-            display: block;
-
-            color: #374550;
-
-            font-size: 13px;
-
-            font-weight: 600;
-
+        h1 {
+            text-align: center;
+            color: #075d30;
+            font-size: 23px;
+            letter-spacing: 0.5px;
             margin-bottom: 7px;
         }
 
+        .subtitle {
+            text-align: center;
+            color: #777;
+            font-size: 12px;
+            margin-bottom: 28px;
+        }
 
-        .input-wrapper {
+        .input-group {
+            margin-bottom: 17px;
+        }
 
+        label {
+            display: block;
+            color: #333;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 7px;
+        }
+
+        input {
+            width: 100%;
+            height: 46px;
+            border: 1px solid #d7e5dc;
+            border-radius: 9px;
+            padding: 0 13px;
+            font-size: 14px;
+            outline: none;
+            transition: 0.2s;
+            background: #fbfdfc;
+        }
+
+        input:focus {
+            border-color: #087a3d;
+            box-shadow: 0 0 0 3px rgba(8, 122, 61, 0.08);
+            background: #fff;
+        }
+
+        .password-box {
             position: relative;
         }
 
-
-        .input-wrapper input {
-
-            width: 100%;
-
-            height: 46px;
-
-            border: 1px solid #cbd3da;
-
-            border-radius: 3px;
-
-            background: #ffffff;
-
-            padding: 0 42px 0 13px;
-
-            font-size: 14px;
-
-            color: #26333d;
-
-            outline: none;
-
-            transition: .2s;
+        .password-box input {
+            padding-right: 55px;
         }
 
-
-        .input-wrapper input:focus {
-
-            border-color: #173f67;
-
-            box-shadow:
-                0 0 0 2px rgba(23,63,103,.08);
-        }
-
-
-        .input-icon {
-
+        .show-password {
             position: absolute;
-
-            right: 13px;
-
+            right: 12px;
             top: 50%;
-
             transform: translateY(-50%);
-
-            color: #7d8992;
-
-            cursor: pointer;
-
-            font-size: 15px;
-        }
-
-
-        /* =========================
-           OPTIONS
-        ========================= */
-
-        .options {
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: space-between;
-
-            margin: 4px 0 22px;
-        }
-
-
-        .remember {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 7px;
-
-            color: #68737d;
-
-            font-size: 12px;
-        }
-
-
-        .remember input {
-
-            accent-color: #173f67;
-        }
-
-
-        .forgot {
-
-            color: #173f67;
-
-            font-size: 12px;
-
-            text-decoration: none;
-        }
-
-
-        .forgot:hover {
-
-            text-decoration: underline;
-        }
-
-
-        /* =========================
-           LOGIN BUTTON
-        ========================= */
-
-        .login-button {
-
-            width: 100%;
-
-            height: 46px;
-
             border: none;
-
-            border-radius: 3px;
-
-            background: #173f67;
-
-            color: #ffffff;
-
-            font-size: 14px;
-
-            font-weight: 600;
-
+            background: transparent;
+            color: #087a3d;
             cursor: pointer;
-
-            letter-spacing: .3px;
-
-            transition: .2s;
+            font-size: 12px;
+            font-weight: 600;
         }
 
-
-        .login-button:hover {
-
-            background: #0f3152;
+        .login-btn {
+            width: 100%;
+            height: 47px;
+            margin-top: 7px;
+            border: none;
+            border-radius: 9px;
+            background: #087a3d;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
         }
 
+        .login-btn:hover {
+            background: #056630;
+        }
 
-        /* =========================
-           ERROR
-        ========================= */
+        .login-btn:active {
+            transform: scale(0.98);
+        }
 
         .error {
-
-            min-height: 18px;
-
+            display: none;
+            margin-top: 14px;
+            padding: 10px;
+            border-radius: 7px;
+            background: #fff0f0;
+            color: #c62828;
             text-align: center;
-
-            color: #b42318;
-
             font-size: 12px;
-
-            margin-top: 10px;
         }
-
-
-        /* =========================
-           SECURITY NOTE
-        ========================= */
-
-        .security-note {
-
-            margin-top: 22px;
-
-            padding-top: 17px;
-
-            border-top: 1px solid #e5e8eb;
-
-            text-align: center;
-
-            color: #7a858e;
-
-            font-size: 11px;
-
-            line-height: 1.6;
-        }
-
-
-        /* =========================
-           FOOTER
-        ========================= */
 
         .footer {
-
-            background: #173f67;
-
-            color: #dbe6ef;
-
-            padding: 17px 20px;
-
             text-align: center;
-
-            font-size: 11px;
+            margin-top: 25px;
+            padding-top: 17px;
+            border-top: 1px solid #edf2ee;
+            color: #999;
+            font-size: 10px;
         }
-
-
-        .footer .credit {
-
-            margin-top: 4px;
-
-            color: #b7c8d7;
-        }
-
 
         .footer a {
-
-            color: #ffffff;
-
-            font-weight: 600;
-
+            color: #087a3d;
             text-decoration: none;
+            font-weight: bold;
         }
 
-
         .footer a:hover {
-
             text-decoration: underline;
         }
 
-
-        /* =========================
-           RESPONSIVE
-        ========================= */
-
-        @media (max-width: 850px) {
-
-            .main-wrapper {
-
-                grid-template-columns: 1fr;
-
-                max-width: 520px;
-
-                gap: 35px;
+        @media (max-width: 400px) {
+            .login-container {
+                padding: 30px 22px 23px;
             }
 
-
-            .intro {
-
-                text-align: center;
-
-                padding: 0;
-            }
-
-
-            .official-label {
-
-                border-left: none;
-
-                border-bottom: 3px solid #b18427;
-
-                padding: 0 0 6px;
-            }
-
-
-            .intro-description {
-
-                margin-left: auto;
-
-                margin-right: auto;
-            }
-
-
-            .info-box {
-
-                text-align: left;
-
-                margin: auto;
-            }
-
-
-            .header-right {
-
-                display: none;
+            h1 {
+                font-size: 21px;
             }
         }
-
-
-        @media (max-width: 550px) {
-
-            .header {
-
-                padding: 14px 18px;
-            }
-
-
-            .emblem {
-
-                width: 48px;
-
-                height: 48px;
-
-                font-size: 22px;
-            }
-
-
-            .brand-text h1 {
-
-                font-size: 19px;
-            }
-
-
-            .brand-text p {
-
-                font-size: 10px;
-            }
-
-
-            .main {
-
-                padding: 35px 15px;
-            }
-
-
-            .intro h2 {
-
-                font-size: 30px;
-            }
-
-
-            .login-card {
-
-                padding: 24px 20px;
-            }
-        }
-
     </style>
-
 </head>
-
 
 <body>
 
+    <div class="login-container">
 
-    <!-- TOP COLOUR STRIP -->
-
-    <div class="top-strip"></div>
-
-
-
-    <!-- =========================
-         HEADER
-    ========================= -->
-
-    <header class="header">
-
-        <div class="header-inner">
-
-
-            <div class="brand">
-
-
-                <div class="emblem">
-                    🛡
-                </div>
-
-
-                <div class="brand-text">
-
-                    <h1>
-                        MUSLIM
-                        <span>YOUTH ADRA</span>
-                    </h1>
-
-                    <p>
-                        Community Reporting & Assistance Portal
-                    </p>
-
-                </div>
-
-            </div>
-
-
-
-            <div class="header-right">
-
-                <strong>
-                    PRIVATE COMMUNITY PORTAL
-                </strong>
-
-                <br>
-
-                Evidence • Guidance • Resources
-
-            </div>
-
-
+        <div class="logo">
+            MYA
         </div>
 
-    </header>
-
-
-
-    <!-- =========================
-         MAIN
-    ========================= -->
-
-    <main class="main">
-
-
-        <div class="main-wrapper">
-
-
-            <!-- INTRODUCTION -->
-
-            <section class="intro">
-
-
-                <div class="official-label">
-
-                    Secure Member Access
-
-                </div>
-
-
-                <h2>
-
-                    Welcome to
-
-                    <br>
-
-                    <span>MUSLIM YOUTH ADRA</span>
-
-                </h2>
-
-
-                <p class="intro-description">
-
-                    A community-focused portal designed to help
-                    users organize information, prepare factual
-                    evidence reports and access relevant official
-                    reporting resources.
-
-                </p>
-
-
-                <div class="info-box">
-
-                    <strong>
-                        Before continuing
-                    </strong>
-
-                    <p>
-
-                        Please use this portal responsibly.
-                        Reports should contain accurate information
-                        and genuine supporting evidence. This portal
-                        does not itself submit complaints to any
-                        government department.
-
-                    </p>
-
-                </div>
-
-
-            </section>
-
-
-
-            <!-- =========================
-                 LOGIN CARD
-            ========================= -->
-
-            <section class="login-card">
-
-
-                <div class="login-heading">
-
-                    <h3>
-                        Member Login
-                    </h3>
-
-                    <p>
-                        Enter your credentials to continue.
-                    </p>
-
-                </div>
-
-
-
-                <form id="loginForm">
-
-
-                    <!-- USERNAME -->
-
-                    <div class="form-group">
-
-                        <label for="username">
-                            Username
-                        </label>
-
-
-                        <div class="input-wrapper">
-
-                            <input
-                                type="text"
-                                id="username"
-                                placeholder="Enter username"
-                                autocomplete="username"
-                                required
-                            >
-
-
-                            <span class="input-icon">
-                                👤
-                            </span>
-
-                        </div>
-
-                    </div>
-
-
-
-                    <!-- PASSWORD -->
-
-                    <div class="form-group">
-
-                        <label for="password">
-                            Password
-                        </label>
-
-
-                        <div class="input-wrapper">
-
-                            <input
-                                type="password"
-                                id="password"
-                                placeholder="Enter password"
-                                autocomplete="current-password"
-                                required
-                            >
-
-
-                            <span
-                                class="input-icon"
-                                id="showPassword"
-                            >
-                                ◉
-                            </span>
-
-                        </div>
-
-                    </div>
-
-
-
-                    <!-- OPTIONS -->
-
-                    <div class="options">
-
-
-                        <label class="remember">
-
-                            <input
-                                type="checkbox"
-                                id="remember"
-                            >
-
-                            Remember Me
-
-                        </label>
-
-
-                        <a
-                            href="#"
-                            class="forgot"
-                            onclick="return false;"
-                        >
-                            Forgot Password?
-                        </a>
-
-
-                    </div>
-
-
-
-                    <!-- LOGIN BUTTON -->
-
-                    <button
-                        type="submit"
-                        class="login-button"
+        <h1>MUSLIM YOUTH ADRA</h1>
+
+        <p class="subtitle">
+            Welcome · Please login to continue
+        </p>
+
+        <form id="loginForm">
+
+            <div class="input-group">
+                <label for="username">Username</label>
+
+                <input
+                    type="text"
+                    id="username"
+                    placeholder="Enter username"
+                    autocomplete="username"
+                    required
+                >
+            </div>
+
+            <div class="input-group">
+                <label for="password">Password</label>
+
+                <div class="password-box">
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter password"
+                        autocomplete="current-password"
+                        required
                     >
 
-                        Login
-
+                    <button
+                        type="button"
+                        class="show-password"
+                        id="showPassword"
+                    >
+                        Show
                     </button>
 
-
-                    <div
-                        class="error"
-                        id="error"
-                    ></div>
-
-
-                </form>
-
-
-
-                <div class="security-note">
-
-                    🔒 Your evidence is processed locally
-                    in this browser in this static version.
-
                 </div>
+            </div>
 
+            <button type="submit" class="login-btn">
+                LOGIN
+            </button>
 
-            </section>
+            <div class="error" id="errorMessage">
+                Invalid username or password.
+            </div>
 
+        </form>
 
-        </div>
-
-    </main>
-
-
-
-    <!-- =========================
-         FOOTER
-    ========================= -->
-
-    <footer class="footer">
-
-        <div>
-            MUSLIM YOUTH ADRA
-        </div>
-
-
-        <div class="credit">
-
+        <div class="footer">
             Created by
-
             <a
                 href="https://www.instagram.com/be.like_sahil?stkn=MTF3eWhrZ3o1NWdzeQ=="
                 target="_blank"
@@ -1046,126 +248,86 @@
             >
                 @be.like_sahil
             </a>
-
         </div>
 
-    </footer>
+    </div>
 
-
-
-    <!-- =========================
-         LOGIN JAVASCRIPT
-    ========================= -->
 
     <script>
 
+        // ==========================================
+        // CHANGE YOUR LOGIN DETAILS HERE
+        // ==========================================
 
-        /*
-        =====================================
-        DEMO LOGIN
-        =====================================
-
-        Username:
-        sahil
-
-        Password:
-        12345
-
-        Later we can change this.
-        =====================================
-        */
+        const CORRECT_USERNAME = "admin";
+        const CORRECT_PASSWORD = "12345";
 
 
-        const correctUsername = "sahil";
+        // ==========================================
+        // LOGIN SYSTEM
+        // ==========================================
 
-        const correctPassword = "12345";
+        const loginForm = document.getElementById("loginForm");
+        const usernameInput = document.getElementById("username");
+        const passwordInput = document.getElementById("password");
+        const errorMessage = document.getElementById("errorMessage");
 
+        loginForm.addEventListener("submit", function(event) {
 
+            event.preventDefault();
 
-        /* SHOW / HIDE PASSWORD */
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value;
 
-        document
-            .getElementById("showPassword")
-            .addEventListener("click", function () {
+            if (
+                username === CORRECT_USERNAME &&
+                password === CORRECT_PASSWORD
+            ) {
 
-                const password =
-                    document.getElementById("password");
+                // Save login state
+                sessionStorage.setItem("mya_logged_in", "true");
 
+                // Next page
+                window.location.href = "pdf.html";
 
-                if (password.type === "password") {
+            } else {
 
-                    password.type = "text";
+                errorMessage.style.display = "block";
 
-                } else {
+                passwordInput.value = "";
 
-                    password.type = "password";
+                setTimeout(function() {
+                    errorMessage.style.display = "none";
+                }, 3000);
+            }
 
-                }
-
-            });
-
-
-
-        /* LOGIN */
-
-        document
-            .getElementById("loginForm")
-            .addEventListener("submit", function (event) {
-
-                event.preventDefault();
-
-
-                const username =
-                    document
-                    .getElementById("username")
-                    .value
-                    .trim();
+        });
 
 
-                const password =
-                    document
-                    .getElementById("password")
-                    .value;
+        // ==========================================
+        // SHOW / HIDE PASSWORD
+        // ==========================================
 
+        const showPasswordButton =
+            document.getElementById("showPassword");
 
-                const error =
-                    document.getElementById("error");
+        showPasswordButton.addEventListener("click", function() {
 
+            if (passwordInput.type === "password") {
 
+                passwordInput.type = "text";
+                showPasswordButton.textContent = "Hide";
 
-                if (
-                    username === correctUsername &&
-                    password === correctPassword
-                ) {
+            } else {
 
+                passwordInput.type = "password";
+                showPasswordButton.textContent = "Show";
 
-                    sessionStorage.setItem(
-                        "mya_login",
-                        "true"
-                    );
+            }
 
-
-                    /*
-                    Page 2 hum next step mein banayenge.
-                    */
-
-                    window.location.href =
-                        "case.html";
-
-
-                } else {
-
-
-                    error.textContent =
-                        "Invalid username or password.";
-
-                }
-
-            });
+        });
 
     </script>
 
-
 </body>
-
 </html>
