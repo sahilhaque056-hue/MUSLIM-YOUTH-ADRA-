@@ -1,14 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>MUSLIM YOUTH ADRA - Incident Report</title>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
-<style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>MUSLIM YOUTH ADRA - Incident Report</title><!-- jsPDF --><script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script><style>
 
 *{
     margin:0;
@@ -32,6 +25,7 @@ header{
     display:flex;
     align-items:center;
     justify-content:space-between;
+    gap:10px;
     box-shadow:0 3px 15px rgba(0,0,0,.12);
 }
 
@@ -43,6 +37,7 @@ header{
 .nav{
     display:flex;
     gap:7px;
+    flex-wrap:wrap;
 }
 
 .nav a,
@@ -187,7 +182,7 @@ textarea{
     line-height:1.4;
 }
 
-/* CHECKBOXES */
+/* CHECKBOX */
 
 .check-group{
     display:grid;
@@ -213,6 +208,51 @@ textarea{
     margin:0;
     font-size:10px;
     font-weight:normal;
+}
+
+/* UPLOAD */
+
+.upload-box{
+    border:2px dashed #b9d8c5;
+    background:#f8fcf9;
+    padding:18px;
+    border-radius:10px;
+    text-align:center;
+}
+
+.upload-box input{
+    border:none;
+    background:transparent;
+    padding:5px;
+}
+
+.preview-list{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(130px,1fr));
+    gap:10px;
+    margin-top:12px;
+}
+
+.preview-item{
+    border:1px solid #dce9e0;
+    border-radius:8px;
+    padding:6px;
+    background:white;
+    overflow:hidden;
+}
+
+.preview-item img{
+    width:100%;
+    height:100px;
+    object-fit:cover;
+    border-radius:5px;
+}
+
+.preview-name{
+    font-size:8px;
+    color:#666;
+    margin-top:5px;
+    word-break:break-word;
 }
 
 /* BUTTONS */
@@ -251,7 +291,7 @@ textarea{
     background:#e1ece4;
 }
 
-/* SUCCESS */
+/* STATUS */
 
 .success{
     display:none;
@@ -259,6 +299,17 @@ textarea{
     background:#edf9f1;
     border:1px solid #cce6d4;
     color:#176534;
+    padding:11px;
+    border-radius:8px;
+    font-size:11px;
+}
+
+.error{
+    display:none;
+    margin-top:15px;
+    background:#fff1f1;
+    border:1px solid #efcaca;
+    color:#a12626;
     padding:11px;
     border-radius:8px;
     font-size:11px;
@@ -314,599 +365,620 @@ footer a{
     }
 }
 
-</style>
-</head>
+</style></head><body><header><div class="brand">
+    MUSLIM YOUTH ADRA
+</div>
+
+<div class="nav">
+
+    <a href="pdf.html">
+        Report
+    </a>
+
+    <a href="portals.html">
+        Government Portals
+    </a>
+
+    <button type="button" onclick="logout()">
+        Logout
+    </button>
+
+</div>
+
+</header><main class="container"><h1 class="title">
+    Hate Speech / Content Incident Report
+</h1>
+
+<p class="subtitle">
+    Record reported hateful, abusive, discriminatory or misleading online content
+</p>
 
 
-<body>
+<div class="notice">
 
-<!-- HEADER -->
+    <strong>Important:</strong>
+    Enter information accurately and preserve original evidence where possible.
+    This report is a record of information provided by the complainant and does
+    not itself determine whether an offence has occurred.
 
-<header>
+</div>
 
-    <div class="brand">
-        MUSLIM YOUTH ADRA
+
+<!-- SECTION 1 -->
+
+<div class="card">
+
+    <div class="section-title">
+        <span class="section-number">1</span>
+        Case Information
     </div>
 
-    <div class="nav">
+    <div class="grid">
 
-        <a href="pdf.html">
-            Report
-        </a>
+        <div class="field">
 
-        <a href="portals.html">
-            Government Portals
-        </a>
+            <label>Case / Reference Number</label>
 
-        <button onclick="logout()">
-            Logout
-        </button>
+            <input
+                type="text"
+                id="caseNumber"
+                placeholder="Example: MYA-2026-001"
+            >
 
-    </div>
+            <div class="small-help">
+                Leave blank to generate a reference number automatically.
+            </div>
 
-</header>
-
-
-<main class="container">
-
-    <h1 class="title">
-        Hate Speech / Content Incident Report
-    </h1>
-
-    <p class="subtitle">
-        Record reported hateful, abusive, discriminatory or misleading online content
-    </p>
-
-
-    <div class="notice">
-
-        <strong>Important:</strong>
-        Enter information accurately and preserve original evidence where possible.
-        This report is a record of information provided by the complainant and does
-        not itself determine whether an offence has occurred.
-
-    </div>
-
-
-    <!-- SECTION 1 -->
-
-    <div class="card">
-
-        <div class="section-title">
-            <span class="section-number">1</span>
-            Case Information
         </div>
 
-        <div class="grid">
 
-            <div class="field">
+        <div class="field">
 
-                <label>Case / Reference Number</label>
+            <label>Date of Report</label>
 
-                <input
-                    type="text"
-                    id="caseNumber"
-                    placeholder="Example: MYA-2026-001"
-                >
-
-            </div>
-
-
-            <div class="field">
-
-                <label>Date of Report</label>
-
-                <input
-                    type="date"
-                    id="reportDate"
-                >
-
-            </div>
+            <input
+                type="date"
+                id="reportDate"
+            >
 
         </div>
 
     </div>
 
+</div>
 
-    <!-- SECTION 2 -->
 
-    <div class="card">
+<!-- SECTION 2 -->
 
-        <div class="section-title">
-            <span class="section-number">2</span>
-            Complainant Information
+<div class="card">
+
+    <div class="section-title">
+        <span class="section-number">2</span>
+        Complainant Information
+    </div>
+
+    <div class="grid">
+
+        <div class="field">
+
+            <label>Full Name *</label>
+
+            <input
+                type="text"
+                id="complainant"
+                placeholder="Enter full name"
+            >
+
         </div>
 
-        <div class="grid">
 
-            <div class="field">
+        <div class="field">
 
-                <label>Full Name</label>
+            <label>Mobile Number</label>
 
-                <input
-                    type="text"
-                    id="complainant"
-                    placeholder="Enter full name"
-                >
+            <input
+                type="tel"
+                id="mobile"
+                placeholder="Enter mobile number"
+            >
 
-            </div>
-
-
-            <div class="field">
-
-                <label>Mobile Number</label>
-
-                <input
-                    type="tel"
-                    id="mobile"
-                    placeholder="Enter mobile number"
-                >
-
-            </div>
+        </div>
 
 
-            <div class="field">
+        <div class="field">
 
-                <label>Email Address</label>
+            <label>Email Address</label>
 
-                <input
-                    type="email"
-                    id="email"
-                    placeholder="Enter email address"
-                >
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter email address"
+            >
 
-            </div>
+        </div>
 
 
-            <div class="field">
+        <div class="field">
 
-                <label>City / District</label>
+            <label>City / District</label>
 
-                <input
-                    type="text"
-                    id="district"
-                    placeholder="Enter city / district"
-                >
-
-            </div>
+            <input
+                type="text"
+                id="district"
+                placeholder="Enter city / district"
+            >
 
         </div>
 
     </div>
 
+</div>
 
-    <!-- SECTION 3 -->
 
-    <div class="card">
+<!-- SECTION 3 -->
 
-        <div class="section-title">
-            <span class="section-number">3</span>
-            Incident Details
+<div class="card">
+
+    <div class="section-title">
+        <span class="section-number">3</span>
+        Incident Details
+    </div>
+
+    <div class="grid">
+
+        <div class="field">
+
+            <label>Incident Date</label>
+
+            <input
+                type="date"
+                id="incidentDate"
+            >
+
         </div>
 
-        <div class="grid">
 
-            <div class="field">
+        <div class="field">
 
-                <label>Incident Date</label>
+            <label>Approximate Time</label>
+
+            <input
+                type="time"
+                id="incidentTime"
+            >
+
+        </div>
+
+
+        <div class="field">
+
+            <label>Platform / Website</label>
+
+            <select id="platform">
+
+                <option value="">
+                    Select platform
+                </option>
+
+                <option>Facebook</option>
+                <option>Instagram</option>
+                <option>YouTube</option>
+                <option>X / Twitter</option>
+                <option>WhatsApp</option>
+                <option>Telegram</option>
+                <option>Other Website</option>
+                <option>Other</option>
+
+            </select>
+
+        </div>
+
+
+        <div class="field">
+
+            <label>Content Type</label>
+
+            <select id="contentType">
+
+                <option value="">
+                    Select content type
+                </option>
+
+                <option>Video</option>
+                <option>Post</option>
+                <option>Comment</option>
+                <option>Image</option>
+                <option>Story</option>
+                <option>Message</option>
+                <option>Other</option>
+
+            </select>
+
+        </div>
+
+
+        <div class="field full">
+
+            <label>Post / Video URL</label>
+
+            <input
+                type="url"
+                id="postUrl"
+                placeholder="https://..."
+            >
+
+            <div class="small-help">
+                Paste the direct URL of the reported content if available.
+            </div>
+
+        </div>
+
+
+        <div class="field full">
+
+            <label>Account / Profile URL</label>
+
+            <input
+                type="url"
+                id="profileUrl"
+                placeholder="https://..."
+            >
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- SECTION 4 -->
+
+<div class="card">
+
+    <div class="section-title">
+        <span class="section-number">4</span>
+        Nature of Reported Content
+    </div>
+
+
+    <div class="check-group">
+
+        <div class="check">
+            <input type="checkbox" id="hate">
+            <label for="hate">
+                Hateful / discriminatory language
+            </label>
+        </div>
+
+        <div class="check">
+            <input type="checkbox" id="religious">
+            <label for="religious">
+                Religious targeting
+            </label>
+        </div>
+
+        <div class="check">
+            <input type="checkbox" id="abusive">
+            <label for="abusive">
+                Abusive / insulting content
+            </label>
+        </div>
+
+        <div class="check">
+            <input type="checkbox" id="misleading">
+            <label for="misleading">
+                Allegedly misleading / false content
+            </label>
+        </div>
+
+        <div class="check">
+            <input type="checkbox" id="threat">
+            <label for="threat">
+                Threatening language
+            </label>
+        </div>
+
+        <div class="check">
+            <input type="checkbox" id="incitement">
+            <label for="incitement">
+                Alleged incitement / hostility
+            </label>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- SECTION 5 -->
+
+<div class="card">
+
+    <div class="section-title">
+        <span class="section-number">5</span>
+        Content Description
+    </div>
+
+    <div class="grid">
+
+        <div class="field full">
+
+            <label>
+                Exact Hateful / Offensive Statement
+            </label>
+
+            <textarea
+                id="exactStatement"
+                placeholder="Enter the exact words as they appeared. Do not paraphrase if the original wording is available."
+            ></textarea>
+
+        </div>
+
+
+        <div class="field full">
+
+            <label>
+                Description of Video / Post
+            </label>
+
+            <textarea
+                id="contentDescription"
+                placeholder="Describe what is shown, said or claimed in the video/post."
+            ></textarea>
+
+        </div>
+
+
+        <div class="field full">
+
+            <label>
+                Why Is This Content Being Reported?
+            </label>
+
+            <textarea
+                id="reason"
+                placeholder="Explain factually why you believe the content is hateful, discriminatory, abusive or misleading."
+            ></textarea>
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                Targeted Community / Person
+            </label>
+
+            <input
+                type="text"
+                id="target"
+                placeholder="Example: Muslim community"
+            >
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                Language Used
+            </label>
+
+            <input
+                type="text"
+                id="language"
+                placeholder="Example: Hindi / English / Bengali"
+            >
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- SECTION 6 -->
+
+<div class="card">
+
+    <div class="section-title">
+        <span class="section-number">6</span>
+        Evidence Information
+    </div>
+
+    <div class="grid">
+
+        <div class="field">
+
+            <label>
+                Evidence Available
+            </label>
+
+            <select id="evidence">
+
+                <option value="">
+                    Select
+                </option>
+
+                <option>Screenshot</option>
+                <option>Screen Recording</option>
+                <option>Video File</option>
+                <option>Post URL</option>
+                <option>Multiple Evidence</option>
+                <option>Other</option>
+
+            </select>
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                Evidence File / Screenshot Name
+            </label>
+
+            <input
+                type="text"
+                id="evidenceName"
+                placeholder="Example: screenshot_01.jpg"
+            >
+
+        </div>
+
+
+        <!-- REAL FILE UPLOAD -->
+
+        <div class="field full">
+
+            <label>
+                Upload Screenshot / Evidence Images
+            </label>
+
+            <div class="upload-box">
 
                 <input
-                    type="date"
-                    id="incidentDate"
-                >
-
-            </div>
-
-
-            <div class="field">
-
-                <label>Approximate Time</label>
-
-                <input
-                    type="time"
-                    id="incidentTime"
-                >
-
-            </div>
-
-
-            <div class="field">
-
-                <label>Platform / Website</label>
-
-                <select id="platform">
-
-                    <option value="">
-                        Select platform
-                    </option>
-
-                    <option>Facebook</option>
-                    <option>Instagram</option>
-                    <option>YouTube</option>
-                    <option>X / Twitter</option>
-                    <option>WhatsApp</option>
-                    <option>Telegram</option>
-                    <option>Other Website</option>
-                    <option>Other</option>
-
-                </select>
-
-            </div>
-
-
-            <div class="field">
-
-                <label>Content Type</label>
-
-                <select id="contentType">
-
-                    <option value="">
-                        Select content type
-                    </option>
-
-                    <option>Video</option>
-                    <option>Post</option>
-                    <option>Comment</option>
-                    <option>Image</option>
-                    <option>Story</option>
-                    <option>Message</option>
-                    <option>Other</option>
-
-                </select>
-
-            </div>
-
-
-            <div class="field full">
-
-                <label>Post / Video URL</label>
-
-                <input
-                    type="url"
-                    id="postUrl"
-                    placeholder="https://..."
+                    type="file"
+                    id="evidenceFiles"
+                    accept="image/jpeg,image/png,image/webp"
+                    multiple
                 >
 
                 <div class="small-help">
-                    Paste the direct URL of the reported content if available.
+                    You can select multiple screenshots. JPG, PNG and WebP are supported.
                 </div>
 
             </div>
 
+            <div
+                id="previewList"
+                class="preview-list"
+            ></div>
 
-            <div class="field full">
+        </div>
 
-                <label>Account / Profile URL</label>
 
-                <input
-                    type="url"
-                    id="profileUrl"
-                    placeholder="https://..."
-                >
+        <div class="field full">
 
-            </div>
+            <label>
+                Evidence Notes
+            </label>
+
+            <textarea
+                id="evidenceNotes"
+                placeholder="Mention what evidence was preserved and when it was captured."
+            ></textarea>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- SECTION 7 -->
+
+<div class="card">
+
+    <div class="section-title">
+        <span class="section-number">7</span>
+        Additional Information
+    </div>
+
+    <div class="grid">
+
+        <div class="field full">
+
+            <label>
+                Additional Details / Witness Information
+            </label>
+
+            <textarea
+                id="additional"
+                placeholder="Enter any additional relevant information."
+            ></textarea>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- SECTION 8 -->
+
+<div class="card">
+
+    <div class="section-title">
+        <span class="section-number">8</span>
+        Declaration
+    </div>
+
+    <div class="grid">
+
+        <div class="field full">
+
+            <label>
+                Declaration
+            </label>
+
+            <textarea id="declaration">I confirm that the information entered in this report is provided to the best of my knowledge and belief. I understand that the relevant authorities or platform may independently verify the information and evidence submitted.</textarea>
 
         </div>
 
     </div>
 
 
-    <!-- SECTION 4 -->
-
-    <div class="card">
-
-        <div class="section-title">
-            <span class="section-number">4</span>
-            Nature of Reported Content
-        </div>
-
-
-        <div class="check-group">
-
-            <div class="check">
-                <input type="checkbox" id="hate">
-                <label for="hate">
-                    Hateful / discriminatory language
-                </label>
-            </div>
-
-            <div class="check">
-                <input type="checkbox" id="religious">
-                <label for="religious">
-                    Religious targeting
-                </label>
-            </div>
-
-            <div class="check">
-                <input type="checkbox" id="abusive">
-                <label for="abusive">
-                    Abusive / insulting content
-                </label>
-            </div>
-
-            <div class="check">
-                <input type="checkbox" id="misleading">
-                <label for="misleading">
-                    Allegedly misleading / false video
-                </label>
-            </div>
-
-            <div class="check">
-                <input type="checkbox" id="threat">
-                <label for="threat">
-                    Threatening language
-                </label>
-            </div>
-
-            <div class="check">
-                <input type="checkbox" id="incitement">
-                <label for="incitement">
-                    Alleged incitement / hostility
-                </label>
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- SECTION 5 -->
-
-    <div class="card">
-
-        <div class="section-title">
-            <span class="section-number">5</span>
-            Content Description
-        </div>
-
-        <div class="grid">
-
-            <div class="field full">
-
-                <label>
-                    Exact Hateful / Offensive Statement
-                </label>
-
-                <textarea
-                    id="exactStatement"
-                    placeholder="Enter the exact words as they appeared. Do not paraphrase if the original wording is available."
-                ></textarea>
-
-            </div>
-
-
-            <div class="field full">
-
-                <label>
-                    Description of Video / Post
-                </label>
-
-                <textarea
-                    id="contentDescription"
-                    placeholder="Describe what is shown, said or claimed in the video/post."
-                ></textarea>
-
-            </div>
-
-
-            <div class="field full">
-
-                <label>
-                    Why Is This Content Being Reported?
-                </label>
-
-                <textarea
-                    id="reason"
-                    placeholder="Explain factually why you believe the content is hateful, discriminatory, abusive or misleading."
-                ></textarea>
-
-            </div>
-
-
-            <div class="field">
-
-                <label>
-                    Targeted Community / Person
-                </label>
-
-                <input
-                    type="text"
-                    id="target"
-                    placeholder="Example: Muslim community"
-                >
-
-            </div>
-
-
-            <div class="field">
-
-                <label>
-                    Language Used
-                </label>
-
-                <input
-                    type="text"
-                    id="language"
-                    placeholder="Example: Hindi / English / Bengali"
-                >
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- SECTION 6 -->
-
-    <div class="card">
-
-        <div class="section-title">
-            <span class="section-number">6</span>
-            Evidence Information
-        </div>
-
-        <div class="grid">
-
-            <div class="field">
-
-                <label>
-                    Evidence Available
-                </label>
-
-                <select id="evidence">
-
-                    <option value="">
-                        Select
-                    </option>
-
-                    <option>Screenshot</option>
-                    <option>Screen Recording</option>
-                    <option>Video File</option>
-                    <option>Post URL</option>
-                    <option>Multiple Evidence</option>
-                    <option>Other</option>
-
-                </select>
-
-            </div>
-
-
-            <div class="field">
-
-                <label>
-                    Evidence File / Screenshot Name
-                </label>
-
-                <input
-                    type="text"
-                    id="evidenceName"
-                    placeholder="Example: screenshot_01.jpg"
-                >
-
-            </div>
-
-
-            <div class="field full">
-
-                <label>
-                    Evidence Notes
-                </label>
-
-                <textarea
-                    id="evidenceNotes"
-                    placeholder="Mention what evidence was preserved and when it was captured."
-                ></textarea>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- SECTION 7 -->
-
-    <div class="card">
-
-        <div class="section-title">
-            <span class="section-number">7</span>
-            Additional Information
-        </div>
-
-        <div class="grid">
-
-            <div class="field full">
-
-                <label>
-                    Additional Details / Witness Information
-                </label>
-
-                <textarea
-                    id="additional"
-                    placeholder="Enter any additional relevant information."
-                ></textarea>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- SECTION 8 -->
-
-    <div class="card">
-
-        <div class="section-title">
-            <span class="section-number">8</span>
-            Declaration
-        </div>
-
-        <div class="grid">
-
-            <div class="field full">
-
-                <label>
-                    Declaration
-                </label>
-
-                <textarea id="declaration">I confirm that the information entered in this report is provided to the best of my knowledge and belief. I understand that the relevant authorities or platform may independently verify the information and evidence submitted.</textarea>
-
-            </div>
-
-        </div>
-
-
-        <div class="actions">
-
-            <button
-                class="btn generate"
-                onclick="generatePDF()"
-            >
-                Generate & Download PDF
-            </button>
-
-            <button
-                class="btn clear"
-                onclick="clearForm()"
-            >
-                Clear Form
-            </button>
-
-        </div>
-
-
-        <div
-            class="success"
-            id="success"
+    <div class="actions">
+
+        <button
+            type="button"
+            class="btn generate"
+            onclick="generatePDF()"
         >
-            PDF generated successfully.
-        </div>
+            Generate & Download PDF
+        </button>
+
+        <button
+            type="button"
+            class="btn clear"
+            onclick="clearForm()"
+        >
+            Clear Form
+        </button>
 
     </div>
 
-</main>
 
-
-<footer>
-
-    Created by
-
-    <a
-        href="https://www.instagram.com/be.like_sahil?stkn=MTF3eWhrZ3o1NWdzeQ=="
-        target="_blank"
-        rel="noopener noreferrer"
+    <div
+        class="success"
+        id="success"
     >
-        @be.like_sahil
-    </a>
+        PDF generated and downloaded successfully.
+    </div>
 
-</footer>
+    <div
+        class="error"
+        id="error"
+    ></div>
 
+</div>
 
-<script>
+</main><footer>Created by
 
-/* LOGIN PROTECTION */
+<a
+    href="https://www.instagram.com/be.like_sahil"
+    target="_blank"
+    rel="noopener noreferrer"
+>
+    @be.like_sahil
+</a>
+
+</footer><script>
+
+/* =========================================
+   LOGIN PROTECTION
+========================================= */
 
 if(
     sessionStorage.getItem("mya_logged_in") !== "true"
@@ -915,34 +987,50 @@ if(
 }
 
 
-/* DATE */
+/* =========================================
+   DATE
+========================================= */
 
 const today =
     new Date().toISOString().split("T")[0];
 
-document.getElementById("reportDate").value=today;
+document.getElementById("reportDate").value = today;
+
+document.getElementById("incidentDate").value = today;
 
 
-/* LOGOUT */
+/* =========================================
+   LOGOUT
+========================================= */
 
 function logout(){
 
     sessionStorage.removeItem("mya_logged_in");
 
     window.location.href="index.html";
+
 }
 
 
-/* VALUE */
+/* =========================================
+   VALUE HELPER
+========================================= */
 
 function getValue(id){
 
-    return document.getElementById(id).value.trim();
+    const element =
+        document.getElementById(id);
+
+    if(!element) return "";
+
+    return element.value.trim();
 
 }
 
 
-/* CHECKED ITEMS */
+/* =========================================
+   CATEGORIES
+========================================= */
 
 function getCategories(){
 
@@ -958,7 +1046,7 @@ function getCategories(){
         list.push("Abusive / insulting content");
 
     if(document.getElementById("misleading").checked)
-        list.push("Allegedly misleading / false video");
+        list.push("Allegedly misleading / false content");
 
     if(document.getElementById("threat").checked)
         list.push("Threatening language");
@@ -966,135 +1054,53 @@ function getCategories(){
     if(document.getElementById("incitement").checked)
         list.push("Alleged incitement / hostility");
 
-    return list.join(", ");
+    return list.length
+        ? list.join(", ")
+        : "Not specified";
 
 }
 
 
-/* PDF */
+/* =========================================
+   FILE STORAGE
+========================================= */
 
-function generatePDF(){
-
-    const complainant=getValue("complainant");
-    const postUrl=getValue("postUrl");
-
-    if(!complainant){
-
-        alert("Please enter the complainant's name.");
-
-        document.getElementById("complainant").focus();
-
-        return;
-    }
+let uploadedFiles = [];
 
 
-    if(!postUrl){
+document
+.getElementById("evidenceFiles")
+.addEventListener("change", function(event){
 
-        const proceed=confirm(
-            "No Post / Video URL has been entered. Generate the report anyway?"
-        );
+    uploadedFiles =
+        Array.from(event.target.files || []);
 
-        if(!proceed) return;
+    showPreviews();
 
-    }
-
-
-    const {jsPDF}=window.jspdf;
-
-    const doc=new jsPDF();
+});
 
 
-    const pageWidth=
-        doc.internal.pageSize.getWidth();
+/* =========================================
+   IMAGE PREVIEWS
+========================================= */
 
-    const pageHeight=
-        doc.internal.pageSize.getHeight();
+function showPreviews(){
 
+    const container =
+        document.getElementById("previewList");
 
-    let y=20;
+    container.innerHTML="";
 
+    uploadedFiles.forEach(function(file){
 
-    /* HEADER */
+        const reader =
+            new FileReader();
 
-    doc.setFillColor(8,122,61);
+        reader.onload=function(e){
 
-    doc.rect(
-        0,
-        0,
-        pageWidth,
-        32,
-        "F"
-    );
+            const item =
+                document.createElement("div");
 
+            item.className="preview-item";
 
-    doc.setTextColor(255,255,255);
-
-    doc.setFont(
-        "helvetica",
-        "bold"
-    );
-
-    doc.setFontSize(16);
-
-    doc.text(
-        "MUSLIM YOUTH ADRA",
-        pageWidth/2,
-        13,
-        {align:"center"}
-    );
-
-
-    doc.setFont(
-        "helvetica",
-        "normal"
-    );
-
-    doc.setFontSize(9);
-
-    doc.text(
-        "Hate Speech / Content Incident Report",
-        pageWidth/2,
-        22,
-        {align:"center"}
-    );
-
-
-    y=44;
-
-
-    /* HELPER */
-
-    function sectionTitle(title){
-
-        if(y>255){
-
-            doc.addPage();
-
-            y=22;
-
-        }
-
-        doc.setFillColor(234,247,239);
-
-        doc.roundedRect(
-            15,
-            y-6,
-            pageWidth-30,
-            9,
-            2,
-            2,
-            "F"
-        );
-
-        doc.setTextColor(8,122,61);
-
-        doc.setFont(
-            "helvetica",
-            "bold"
-        );
-
-        doc.setFontSize(10);
-
-        doc.text(
-            title,
-            19
+            item.inne
