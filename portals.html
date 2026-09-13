@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MUSLIM YOUTH ADRA - Government Portals</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #f3faf6;
+            color: #222;
+        }
+
+        /* HEADER */
+
+        header {
+            background: #087a3d;
+            color: white;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.10);
+        }
+
+        .brand {
+            font-size: 17px;
+            font-weight: bold;
+            letter-spacing: .4px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 7px;
+        }
+
+        .nav-btn {
+            border: 1px solid rgba(255,255,255,.55);
+            background: transparent;
+            color: white;
+            padding: 7px 11px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 10px;
+            text-decoration: none;
+        }
+
+        .nav-btn:hover {
+            background: white;
+            color: #087a3d;
+        }
+
+        /* MAIN */
+
+        .container {
+            width: 100%;
+            max-width: 950px;
+            margin: 28px auto;
+            padding: 0 16px;
+        }
+
+        .title {
+            text-align: center;
+            color: #075d30;
+            font-size: 23px;
+            margin-bottom: 6px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #777;
+            font-size: 12px;
+            margin-bottom: 27px;
+        }
+
+        /* NOTICE */
+
+        .notice {
+            background: #ffffff;
+            border: 1px solid #dcebe1;
+            border-left: 4px solid #087a3d;
+            border-radius: 9px;
+            padding: 13px 15px;
+            margin-bottom: 20px;
+            color: #555;
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        /* PORTAL GRID */
+
+        .portal-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .portal-card {
+            background: white;
+            border: 1px solid #e0ece4;
+            border-radius: 13px;
+            padding: 19px;
+            box-shadow: 0 5px 20px rgba(0, 70, 35, .06);
+            transition: .2s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .portal-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 9px 25px rgba(0, 70, 35, .11);
+            border-color: #b9dac5;
+        }
+
+        .portal-icon {
+            width: 43px;
+            height: 43px;
+            border-radius: 10px;
+            background: #eaf7ef;
+            color: #087a3d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 13px;
+        }
+
+        .portal-name {
+            color: #075d30;
+            font-size: 14px;
+            font-weight: bold;
+            line-height: 1.35;
+            margin-bottom: 7px;
+        }
+
+        .portal-description {
+            color: #777;
+            font-size: 11px;
+            line-height: 1.55;
+            margin-bottom: 17px;
+            flex: 1;
+        }
+
+        .official {
+            font-size: 9px;
+            color: #8a8a8a;
+            margin-bottom: 10px;
+        }
+
+        .open-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+            background: #087a3d;
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
+            font-size: 11px;
+            font-weight: bold;
+            transition: .2s;
+        }
+
+        .open-btn:hover {
+            background: #056630;
+        }
+
+        /* FOOTER */
+
+        footer {
+            text-align: center;
+            padding: 25px 15px;
+            color: #999;
+            font-size: 10px;
+        }
+
+        footer a {
+            color: #087a3d;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 650px) {
+
+            header {
+                padding: 12px 14px;
+            }
+
+            .brand {
+                font-size: 13px;
+            }
+
+            .nav-buttons {
+                gap: 4px;
+            }
+
+            .nav-btn {
+                padding: 6px 8px;
+                font-size: 9px;
+            }
+
+            .portal-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .title {
+                font-size: 20px;
+            }
+
+            .container {
+                margin-top: 22px;
+            }
+        }
+
+        @media (max-width: 390px) {
+
+            .nav-btn:nth-child(2) {
+                display: none;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <!-- HEADER -->
+
+    <header>
+
+        <div class="brand">
+            MUSLIM YOUTH ADRA
+        </div>
+
+        <div class="nav-buttons">
+
+            <a
+                href="pdf.html"
+                class="nav-btn"
+            >
+                PDF Generator
+            </a>
+
+            <button
+                class="nav-btn"
+                onclick="logout()"
+            >
+                Logout
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- MAIN -->
+
+    <main class="container">
+
+        <h1 class="title">
+            Government Portals
+        </h1>
+
+        <p class="subtitle">
+            Official Government & Police Websites
+        </p>
+
+
+        <div class="notice">
+
+            <strong>Important:</strong>
+            The buttons below open the respective official
+            government/police websites in a new browser tab.
+            MUSLIM YOUTH ADRA is not affiliated with or responsible
+            for the content of these external websites.
+
+        </div>
+
+
+        <!-- PORTAL GRID -->
+
+        <div class="portal-grid">
+
+
+            <!-- 1 -->
+
+            <div class="portal-card">
+
+                <div class="portal-icon">
+                    CC
+                </div>
+
+                <div class="portal-name">
+                    National Cyber Crime Reporting Portal
+                </div>
+
+                <div class="portal-description">
+                    Government of India portal for reporting
+                    cyber crime complaints and accessing
+                    cyber-safety related services.
+                </div>
+
+                <div class="official">
+                    Official Government of India / I4C Portal
+                </div>
+
+                <a
+                    class="open-btn"
+                    href="https://www.cybercrime.gov.in/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Open Official Website ↗
+                </a>
+
+            </div>
+
+
+            <!-- 2 -->
+
+            <div class="portal-card">
+
+                <div class="portal-icon">
+                    WB
+                </div>
+
+                <div class="portal-name">
+                    West Bengal Cyber Crime Wing
+                </div>
+
+                <div class="portal-description">
+                    Official West Bengal Police Cyber Crime
+                    Wing website and cyber crime related
+                    information.
+                </div>
+
+                <div class="official">
+                    West Bengal Police
+                </div>
+
+                <a
+                    class="open-btn"
+                    href="https://cybercrimewing.wb.gov.in/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Open Official Website ↗
+                </a>
+
+            </div>
+
+
+            <!-- 3 -->
+
+            <div class="portal-card">
+
+                <div class="portal-icon">
+                    WP
+                </div>
+
+                <div class="portal-name">
+                    West Bengal Police
+                </div>
+
+                <div class="portal-description">
+                    Official website of West Bengal Police
+                    containing police services, information,
+                    notices and important links.
+                </div>
+
+                <div class="official">
+                    Official West Bengal Police Website
+                </div>
+
+                <a
+                    class="open-btn"
+                    href="https://wbpolice.gov.in/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Open Official Website ↗
+                </a>
+
+            </div>
+
+
+            <!-- 4 -->
+
+            <div class="portal-card">
+
+                <div class="portal-icon">
+                    CP
+                </div>
+
+                <div class="portal-name">
+                    West Bengal Police Citizen Portal
+                </div>
+
+                <div class="portal-description">
+                    West Bengal Police citizen services portal
+                    for online citizen-related police services
+                    and information.
+                </div>
+
+                <div class="official">
+                    West Bengal Police / SCRB
+                </div>
+
+                <a
+                    class="open-btn"
+                    href="https://policesohaiyota.wbpolice.gov.in/Login.aspx"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Open Citizen Portal ↗
+                </a>
+
+            </div>
+
+
+            <!-- 5 -->
+
+            <div class="portal-card">
+
+                <div class="portal-icon">
+                    PG
+                </div>
+
+                <div class="portal-name">
+                    West Bengal Government Public Grievance Portal
+                </div>
+
+                <div class="portal-description">
+                    Public grievance-related online service
+                    provided through the Government of
+                    West Bengal.
+                </div>
+
+                <div class="official">
+                    Government of West Bengal
+                </div>
+
+                <a
+                    class="open-btn"
+                    href="https://finance.wb.gov.in/pgrs/Page/Default.aspx"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Open Official Website ↗
+                </a>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        Created by
+
+        <a
+            href="https://www.instagram.com/be.like_sahil?stkn=MTF3eWhrZ3o1NWdzeQ=="
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            @be.like_sahil
+        </a>
+
+    </footer>
+
+
+    <script>
+
+        // ==========================================
+        // LOGIN PROTECTION
+        // ==========================================
+
+        if (
+            sessionStorage.getItem("mya_logged_in")
+            !== "true"
+        ) {
+
+            window.location.href = "index.html";
+
+        }
+
+
+        // ==========================================
+        // LOGOUT
+        // ==========================================
+
+        function logout() {
+
+            sessionStorage.removeItem("mya_logged_in");
+
+            window.location.href = "index.html";
+
+        }
+
+    </script>
+
+</body>
+</html>
