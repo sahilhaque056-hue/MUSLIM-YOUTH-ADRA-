@@ -3,63 +3,72 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MUSLIM YOUTH ADRA — Evidence Report Generator</title>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<title>MUSLIM YOUTH ADRA — Incident Report</title>
+
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"
+onerror="this.onerror=null;this.src='https://unpkg.com/jspdf@2.5.1/dist/jspdf.umd.min.js';">
+</script>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+
+*{
+    box-sizing:border-box;
+}
 
 body{
+    margin:0;
+    background:#f3f6f9;
+    color:#17212b;
     font-family:Arial,Helvetica,sans-serif;
-    background:#f2f4f7;
-    color:#17202a;
+}
+
+.page{
+    max-width:980px;
+    margin:20px auto;
+    padding:0 14px;
+}
+
+.header{
+    background:#102a43;
+    color:#fff;
+    border-radius:16px;
+    padding:24px 22px;
+    margin-bottom:18px;
+}
+
+.header h1{
+    margin:0 0 6px;
+    font-size:25px;
+}
+
+.header p{
+    margin:0;
+    opacity:.86;
+    font-size:14px;
     line-height:1.5;
 }
 
-header{
-    background:#111827;
-    color:white;
-    padding:25px 18px;
-    text-align:center;
-}
-
-header h1{
-    font-size:27px;
-    letter-spacing:.5px;
-}
-
-header p{
-    margin-top:6px;
-    opacity:.8;
-}
-
-.container{
-    max-width:1050px;
-    margin:25px auto;
-    padding:0 15px;
-}
-
 .card{
-    background:white;
-    border-radius:12px;
-    padding:22px;
-    margin-bottom:20px;
-    box-shadow:0 3px 15px rgba(0,0,0,.07);
+    background:#fff;
+    border:1px solid #dfe6ed;
+    border-radius:14px;
+    padding:20px;
+    margin-bottom:16px;
+    box-shadow:0 3px 12px rgba(16,42,67,.06);
 }
 
 .card h2{
-    font-size:19px;
-    margin-bottom:16px;
-    color:#111827;
-    border-bottom:1px solid #e5e7eb;
-    padding-bottom:10px;
+    font-size:18px;
+    margin:0 0 16px;
+    color:#102a43;
 }
 
 .grid{
     display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:15px;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:14px;
 }
 
 .field{
@@ -68,938 +77,1535 @@ header p{
     gap:6px;
 }
 
-.full{
+.field.full{
     grid-column:1/-1;
 }
 
 label{
-    font-weight:bold;
-    font-size:14px;
+    font-size:13px;
+    font-weight:700;
+    color:#34495e;
 }
 
-input,select,textarea{
+input,
+select,
+textarea{
     width:100%;
-    border:1px solid #cfd5dc;
-    border-radius:7px;
-    padding:11px;
-    font-size:14px;
+    padding:11px 12px;
+    border:1px solid #cbd5df;
+    border-radius:9px;
+    background:#fff;
+    color:#17212b;
+    font:inherit;
     outline:none;
 }
 
+input:focus,
+select:focus,
+textarea:focus{
+    border-color:#2d6cdf;
+    box-shadow:0 0 0 3px rgba(45,108,223,.10);
+}
+
 textarea{
-    min-height:110px;
+    min-height:95px;
     resize:vertical;
 }
 
-input:focus,select:focus,textarea:focus{
-    border-color:#2563eb;
+.checks{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:9px;
 }
 
-.evidence{
-    border:1px solid #dce1e7;
-    border-radius:10px;
-    padding:18px;
-    margin-top:15px;
-    background:#fafbfc;
-}
-
-.evidence-title{
+.check{
     display:flex;
-    justify-content:space-between;
     align-items:center;
-    margin-bottom:15px;
+    gap:8px;
+    border:1px solid #e0e6ec;
+    border-radius:9px;
+    padding:10px;
+    background:#fafcfe;
 }
 
-.badge{
-    background:#111827;
-    color:white;
-    padding:5px 10px;
-    border-radius:20px;
+.check input{
+    width:auto;
+}
+
+.upload{
+    border:2px dashed #b8c6d4;
+    border-radius:12px;
+    padding:16px;
+    background:#fbfdff;
+}
+
+.upload input{
+    border:0;
+    padding:0;
+}
+
+.hint{
     font-size:12px;
+    color:#657786;
+    line-height:1.5;
+    margin-top:8px;
 }
 
-.remove{
-    background:#dc2626;
-    color:white;
-    border:0;
-    padding:7px 11px;
-    border-radius:6px;
-    cursor:pointer;
-}
-
-.buttons{
-    display:flex;
-    flex-wrap:wrap;
+.previews{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
     gap:10px;
-    margin-top:15px;
+    margin-top:14px;
 }
 
-button{
+.preview-item{
+    border:1px solid #dfe6ed;
+    border-radius:10px;
+    overflow:hidden;
+    background:#fff;
+}
+
+.preview-item img{
+    display:block;
+    width:100%;
+    height:130px;
+    object-fit:cover;
+}
+
+.preview-name{
+    padding:8px;
+    font-size:11px;
+    word-break:break-word;
+    color:#465a6e;
+}
+
+.actions{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:4px;
+}
+
+button,
+.portal-link{
     border:0;
-    border-radius:7px;
+    border-radius:10px;
     padding:12px 17px;
+    font-weight:700;
     cursor:pointer;
-    font-weight:bold;
+    font-size:14px;
 }
 
 .primary{
-    background:#111827;
-    color:white;
+    background:#102a43;
+    color:#fff;
 }
 
 .secondary{
-    background:#2563eb;
-    color:white;
+    background:#e8eef4;
+    color:#102a43;
 }
 
-.success{
-    background:#15803d;
-    color:white;
+.test{
+    background:#2d6cdf;
+    color:#fff;
 }
 
-button:hover{
-    opacity:.9;
+.portal-link{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    text-decoration:none;
+    background:#166534;
+    color:#fff !important;
+    min-height:44px;
 }
 
-.preview-img{
-    max-width:180px;
-    max-height:180px;
-    margin-top:10px;
-    border-radius:7px;
-    border:1px solid #ddd;
+.portal-link:hover{
+    background:#14532d;
+}
+
+button:disabled{
+    opacity:.55;
+    cursor:not-allowed;
+}
+
+.status{
     display:none;
+    margin-top:14px;
+    padding:12px;
+    border-radius:10px;
+    font-size:13px;
+    line-height:1.5;
 }
 
-.notice{
-    background:#fff7ed;
-    border:1px solid #fed7aa;
-    padding:13px;
-    border-radius:8px;
-    font-size:13px;
-    margin-bottom:18px;
+.status.ok{
+    display:block;
+    background:#eaf8ef;
+    color:#176b36;
+    border:1px solid #bfe5ca;
+}
+
+.status.err{
+    display:block;
+    background:#fff0f0;
+    color:#9b1c1c;
+    border:1px solid #efbcbc;
 }
 
 .footer{
     text-align:center;
-    color:#6b7280;
-    padding:20px;
+    color:#718096;
     font-size:12px;
+    padding:10px 0 28px;
+}
+
+.notice{
+    background:#fff8e7;
+    border:1px solid #f0d58a;
+    color:#6d5415;
+    border-radius:10px;
+    padding:11px 13px;
+    font-size:12px;
+    line-height:1.5;
 }
 
 @media(max-width:700px){
-    .grid{grid-template-columns:1fr}
-    .full{grid-column:auto}
-    header h1{font-size:22px}
+
+    .grid,
+    .checks{
+        grid-template-columns:1fr;
+    }
+
+    .field.full{
+        grid-column:auto;
+    }
+
+    .previews{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+
+    .header h1{
+        font-size:21px;
+    }
+
+    .actions{
+        flex-direction:column;
+    }
+
+    .actions button,
+    .portal-link{
+        width:100%;
+    }
 }
+
 </style>
 </head>
 
 <body>
 
-<header>
-    <h1>MUSLIM YOUTH ADRA</h1>
-    <p>Hate Speech / Incident Evidence Report Generator</p>
+<div class="page">
+
+<header class="header">
+
+<h1>MUSLIM YOUTH ADRA</h1>
+
+<p>
+Incident / Content Report Form
+</p>
+
 </header>
 
-<div class="container">
 
-<div class="card">
+<form id="reportForm" novalidate>
 
-<div class="notice">
-<strong>Evidence documentation:</strong>
-Use this form to document content that you have lawfully obtained or can legitimately access.
-Do not alter the original evidence. Keep original screenshots/files separately.
-</div>
 
-<h2>Report Information</h2>
+<!-- CASE INFORMATION -->
+
+<section class="card">
+
+<h2>1. Case Information</h2>
 
 <div class="grid">
 
 <div class="field">
-<label>Report ID</label>
-<input id="reportId" readonly>
+
+<label for="caseNumber">
+Case Number
+</label>
+
+<input
+id="caseNumber"
+name="caseNumber"
+readonly>
+
 </div>
 
-<div class="field">
-<label>Report Date</label>
-<input type="date" id="reportDate">
-</div>
 
 <div class="field">
-<label>Reporter / Organization</label>
-<input id="reporter" placeholder="MUSLIM YOUTH ADRA">
+
+<label for="reportDate">
+Report Date
+</label>
+
+<input
+id="reportDate"
+name="reportDate"
+type="date">
+
 </div>
 
-<div class="field">
-<label>Contact Information</label>
-<input id="contact" placeholder="Optional">
 </div>
+
+</section>
+
+
+
+<!-- COMPLAINANT -->
+
+<section class="card">
+
+<h2>2. Complainant</h2>
+
+<div class="grid">
+
+<div class="field">
+
+<label for="complainantName">
+Name
+</label>
+
+<input
+id="complainantName"
+name="complainantName"
+placeholder="Full name">
+
+</div>
+
+
+<div class="field">
+
+<label for="mobile">
+Mobile
+</label>
+
+<input
+id="mobile"
+name="mobile"
+type="tel"
+placeholder="Mobile number">
+
+</div>
+
+
+<div class="field">
+
+<label for="email">
+Email
+</label>
+
+<input
+id="email"
+name="email"
+type="email"
+placeholder="Email address">
+
+</div>
+
+
+<div class="field">
+
+<label for="cityDistrict">
+City / District
+</label>
+
+<input
+id="cityDistrict"
+name="cityDistrict"
+placeholder="City / District">
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- INCIDENT -->
+
+<section class="card">
+
+<h2>3. Incident Details</h2>
+
+<div class="grid">
+
+
+<div class="field">
+
+<label for="incidentDate">
+Incident Date
+</label>
+
+<input
+id="incidentDate"
+name="incidentDate"
+type="date">
+
+</div>
+
+
+<div class="field">
+
+<label for="incidentTime">
+Incident Time
+</label>
+
+<input
+id="incidentTime"
+name="incidentTime"
+type="time">
+
+</div>
+
+
+<div class="field">
+
+<label for="platform">
+Platform
+</label>
+
+<select id="platform" name="platform">
+
+<option value="">
+Select platform
+</option>
+
+<option>Instagram</option>
+<option>Facebook</option>
+<option>YouTube</option>
+<option>X / Twitter</option>
+<option>TikTok</option>
+<option>WhatsApp</option>
+<option>Telegram</option>
+<option>Website</option>
+<option>Other</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label for="contentType">
+Content Type
+</label>
+
+<select id="contentType" name="contentType">
+
+<option value="">
+Select type
+</option>
+
+<option>Post</option>
+<option>Video</option>
+<option>Story</option>
+<option>Comment</option>
+<option>Profile</option>
+<option>Message</option>
+<option>Other</option>
+
+</select>
+
+</div>
+
 
 <div class="field full">
-<label>Report Summary</label>
-<textarea id="summary"
-placeholder="Briefly describe what this report documents..."></textarea>
-</div>
 
-</div>
-</div>
+<label for="postUrl">
+Post / Video URL
+</label>
 
-
-<div class="card">
-
-<h2>Evidence Items</h2>
-
-<div id="evidenceContainer"></div>
-
-<div class="buttons">
-<button class="secondary" onclick="addEvidence()">+ Add Evidence</button>
-</div>
+<input
+id="postUrl"
+name="postUrl"
+type="url"
+placeholder="https://...">
 
 </div>
 
 
-<div class="card">
+<div class="field full">
 
-<h2>Declaration</h2>
+<label for="profileUrl">
+Profile URL
+</label>
 
-<textarea id="declaration">I declare that the information contained in this report has been recorded to the best of my knowledge from the evidence available to me. The attached screenshots/files are intended to preserve the context of the reported content and should be independently verified where necessary.</textarea>
+<input
+id="profileUrl"
+name="profileUrl"
+type="url"
+placeholder="https://...">
 
-<div class="buttons">
-<button class="success" onclick="generatePDF()">📄 Generate PDF Report</button>
-<button class="primary" onclick="window.print()">🖨 Print</button>
 </div>
 
 </div>
 
+</section>
+
+
+
+<!-- CONTENT NATURE -->
+
+<section class="card">
+
+<h2>4. Nature of Content</h2>
+
+<div class="checks">
+
+<label class="check">
+<input
+type="checkbox"
+name="category"
+value="Hateful / discriminatory">
+Hateful / discriminatory
+</label>
+
+
+<label class="check">
+<input
+type="checkbox"
+name="category"
+value="Religious targeting">
+Religious targeting
+</label>
+
+
+<label class="check">
+<input
+type="checkbox"
+name="category"
+value="Abusive">
+Abusive
+</label>
+
+
+<label class="check">
+<input
+type="checkbox"
+name="category"
+value="Misleading">
+Misleading
+</label>
+
+
+<label class="check">
+<input
+type="checkbox"
+name="category"
+value="Threatening">
+Threatening
+</label>
+
+
+<label class="check">
+<input
+type="checkbox"
+name="category"
+value="Incitement">
+Incitement
+</label>
+
 </div>
+
+</section>
+
+
+
+<!-- DESCRIPTION -->
+
+<section class="card">
+
+<h2>5. Content Description</h2>
+
+<div class="grid">
+
+
+<div class="field full">
+
+<label for="exactStatement">
+Exact Statement / Text
+</label>
+
+<textarea
+id="exactStatement"
+name="exactStatement"
+placeholder="Enter the exact words if available">
+</textarea>
+
+</div>
+
+
+<div class="field full">
+
+<label for="description">
+Description of Incident
+</label>
+
+<textarea
+id="description"
+name="description"
+placeholder="Describe what happened">
+</textarea>
+
+</div>
+
+
+<div class="field">
+
+<label for="reason">
+Why is it concerning?
+</label>
+
+<textarea
+id="reason"
+name="reason">
+</textarea>
+
+</div>
+
+
+<div class="field">
+
+<label for="target">
+Target / Person / Group
+</label>
+
+<textarea
+id="target"
+name="target">
+</textarea>
+
+</div>
+
+
+<div class="field">
+
+<label for="language">
+Language
+</label>
+
+<input
+id="language"
+name="language"
+placeholder="e.g. Hindi, English, Urdu">
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- EVIDENCE -->
+
+<section class="card">
+
+<h2>6. Evidence / Screenshots</h2>
+
+<div class="upload">
+
+<label for="evidenceFiles">
+
+Upload screenshots / evidence images
+
+</label>
+
+<input
+id="evidenceFiles"
+name="evidenceFiles"
+type="file"
+accept="image/jpeg,image/png,image/webp"
+multiple>
+
+<div class="hint">
+
+PNG, JPG/JPEG or WebP.
+You can select multiple screenshots.
+Images are processed in your browser and embedded
+into the generated PDF.
+
+</div>
+
+<div
+id="previews"
+class="previews">
+</div>
+
+</div>
+
+
+<div
+class="grid"
+style="margin-top:14px">
+
+
+<div class="field">
+
+<label for="evidenceType">
+Evidence Type
+</label>
+
+<select
+id="evidenceType"
+name="evidenceType">
+
+<option value="">
+Select type
+</option>
+
+<option>Screenshot</option>
+<option>Screen recording</option>
+<option>URL</option>
+<option>Other</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label for="evidenceNotes">
+Evidence Notes
+</label>
+
+<textarea
+id="evidenceNotes"
+name="evidenceNotes"
+placeholder="Explain what the uploaded evidence shows">
+</textarea>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- ADDITIONAL -->
+
+<section class="card">
+
+<h2>7. Additional Information</h2>
+
+<div class="field">
+
+<label for="additionalInfo">
+Additional Information
+</label>
+
+<textarea
+id="additionalInfo"
+name="additionalInfo">
+</textarea>
+
+</div>
+
+</section>
+
+
+
+<!-- DECLARATION -->
+
+<section class="card">
+
+<h2>8. Declaration</h2>
+
+<div class="notice">
+
+I confirm that the information provided in this report
+is based on the information/evidence available to me
+and is submitted for review. This document is a
+complainant-prepared incident record; it is not a
+government-issued complaint, FIR, or legal order.
+
+</div>
+
+</section>
+
+
+
+<!-- BUTTONS -->
+
+<section class="card">
+
+<div class="actions">
+
+
 <button
-    onclick="window.location.href='portals.html'"
-    style="
-        width:100%;
-        margin-top:12px;
-        padding:14px;
-        background:#166534;
-        color:white;
-        border:none;
-        border-radius:8px;
-        font-size:16px;
-        font-weight:bold;
-        cursor:pointer;
-    ">
-    🏛️ Government Reporting Portals
+id="generateBtn"
+class="primary"
+type="button">
+
+Generate &amp; Download PDF
+
 </button>
-<div class="footer">
-MUSLIM YOUTH ADRA • Evidence Documentation Tool
+
+
+<button
+id="testBtn"
+class="test"
+type="button">
+
+Test PDF Download
+
+</button>
+
+
+<button
+id="clearBtn"
+class="secondary"
+type="button">
+
+Clear Form
+
+</button>
+
+
+<!-- IMPORTANT:
+     This is a normal link.
+     It does NOT submit the form.
+-->
+
+<a
+class="portal-link"
+href="./portals.html"
+target="_self">
+
+🏛️ Government Reporting Portals
+
+</a>
+
+
 </div>
+
+
+<div
+id="status"
+class="status">
+</div>
+
+</section>
+
+
+</form>
+
+
+<div class="footer">
+
+MUSLIM YOUTH ADRA — Incident Report
+
+</div>
+
+</div>
+
 
 
 <script>
 
-const { jsPDF } = window.jspdf;
+(function(){
 
-let evidenceCount = 0;
-const images = {};
+"use strict";
 
-function generateID(){
+
+const $ =
+(id) => document.getElementById(id);
+
+
+const statusBox =
+$("status");
+
+
+const fileInput =
+$("evidenceFiles");
+
+
+const previews =
+$("previews");
+
+
+let selectedFiles = [];
+
+
+
+/* STATUS */
+
+function showStatus(message,type){
+
+    statusBox.textContent = message;
+
+    statusBox.className =
+    "status " + (type || "ok");
+
+}
+
+
+function hideStatus(){
+
+    statusBox.textContent = "";
+
+    statusBox.className =
+    "status";
+
+}
+
+
+
+/* VALUE */
+
+function value(id){
+
+    const el = $(id);
+
+    return el
+    ? String(el.value || "").trim()
+    : "";
+
+}
+
+
+
+/* CATEGORIES */
+
+function categories(){
+
+    return Array
+    .from(
+        document.querySelectorAll(
+            'input[name="category"]:checked'
+        )
+    )
+    .map(
+        el => el.value
+    );
+
+}
+
+
+
+/* CASE NUMBER */
+
+function makeCaseNumber(){
 
     const d = new Date();
 
-    return "MYA-" +
-        d.getFullYear() +
-        String(d.getMonth()+1).padStart(2,"0") +
-        String(d.getDate()).padStart(2,"0") +
-        "-" +
-        Math.random().toString(36).substring(2,8).toUpperCase();
-}
+    const stamp =
+        d.getFullYear().toString() +
 
-document.getElementById("reportId").value = generateID();
+        String(
+            d.getMonth()+1
+        ).padStart(2,"0") +
 
-document.getElementById("reportDate").value =
-    new Date().toISOString().split("T")[0];
+        String(
+            d.getDate()
+        ).padStart(2,"0");
 
 
-function addEvidence(){
-
-    evidenceCount++;
-
-    const id = evidenceCount;
-
-    const box = document.createElement("div");
-
-    box.className = "evidence";
-
-    box.id = "evidence-" + id;
-
-    box.innerHTML = `
-
-    <div class="evidence-title">
-
-        <strong>Evidence Item ${id}</strong>
-
-        <div>
-            <span class="badge">EVIDENCE ${id}</span>
-
-            <button class="remove"
-                onclick="removeEvidence(${id})">
-                Remove
-            </button>
-        </div>
-
-    </div>
-
-    <div class="grid">
-
-        <div class="field">
-            <label>Platform</label>
-
-            <select class="platform">
-                <option>Facebook</option>
-                <option>Instagram</option>
-                <option>X / Twitter</option>
-                <option>YouTube</option>
-                <option>TikTok</option>
-                <option>WhatsApp</option>
-                <option>Telegram</option>
-                <option>Other</option>
-            </select>
-        </div>
-
-        <div class="field">
-            <label>Content Type</label>
-
-            <select class="contentType">
-                <option>Post</option>
-                <option>Comment</option>
-                <option>Video</option>
-                <option>Image</option>
-                <option>Story</option>
-                <option>Message</option>
-                <option>Other</option>
-            </select>
-        </div>
-
-        <div class="field">
-            <label>Account / Page Name</label>
-
-            <input class="account"
-                placeholder="Name shown on the platform">
-        </div>
-
-        <div class="field">
-            <label>Username / Handle</label>
-
-            <input class="username"
-                placeholder="@username">
-        </div>
-
-        <div class="field full">
-            <label>Post / Content URL</label>
-
-            <input class="url"
-                placeholder="https://...">
-        </div>
-
-        <div class="field">
-            <label>Date Published / Observed</label>
-
-            <input type="date" class="date">
-        </div>
-
-        <div class="field">
-            <label>Time</label>
-
-            <input type="time" class="time">
-        </div>
-
-        <div class="field full">
-            <label>Exact Statement / Reported Text</label>
-
-            <textarea class="statement"
-                placeholder="Copy the exact words as displayed. Do not paraphrase."></textarea>
-        </div>
-
-        <div class="field">
-            <label>Category</label>
-
-            <select class="category">
-                <option>Anti-Muslim / Religious Hate</option>
-                <option>Threatening Content</option>
-                <option>Harassment</option>
-                <option>Incitement</option>
-                <option>Discriminatory Content</option>
-                <option>Other / Needs Review</option>
-            </select>
-        </div>
-
-        <div class="field">
-            <label>Evidence Status</label>
-
-            <select class="status">
-                <option>Original screenshot available</option>
-                <option>URL recorded</option>
-                <option>Both screenshot and URL</option>
-                <option>Other</option>
-            </select>
-        </div>
-
-        <div class="field full">
-
-            <label>Screenshot / Evidence Image</label>
-
-            <input type="file"
-                accept="image/*"
-                onchange="loadImage(event,${id})">
-
-            <img
-                id="preview-${id}"
-                class="preview-img">
-
-        </div>
-
-        <div class="field full">
-
-            <label>Additional Notes</label>
-
-            <textarea class="notes"
-                placeholder="Context, observations, relevant details, etc."></textarea>
-
-        </div>
-
-    </div>
-    `;
-
-    document.getElementById("evidenceContainer")
-        .appendChild(box);
-}
-
-
-function removeEvidence(id){
-
-    const el = document.getElementById("evidence-"+id);
-
-    if(el) el.remove();
-
-    delete images[id];
-}
-
-
-function loadImage(event,id){
-
-    const file = event.target.files[0];
-
-    if(!file) return;
-
-    const reader = new FileReader();
-
-    reader.onload = function(e){
-
-        images[id] = e.target.result;
-
-        const preview =
-            document.getElementById("preview-"+id);
-
-        preview.src = e.target.result;
-
-        preview.style.display = "block";
-    };
-
-    reader.readAsDataURL(file);
-}
-
-
-function getValue(box,selector){
-
-    const el = box.querySelector(selector);
-
-    return el ? el.value.trim() : "";
-}
-
-
-function addWrappedText(doc,text,x,y,maxWidth,lineHeight){
-
-    const lines = doc.splitTextToSize(
-        text || "Not provided",
-        maxWidth
-    );
-
-    doc.text(lines,x,y);
-
-    return y + lines.length * lineHeight;
-}
-
-
-function addPageHeader(doc,title){
-
-    doc.setFont("helvetica","bold");
-    doc.setFontSize(16);
-
-    doc.text(title,20,20);
-
-    doc.setDrawColor(150);
-
-    doc.line(20,24,190,24);
-}
-
-
-function generatePDF(){
-
-    const doc = new jsPDF({
-        orientation:"portrait",
-        unit:"mm",
-        format:"a4"
-    });
-
-    const reportId =
-        document.getElementById("reportId").value;
-
-    const reportDate =
-        document.getElementById("reportDate").value;
-
-    const reporter =
-        document.getElementById("reporter").value;
-
-    const contact =
-        document.getElementById("contact").value;
-
-    const summary =
-        document.getElementById("summary").value;
-
-    const declaration =
-        document.getElementById("declaration").value;
-
-
-    /* COVER */
-
-    doc.setFont("helvetica","bold");
-
-    doc.setFontSize(25);
-
-    doc.text(
-        "MUSLIM YOUTH ADRA",
-        105,
-        55,
-        {align:"center"}
-    );
-
-    doc.setFontSize(18);
-
-    doc.text(
-        "EVIDENCE REPORT",
-        105,
-        68,
-        {align:"center"}
-    );
-
-    doc.setFont("helvetica","normal");
-
-    doc.setFontSize(11);
-
-    doc.text(
-        "Hate Speech / Incident Documentation",
-        105,
-        78,
-        {align:"center"}
-    );
-
-    doc.setFontSize(12);
-
-    doc.text("Report ID: " + reportId,30,105);
-
-    doc.text("Report Date: " + reportDate,30,114);
-
-    doc.text(
-        "Reporter / Organization: " +
-        (reporter || "Not provided"),
-        30,
-        123
-    );
-
-    if(contact){
-
-        doc.text(
-            "Contact: " + contact,
-            30,
-            132
+    const random =
+        Math.floor(
+            1000 +
+            Math.random()*9000
         );
+
+
+    return "MYA-" +
+           stamp +
+           "-" +
+           random;
+
+}
+
+
+
+/* DEFAULT VALUES */
+
+function setDefaults(){
+
+    if(
+        !$("caseNumber").value
+    ){
+
+        $("caseNumber").value =
+        makeCaseNumber();
+
     }
 
-    doc.setFont("helvetica","bold");
 
-    doc.text("Summary",30,150);
+    if(
+        !$("reportDate").value
+    ){
 
-    doc.setFont("helvetica","normal");
+        const d = new Date();
 
-    addWrappedText(
+
+        $("reportDate").value =
+            d.getFullYear() +
+            "-" +
+            String(
+                d.getMonth()+1
+            ).padStart(2,"0") +
+            "-" +
+            String(
+                d.getDate()
+            ).padStart(2,"0");
+
+    }
+
+}
+
+
+
+/* IMAGE PREVIEW */
+
+function renderPreviews(){
+
+    previews.innerHTML = "";
+
+
+    selectedFiles.forEach(
+        (file,index)=>{
+
+            const item =
+            document.createElement(
+                "div"
+            );
+
+            item.className =
+            "preview-item";
+
+
+            const img =
+            document.createElement(
+                "img"
+            );
+
+            img.alt =
+            "Evidence " +
+            (index+1);
+
+
+            const name =
+            document.createElement(
+                "div"
+            );
+
+            name.className =
+            "preview-name";
+
+            name.textContent =
+            file.name;
+
+
+            const reader =
+            new FileReader();
+
+
+            reader.onload =
+            function(event){
+
+                img.src =
+                event.target.result;
+
+            };
+
+
+            reader.readAsDataURL(
+                file
+            );
+
+
+            item.appendChild(img);
+
+            item.appendChild(name);
+
+            previews.appendChild(item);
+
+        }
+    );
+
+}
+
+
+
+/* FILE UPLOAD */
+
+fileInput.addEventListener(
+"change",
+function(){
+
+    selectedFiles =
+    Array.from(
+        fileInput.files || []
+    );
+
+
+    const maxSize =
+    12 * 1024 * 1024;
+
+
+    const invalid =
+    selectedFiles.find(
+        file =>
+
+        !/^image\/
+        (jpeg|png|webp)$/i
+        .test(file.type)
+
+        ||
+
+        file.size > maxSize
+    );
+
+
+    if(invalid){
+
+        selectedFiles = [];
+
+        fileInput.value = "";
+
+        previews.innerHTML = "";
+
+
+        showStatus(
+            "Please select PNG/JPG/JPEG/WebP images only, with each image 12 MB or smaller.",
+            "err"
+        );
+
+
+        return;
+
+    }
+
+
+    hideStatus();
+
+    renderPreviews();
+
+});
+
+
+
+/* REPORT DATA */
+
+function getReportData(){
+
+    return {
+
+        caseNumber:
+        value("caseNumber"),
+
+        reportDate:
+        value("reportDate"),
+
+        complainantName:
+        value("complainantName"),
+
+        mobile:
+        value("mobile"),
+
+        email:
+        value("email"),
+
+        cityDistrict:
+        value("cityDistrict"),
+
+        incidentDate:
+        value("incidentDate"),
+
+        incidentTime:
+        value("incidentTime"),
+
+        platform:
+        value("platform"),
+
+        contentType:
+        value("contentType"),
+
+        postUrl:
+        value("postUrl"),
+
+        profileUrl:
+        value("profileUrl"),
+
+        categories:
+        categories(),
+
+        exactStatement:
+        value("exactStatement"),
+
+        description:
+        value("description"),
+
+        reason:
+        value("reason"),
+
+        target:
+        value("target"),
+
+        language:
+        value("language"),
+
+        evidenceType:
+        value("evidenceType"),
+
+        evidenceNotes:
+        value("evidenceNotes"),
+
+        additionalInfo:
+        value("additionalInfo")
+
+    };
+
+}
+
+
+
+/* CHECK PDF LIBRARY */
+
+function checkJsPDF(){
+
+    return (
+        window.jspdf &&
+        typeof window.jspdf.jsPDF === "function"
+    );
+
+}
+
+
+
+/* PAGE SPACE */
+
+function ensureSpace(
+    doc,
+    y,
+    needed,
+    pageHeight,
+    marginBottom
+){
+
+    if(
+        y + needed >
+        pageHeight - marginBottom
+    ){
+
+        doc.addPage();
+
+        return 20;
+
+    }
+
+
+    return y;
+
+}
+
+
+
+/* WRAPPED FIELD */
+
+function addWrappedField(
+    doc,
+    label,
+    text,
+    y,
+    opts
+){
+
+    opts =
+    opts || {};
+
+
+    const margin =
+    opts.margin || 15;
+
+
+    const pageHeight =
+    opts.pageHeight || 297;
+
+
+    const bottom =
+    opts.bottom || 18;
+
+
+    const width =
+    opts.width || 180;
+
+
+    text =
+    text || "—";
+
+
+    const lines =
+    doc.splitTextToSize(
+        String(text),
+        width
+    );
+
+
+    y =
+    ensureSpace(
         doc,
-        summary,
-        30,
-        159,
-        150,
-        5
+        y,
+        13 + lines.length * 5,
+        pageHeight,
+        bottom
+    );
+
+
+    doc.setFont(
+        "helvetica",
+        "bold"
     );
 
     doc.setFontSize(9);
 
     doc.text(
-        "This report is a documentation of supplied evidence and does not by itself establish the legal status of the reported content.",
-        30,
-        260,
-        {maxWidth:150}
-    );
-
-
-    /* EVIDENCE */
-
-    const boxes =
-        document.querySelectorAll(".evidence");
-
-    boxes.forEach((box,index)=>{
-
-        doc.addPage();
-
-        addPageHeader(
-            doc,
-            "Evidence Item " + (index+1)
-        );
-
-        let y = 35;
-
-        const platform =
-            getValue(box,".platform");
-
-        const contentType =
-            getValue(box,".contentType");
-
-        const account =
-            getValue(box,".account");
-
-        const username =
-            getValue(box,".username");
-
-        const url =
-            getValue(box,".url");
-
-        const date =
-            getValue(box,".date");
-
-        const time =
-            getValue(box,".time");
-
-        const category =
-            getValue(box,".category");
-
-        const status =
-            getValue(box,".status");
-
-        const statement =
-            getValue(box,".statement");
-
-        const notes =
-            getValue(box,".notes");
-
-
-        doc.setFontSize(10);
-
-        function field(label,value){
-
-            doc.setFont("helvetica","bold");
-
-            doc.text(label + ":",20,y);
-
-            doc.setFont("helvetica","normal");
-
-            const lines =
-                doc.splitTextToSize(
-                    value || "Not provided",
-                    125
-                );
-
-            doc.text(lines,65,y);
-
-            y += Math.max(
-                7,
-                lines.length * 5
-            );
-        }
-
-
-        field("Platform",platform);
-
-        field("Content Type",contentType);
-
-        field("Account / Page",account);
-
-        field("Username",username);
-
-        field("URL",url);
-
-        field("Date",date);
-
-        field("Time",time);
-
-        field("Category",category);
-
-        field("Evidence Status",status);
-
-
-        y += 3;
-
-        doc.setFont("helvetica","bold");
-
-        doc.text(
-            "Exact Statement / Reported Text",
-            20,
-            y
-        );
-
-        y += 7;
-
-        doc.setFont("helvetica","normal");
-
-        y = addWrappedText(
-            doc,
-            statement,
-            20,
-            y,
-            170,
-            5
-        );
-
-
-        if(y > 245){
-
-            doc.addPage();
-
-            addPageHeader(
-                doc,
-                "Evidence Item " + (index+1) +
-                " — Continued"
-            );
-
-            y = 35;
-        }
-
-
-        if(images[index+1]){
-
-            y += 8;
-
-            doc.setFont("helvetica","bold");
-
-            doc.text(
-                "Screenshot / Image Evidence",
-                20,
-                y
-            );
-
-            y += 6;
-
-            try{
-
-                const img =
-                    images[index+1];
-
-                const props =
-                    doc.getImageProperties(img);
-
-                let w = 165;
-
-                let h =
-                    (props.height /
-                    props.width) * w;
-
-                if(h > 115){
-
-                    h = 115;
-
-                    w =
-                        (props.width /
-                        props.height) * h;
-                }
-
-                if(y+h > 275){
-
-                    doc.addPage();
-
-                    addPageHeader(
-                        doc,
-                        "Evidence Image — Continued"
-                    );
-
-                    y=35;
-                }
-
-                doc.addImage(
-                    img,
-                    "JPEG",
-                    20,
-                    y,
-                    w,
-                    h
-                );
-
-                y += h + 8;
-
-            }catch(e){
-
-                doc.setFont("helvetica","normal");
-
-                doc.text(
-                    "Image could not be embedded.",
-                    20,
-                    y
-                );
-
-                y += 8;
-            }
-        }
-
-
-        if(notes){
-
-            if(y > 245){
-
-                doc.addPage();
-
-                addPageHeader(
-                    doc,
-                    "Evidence Item " +
-                    (index+1) +
-                    " — Notes"
-                );
-
-                y=35;
-            }
-
-            doc.setFont("helvetica","bold");
-
-            doc.text(
-                "Additional Notes",
-                20,
-                y
-            );
-
-            y += 7;
-
-            doc.setFont("helvetica","normal");
-
-            addWrappedText(
-                doc,
-                notes,
-                20,
-                y,
-                170,
-                5
-            );
-        }
-
-    });
-
-
-    /* DECLARATION */
-
-    doc.addPage();
-
-    addPageHeader(
-        doc,
-        "Declaration & Report Information"
-    );
-
-    let y=38;
-
-    doc.setFont("helvetica","bold");
-
-    doc.text(
-        "Declaration",
-        20,
+        label,
+        margin,
         y
     );
 
-    y+=9;
 
-    doc.setFont("helvetica","normal");
+    y += 5;
 
-    y=addWrappedText(
-        doc,
-        declaration,
-        20,
-        y,
-        170,
-        5
+
+    doc.setFont(
+        "helvetica",
+        "normal"
     );
 
-    y+=15;
+    doc.setFontSize(9);
 
-    doc.setFont("helvetica","bold");
 
     doc.text(
-        "Evidence Handling Notes",
-        20,
+        lines,
+        margin,
         y
     );
 
-    y+=9;
 
-    doc.setFont("helvetica","normal");
-
-    const handling =
-        "Original files should be preserved separately. " +
-        "Screenshots can be edited or removed from platforms " +
-        "after capture, so investigators should independently " +
-        "verify URLs, timestamps, account information and " +
-        "other available metadata where appropriate.";
-
-    addWrappedText(
-        doc,
-        handling,
-        20,
-        y,
-        170,
-        5
+    y += Math.max(
+        7,
+        lines.length * 4.5 + 3
     );
 
 
-    /* PAGE NUMBERS */
+    return y;
 
-    const total =
-        doc.internal.getNumberOfPages();
-
-    for(let i=1;i<=total;i++){
-
-        doc.setPage(i);
-
-        doc.setFontSize(8);
-
-        doc.setFont("helvetica","normal");
-
-        doc.text(
-            "MUSLIM YOUTH ADRA • " +
-            reportId +
-            " • Page " +
-            i +
-            " of " +
-            total,
-            105,
-            290,
-            {align:"center"}
-        );
-    }
-
-
-    const filename =
-        "MUSLIM_YOUTH_ADRA_" +
-        reportId +
-        "_Evidence_Report.pdf";
-
-    doc.save(filename);
 }
 
 
-/* Add first evidence automatically */
 
-addEvidence();
+/* SECTION TITLE */
 
-</script>
+function addSectionTitle(
+    doc,
+    title,
+    y
+){
 
-</body>
-</html>
+    y =
+    ensureSpace(
+        doc,
+        y,
+        16,
+        297,
+        18
+    );
+
+
+    doc.setFont(
+        "helvetica",
+        "bold"
+    );
+
+    doc.setFontSize(12);
+
+
+    doc.text(
+        title,
+        15,
+        y
+    );
+
+
+    y += 6;
+
+
+    doc.setDrawColor(
+        210,
+        218,
+        226
+    );
+
+
+    doc.line(
+        15,
+        y,
+        195,
+        y
+    );
+
+
+    y += 7;
+
+
+    return y;
+
+}
+
+
+
+/* FOOTER */
+
+function addFooter(doc){
+
+    const pageCount =
+    doc.getNumberOfPages();
+
+
+    for(
+        let page=1;
+        page<=pageCount;
+        page++
+    ){
+
+        doc.setPage(page);
+
+
+        doc.setFont(
+            "helvetica",
+            "normal"
+        );
+
+        doc.setFontSize(7.5);
+
+        doc.setTextColor(
+            105,
+            115,
+            125
+        );
+
+
+        doc.text(
+            "MUSLIM YOUTH ADRA — Complainant-prepared incident record",
+            15,
+            289
+        );
+
+
+        doc.text(
+            "Page " +
+            page +
+            " of " +
+            pageCount,
+            195,
+            289,
+            {
+                align:"right"
+            }
+        );
+
+    }
+
+
+    doc.setTextColor(
+        0,
+        0,
+        0
+    );
+
+}
+
+
+
+/* IMAGE TO JPEG */
+
+function fileToJpegDataURL(
+    file,
+    maxWidth
+){
+
+    maxWidth =
+    maxWidth || 1600;
+
+
+    return new Promise(
+        (resolve,reject)=>{
+
+            const reader =
+            new FileReader();
+
+
+            reader.onerror =
+            () =>
+            reject(
+                new Error(
+                    "Could not read " +
+                    file.name
+                )
+            );
+
+
+            reader.onload =
+            function(){
+
+                const img =
+                new Image();
+
+
+                img.onerror =
+                () =>
+                reject(
+                    new Error(
+                        "Could not decode " +
+                        file.name
+                    )
+                );
+
+
+                img.onload =
+                function(){
+
+                    let w =
+                    img.naturalWidth ||
+                    img.width;
+
+
+                    let h =
+                    img.naturalHeight ||
+                    img.height;
+
+
+                    if(!w || !h){
+
+                        reject(
+                            new Error(
+                                "Invalid image: " +
+                                file.name
+                            )
+                        );
+
+                        return;
+
+                    }
+
+
+                    if(w > maxWidth){
+
+                        const scale =
+    
