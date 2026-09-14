@@ -1,1 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>MUSLIM YOUTH ADRA - Evidence Report</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #06140e, #0b3d2e);
+    color: white;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 650px;
+    margin: auto;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.header h1 {
+    font-size: 24px;
+    letter-spacing: 1px;
+}
+
+.header p {
+    color: #b9ccc4;
+    font-size: 13px;
+    margin-top: 7px;
+}
+
+.card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 18px;
+    padding: 22px;
+    backdrop-filter: blur(10px);
+}
+
+label {
+    display: block;
+    margin: 15px 0 7px;
+    font-size: 13px;
+    color: #dce8e3;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 13px;
+    border: none;
+    outline: none;
+    border-radius: 9px;
+    font-size: 14px;
+    background: white;
+    color: #111;
+}
+
+textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 18px;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.generate {
+    background: white;
+    color: #0b3d2e;
+}
+
+.portals {
+    background: #174f3d;
+    color: white;
+}
+
+.logout {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.25);
+    color: #ddd;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+.status {
+    text-align: center;
+    font-size: 13px;
+    margin-top: 15px;
+    color: #bdebd7;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 11px;
+    color: #91a49d;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h1>MUSLIM YOUTH ADRA</h1>
+        <p>Evidence Report Generator</p>
+    </div>
+
+    <div class="card">
+
+        <label>Platform</label>
+        <select id="platform">
+            <option value="">Select Platform</option>
+            <option>Facebook</option>
+            <option>Instagram</option>
+            <option>YouTube</option>
+            <option>X / Twitter</option>
+            <option>TikTok</option>
+            <option>WhatsApp</option>
+            <option>Telegram</option>
+            <option>Other</option>
+        </select>
+
+        <label>Content Type</label>
+        <select id="contentType">
+            <option value="">Select Content Type</option>
+            <option>Post</option>
+            <option>Comment</option>
+            <option>Video</option>
+            <option>Image</option>
+            <option>Message</option>
+            <option>Profile</option>
+            <option>Other</option>
+        </select>
+
+        <label>Date / Time of Observation</label>
+        <input type="datetime-local" id="dateTime">
+
+        <label>Content URL</label>
+        <input
+            type="url"
+            id="url"
+            placeholder="https://..."
+        >
+
+        <label>Username / Page Name</label>
+        <input
+            type="text"
+            id="username"
+            placeholder="Username or page name"
+        >
+
+        <label>Reported Content / Statement</label>
+        <textarea
+            id="content"
+            placeholder="Enter the exact statement or describe the content..."
+        ></textarea>
+
+        <label>Additional Notes</label>
+        <textarea
+            id="notes"
+            placeholder="Add any additional factual information..."
+        ></textarea>
+
+        <button class="generate" onclick="generatePDF()">
+            GENERATE EVIDENCE PDF
+        </button>
+
+        <button class="portals" onclick="openPortals()">
+            GOVERNMENT PORTALS
+        </button>
+
+        <button class="logout" onclick="logout()">
+            LOGOUT
+        </button>
+
+        <div class="status" id="status"></div>
+
+    </div>
+
+    <div class="footer">
+        Created by MUSLIM YOUTH ADRA
+    </div>
+
+</div>
+
+<script>
+
+/* LOGIN PROTECTION */
+
+if (sessionStorage.getItem("mya_logged_in") !== "true") {
+    window.location.replace("./index.html");
+}
+
+
+/* OPEN GOVERNMENT PORTALS */
+
+function openPortals() {
+    window.location.href = "./portals.html";
+}
+
+
+/* LOGOUT */
+
+function logout() {
+
+    sessionStorage.removeItem("mya_logged_in");
+
+    window.location.replace("./index.html");
+}
+
+
+/* PDF GENERATOR */
+
+async function generatePDF() {
+
+    const status = document.getElementById("status");
+
+    if (!window.jspdf || !window.jspdf.jsPDF) {
+
+        status.textContent =
+            "PDF library load nahi hui. Internet connection check karein.";
+
+        return;
+    }
+
+    const platform =
+        document.getElementById("platform").value;
+
+    const contentType =
+        document.getElementById("contentType").value;
+
+    const dateTime =
+        document.getElementById("dateTime").value;
+
+    const url =
+        document.getElementById("url").value.trim();
+
+    const username =
+        document.getElementById("username").value.trim();
+
+    const content =
+        document.getElementById("content").value.trim();
+
+    const notes =
+        document.getElementById("notes").value.trim();
+
+
+    if (!platform ||
+        !contentType ||
+        !dateTime ||
+        !content) {
+
+        status.textContent =
+            "Please fill Platform, Content Type, Date/Time and Content.";
+
+        return;
+    }
+
+
+    try {
+
+        const { jsPDF } = window.jspdf;
+
+        const pdf = new jsPDF();
+
+        let y = 20;
+
+        /* HEADER */
+
+        pdf.setFontSize(18);
+        pdf.setFont("helvetica", "bold");
+
+        pdf.text(
+            "MUSLIM YOUTH ADRA",
+            105,
+            y,
+            { align: "center" }
+        );
+
+        y += 9;
+
+        pdf.setFontSize(14);
+
+        pdf.text(
+            "SOCIAL MEDIA EVIDENCE REPORT",
+            105,
+            y,
+            { align: "center" }
+        );
+
+        y += 15;
+
+        pdf.setLineWidth(0.5);
+
+        pdf.line(15, y, 195, y);
+
+        y += 12;
+
+
+        /* REPORT INFORMATION */
+
+        pdf.setFontSize(11);
+        pdf.setFont("helvetica", "bold");
+
+        pdf.text("REPORT INFORMATION", 15, y);
+
+        y += 8;
+
+        pdf.setFont("helvetica", "normal");
+
+        pdf.text(
+            "Platform: " + platform,
+            15,
+            y
+        );
+
+        y += 7;
+
+        pdf.text(
+            "Content Type: " + contentType,
+            15,
+            y
+        );
+
+        y += 7;
+
+        pdf.text(
+            "Date / Time: " + dateTime,
+            15,
+            y
+        );
+
+        y += 7;
+
+        pdf.text(
+            "Username / Page: " +
+            (username || "Not provided"),
+            15,
+            y
+        );
+
+        y += 7;
+
+
+        /* URL */
+
+        pdf.text("Content URL:", 15, y);
+
+        y += 6;
+
+        const urlLines =
+            pdf.splitTextToSize(
+                url || "Not provided",
+                175
+            );
+
+        pdf.text(urlLines, 15, y);
+
+        y += urlLines.length * 6 + 7;
+
+
+        /* CONTENT */
+
+        pdf.setFont("helvetica", "bold");
+
+        pdf.text(
+            "REPORTED CONTENT / STATEMENT",
+            15,
+            y
+        );
+
+        y += 7;
+
+        pdf.setFont("helvetica", "normal");
+
+        const contentLines =
+            pdf.splitTextToSize(
+                content,
+                175
+            );
+
+        pdf.text(
+            contentLines,
+            15,
+            y
+        );
+
+        y += contentLines.length * 6 + 10;
+
+
+        /* NOTES */
+
+        if (notes) {
+
+            pdf.setFont("helvetica", "bold");
+
+            pdf.text(
+                "ADDITIONAL NOTES",
+                15,
+                y
+            );
+
+            y += 7;
+
+            pdf.setFont("helvetica", "normal");
+
+            const noteLines =
+                pdf.splitTextToSize(
+                    notes,
+                    175
+                );
+
+            pdf.text(
+                noteLines,
+                15,
+                y
+            );
+
+            y += noteLines.length * 6 + 10;
+        }
+
+
+        /* DISCLAIMER */
+
+        if (y > 250) {
+
+            pdf.addPage();
+
+            y = 20;
+        }
+
+        pdf.setFontSize(9);
+        pdf.setFont("helvetica", "italic");
+
+        const disclaimer =
+            "This report is a factual record prepared for documentation " +
+            "and reporting purposes. Verify the original content and URL " +
+            "before submitting a report to any authority.";
+
+        const disclaimerLines =
+            pdf.splitTextToSize(
+                disclaimer,
+                175
+            );
+
+        pdf.text(
+            disclaimerLines,
+            15,
+            270
+        );
+
+
+        /* SAVE */
+
+        const filename =
+            "MUSLIM_YOUTH_ADRA_Evidence_Report.pdf";
+
+        pdf.save(filename);
+
+        status.textContent =
+            "PDF successfully generated.";
+
+    } catch (error) {
+
+        console.error(error);
+
+        status.textContent =
+            "PDF generate nahi hua. Please try again.";
+    }
+
+}
+
+</script>
+
+</body>
+</html>
