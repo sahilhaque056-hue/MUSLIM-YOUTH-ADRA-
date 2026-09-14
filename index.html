@@ -1,1 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>MUSLIM YOUTH ADRA - Login</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #071a12, #0b3d2e, #06140e);
+    color: white;
+}
+
+.login-box {
+    width: 90%;
+    max-width: 390px;
+    padding: 35px 25px;
+    text-align: center;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 20px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+}
+
+.logo {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 18px;
+    border-radius: 50%;
+    background: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #0b3d2e;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+.subtitle {
+    font-size: 13px;
+    color: #c8d8d2;
+    margin-bottom: 28px;
+}
+
+input {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 15px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.95);
+    color: #111;
+    font-size: 15px;
+}
+
+.password-box {
+    position: relative;
+}
+
+.password-box input {
+    padding-right: 50px;
+}
+
+.show-password {
+    position: absolute;
+    right: 15px;
+    top: 14px;
+    cursor: pointer;
+    color: #555;
+    font-size: 13px;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 5px;
+    border: none;
+    border-radius: 10px;
+    background: #ffffff;
+    color: #0b3d2e;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #dff5eb;
+}
+
+.error {
+    display: none;
+    margin-top: 15px;
+    color: #ffb3b3;
+    font-size: 13px;
+}
+
+.instagram {
+    display: inline-block;
+    margin-top: 25px;
+    color: #cbd8d3;
+    font-size: 11px;
+    text-decoration: none;
+}
+
+.instagram:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+.footer {
+    margin-top: 10px;
+    font-size: 10px;
+    color: #91a49d;
+}
+</style>
+</head>
+
+<body>
+
+<div class="login-box">
+
+    <div class="logo">MYA</div>
+
+    <h1>MUSLIM YOUTH ADRA</h1>
+
+    <div class="subtitle">
+        Secure Login
+    </div>
+
+    <input
+        type="text"
+        id="username"
+        placeholder="Username"
+        autocomplete="username"
+    >
+
+    <div class="password-box">
+        <input
+            type="password"
+            id="password"
+            placeholder="Password"
+            autocomplete="current-password"
+        >
+        <span class="show-password" onclick="togglePassword()">Show</span>
+    </div>
+
+    <button onclick="login()">LOGIN</button>
+
+    <div class="error" id="error">
+        Incorrect username or password.
+    </div>
+
+    <a
+        class="instagram"
+        href="https://www.instagram.com/be.like_sahil?stkn=MTF3eWhrZ3o1NWdzeQ=="
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+        @be.like_sahil
+    </a>
+
+    <div class="footer">
+        MUSLIM YOUTH ADRA
+    </div>
+
+</div>
+
+<script>
+
+const CORRECT_USERNAME = "admin";
+const CORRECT_PASSWORD = "12345";
+
+function login() {
+
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value;
+
+    const error = document.getElementById("error");
+
+    if (
+        username === CORRECT_USERNAME &&
+        password === CORRECT_PASSWORD
+    ) {
+
+        sessionStorage.setItem("mya_logged_in", "true");
+
+        window.location.href = "./pdf.html";
+
+    } else {
+
+        error.style.display = "block";
+
+    }
+}
+
+function togglePassword() {
+
+    const password = document.getElementById("password");
+    const toggle = document.querySelector(".show-password");
+
+    if (password.type === "password") {
+
+        password.type = "text";
+        toggle.textContent = "Hide";
+
+    } else {
+
+        password.type = "password";
+        toggle.textContent = "Show";
+
+    }
+}
+
+document.getElementById("password").addEventListener("keydown", function(event) {
+
+    if (event.key === "Enter") {
+        login();
+    }
+
+});
+
+</script>
+
+</body>
+</html>
