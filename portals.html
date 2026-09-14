@@ -1,1 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>MUSLIM YOUTH ADRA - Government Portals</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #06140e, #0b3d2e);
+    color: white;
+    padding: 25px 18px;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    font-size: 24px;
+    letter-spacing: 1px;
+}
+
+.header p {
+    margin-top: 8px;
+    color: #b9ccc4;
+    font-size: 13px;
+}
+
+.portal-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.portal {
+    display: block;
+    width: 100%;
+    padding: 17px 18px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.09);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: white;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.portal:hover {
+    background: rgba(255,255,255,0.16);
+    transform: translateY(-2px);
+}
+
+.portal-title {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.portal-url {
+    display: block;
+    margin-top: 5px;
+    font-size: 11px;
+    color: #a9c5ba;
+    word-break: break-all;
+}
+
+.back {
+    width: 100%;
+    margin-top: 25px;
+    padding: 14px;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 10px;
+    background: transparent;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 25px;
+    color: #91a49d;
+    font-size: 11px;
+}
+
+.instagram {
+    display: inline-block;
+    margin-top: 8px;
+    color: #b9ccc4;
+    text-decoration: none;
+    font-size: 10px;
+}
+
+.instagram:hover {
+    color: white;
+    text-decoration: underline;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h1>GOVERNMENT PORTALS</h1>
+        <p>Official reporting and grievance portals</p>
+    </div>
+
+    <div class="portal-list">
+
+        <a
+            class="portal"
+            href="https://www.cybercrime.gov.in/"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            <span class="portal-title">
+                National Cyber Crime Reporting Portal
+            </span>
+            <span class="portal-url">
+                cybercrime.gov.in
+            </span>
+        </a>
+
+        <a
+            class="portal"
+            href="https://cybercrimewing.wb.gov.in/"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            <span class="portal-title">
+                West Bengal Cyber Crime Wing
+            </span>
+            <span class="portal-url">
+                cybercrimewing.wb.gov.in
+            </span>
+        </a>
+
+        <a
+            class="portal"
+            href="https://wbpolice.gov.in/"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            <span class="portal-title">
+                West Bengal Police
+            </span>
+            <span class="portal-url">
+                wbpolice.gov.in
+            </span>
+        </a>
+
+        <a
+            class="portal"
+            href="https://policesohaiyota.wbpolice.gov.in/"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            <span class="portal-title">
+                West Bengal Police Citizen Portal
+            </span>
+            <span class="portal-url">
+                policesohaiyota.wbpolice.gov.in
+            </span>
+        </a>
+
+        <a
+            class="portal"
+            href="https://prdgrievance.wb.gov.in/"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            <span class="portal-title">
+                West Bengal Government Public Grievance Portal
+            </span>
+            <span class="portal-url">
+                prdgrievance.wb.gov.in
+            </span>
+        </a>
+
+    </div>
+
+    <button class="back" onclick="goBack()">
+        ← BACK TO PDF GENERATOR
+    </button>
+
+    <div class="footer">
+        Created by MUSLIM YOUTH ADRA
+
+        <br>
+
+        <a
+            class="instagram"
+            href="https://www.instagram.com/be.like_sahil?stkn=MTF3eWhrZ3o1NWdzeQ=="
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            @be.like_sahil
+        </a>
+    </div>
+
+</div>
+
+<script>
+
+function goBack() {
+    window.location.href = "./pdf.html";
+}
+
+</script>
+
+</body>
+</html>
