@@ -1,333 +1,680 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>MUSLIM YOUTH ADRA - Login</title>
+<meta charset="UTF-8">
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, Helvetica, sans-serif;
-        }
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-        body {
-            min-height: 100vh;
-            background: linear-gradient(135deg, #f4fff8, #e5f7ec);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
+<title>Secure Login</title>
 
-        .login-container {
-            width: 100%;
-            max-width: 390px;
-            background: #ffffff;
-            border-radius: 18px;
-            padding: 35px 28px 25px;
-            box-shadow: 0 12px 40px rgba(0, 80, 40, 0.12);
-            border: 1px solid #e1f0e6;
-        }
+<style>
 
-        .logo {
-            width: 70px;
-            height: 70px;
-            margin: 0 auto 18px;
-            border-radius: 50%;
-            background: #087a3d;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 25px;
-            font-weight: bold;
-        }
+/* ==========================================
+   RESET
+========================================== */
 
-        h1 {
-            text-align: center;
-            color: #075d30;
-            font-size: 23px;
-            letter-spacing: 0.5px;
-            margin-bottom: 7px;
-        }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-        .subtitle {
-            text-align: center;
-            color: #777;
-            font-size: 12px;
-            margin-bottom: 28px;
-        }
 
-        .input-group {
-            margin-bottom: 17px;
-        }
+/* ==========================================
+   BODY
+========================================== */
 
-        label {
-            display: block;
-            color: #333;
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 7px;
-        }
+body{
 
-        input {
-            width: 100%;
-            height: 46px;
-            border: 1px solid #d7e5dc;
-            border-radius: 9px;
-            padding: 0 13px;
-            font-size: 14px;
-            outline: none;
-            transition: 0.2s;
-            background: #fbfdfc;
-        }
+    min-height:100vh;
 
-        input:focus {
-            border-color: #087a3d;
-            box-shadow: 0 0 0 3px rgba(8, 122, 61, 0.08);
-            background: #fff;
-        }
+    display:flex;
 
-        .password-box {
-            position: relative;
-        }
+    align-items:center;
 
-        .password-box input {
-            padding-right: 55px;
-        }
+    justify-content:center;
 
-        .show-password {
-            position: absolute;
-            right: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            border: none;
-            background: transparent;
-            color: #087a3d;
-            cursor: pointer;
-            font-size: 12px;
-            font-weight: 600;
-        }
+    padding:20px;
 
-        .login-btn {
-            width: 100%;
-            height: 47px;
-            margin-top: 7px;
-            border: none;
-            border-radius: 9px;
-            background: #087a3d;
-            color: white;
-            font-size: 14px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.2s;
-        }
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
 
-        .login-btn:hover {
-            background: #056630;
-        }
+    background:
+        linear-gradient(
+            135deg,
+            #0f172a,
+            #1e293b,
+            #334155
+        );
 
-        .login-btn:active {
-            transform: scale(0.98);
-        }
+    color:#172033;
 
-        .error {
-            display: none;
-            margin-top: 14px;
-            padding: 10px;
-            border-radius: 7px;
-            background: #fff0f0;
-            color: #c62828;
-            text-align: center;
-            font-size: 12px;
-        }
+}
 
-        .footer {
-            text-align: center;
-            margin-top: 25px;
-            padding-top: 17px;
-            border-top: 1px solid #edf2ee;
-            color: #999;
-            font-size: 10px;
-        }
 
-        .footer a {
-            color: #087a3d;
-            text-decoration: none;
-            font-weight: bold;
-        }
+/* ==========================================
+   LOGIN CONTAINER
+========================================== */
 
-        .footer a:hover {
-            text-decoration: underline;
-        }
+.login-container{
 
-        @media (max-width: 400px) {
-            .login-container {
-                padding: 30px 22px 23px;
-            }
+    width:100%;
 
-            h1 {
-                font-size: 21px;
-            }
-        }
-    </style>
+    max-width:420px;
+
+}
+
+
+/* ==========================================
+   LOGIN CARD
+========================================== */
+
+.login-card{
+
+    background:#ffffff;
+
+    border-radius:18px;
+
+    padding:30px 25px;
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,.25);
+
+}
+
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.logo{
+
+    width:65px;
+
+    height:65px;
+
+    margin:0 auto 15px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:#2563eb;
+
+    color:#ffffff;
+
+    font-size:27px;
+
+    font-weight:bold;
+
+}
+
+
+h1{
+
+    text-align:center;
+
+    font-size:24px;
+
+    color:#111827;
+
+    margin-bottom:7px;
+
+}
+
+
+.subtitle{
+
+    text-align:center;
+
+    color:#64748b;
+
+    font-size:13px;
+
+    margin-bottom:25px;
+
+}
+
+
+/* ==========================================
+   FORM
+========================================== */
+
+.form-group{
+
+    margin-bottom:17px;
+
+}
+
+
+label{
+
+    display:block;
+
+    margin-bottom:7px;
+
+    font-size:14px;
+
+    font-weight:bold;
+
+    color:#334155;
+
+}
+
+
+input{
+
+    width:100%;
+
+    height:48px;
+
+    padding:0 13px;
+
+    border:1px solid #cbd5e1;
+
+    border-radius:9px;
+
+    outline:none;
+
+    font-size:14px;
+
+    background:#ffffff;
+
+    color:#111827;
+
+    transition:.2s;
+
+}
+
+
+input:focus{
+
+    border-color:#2563eb;
+
+    box-shadow:
+        0 0 0 3px rgba(37,99,235,.10);
+
+}
+
+
+/* ==========================================
+   PASSWORD WRAPPER
+========================================== */
+
+.password-wrapper{
+
+    position:relative;
+
+}
+
+
+.password-wrapper input{
+
+    padding-right:65px;
+
+}
+
+
+#showPassword{
+
+    position:absolute;
+
+    right:7px;
+
+    top:7px;
+
+    height:34px;
+
+    padding:0 10px;
+
+    border:0;
+
+    border-radius:7px;
+
+    background:#e2e8f0;
+
+    color:#334155;
+
+    font-size:12px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+}
+
+
+#showPassword:hover{
+
+    background:#cbd5e1;
+
+}
+
+
+/* ==========================================
+   LOGIN BUTTON
+========================================== */
+
+.login-button{
+
+    width:100%;
+
+    height:48px;
+
+    border:0;
+
+    border-radius:9px;
+
+    background:#2563eb;
+
+    color:#ffffff;
+
+    font-size:15px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+
+.login-button:hover{
+
+    background:#1d4ed8;
+
+}
+
+
+.login-button:active{
+
+    transform:scale(.98);
+
+}
+
+
+/* ==========================================
+   ERROR MESSAGE
+========================================== */
+
+#errorMessage{
+
+    display:none;
+
+    margin-bottom:15px;
+
+    padding:11px;
+
+    border-radius:8px;
+
+    background:#fef2f2;
+
+    border:1px solid #fecaca;
+
+    color:#b91c1c;
+
+    font-size:13px;
+
+    text-align:center;
+
+}
+
+
+/* ==========================================
+   FOOTER
+========================================== */
+
+.footer{
+
+    text-align:center;
+
+    margin-top:22px;
+
+    color:#64748b;
+
+    font-size:12px;
+
+}
+
+
+.footer a{
+
+    color:#2563eb;
+
+    text-decoration:none;
+
+    font-weight:bold;
+
+}
+
+
+.footer a:hover{
+
+    text-decoration:underline;
+
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media(max-width:480px){
+
+    body{
+
+        padding:15px;
+
+    }
+
+    .login-card{
+
+        padding:25px 18px;
+
+    }
+
+    h1{
+
+        font-size:21px;
+
+    }
+
+}
+
+</style>
+
 </head>
+
 
 <body>
 
-    <div class="login-container">
+
+<div class="login-container">
+
+    <div class="login-card">
+
+
+        <!-- ==================================
+             LOGO
+        =================================== -->
 
         <div class="logo">
-            MYA
+            M
         </div>
 
-        <h1>MUSLIM YOUTH ADRA</h1>
 
-        <p class="subtitle">
-            Welcome · Please login to continue
-        </p>
+        <!-- ==================================
+             TITLE
+        =================================== -->
+
+        <h1>
+            Secure Login
+        </h1>
+
+
+        <div class="subtitle">
+            Login to continue
+        </div>
+
+
+        <!-- ==================================
+             ERROR
+        =================================== -->
+
+        <div id="errorMessage">
+            Invalid username or password.
+        </div>
+
+
+        <!-- ==================================
+             LOGIN FORM
+        =================================== -->
 
         <form id="loginForm">
 
-            <div class="input-group">
-                <label for="username">Username</label>
+
+            <!-- USERNAME -->
+
+            <div class="form-group">
+
+                <label for="username">
+                    Username
+                </label>
 
                 <input
                     type="text"
                     id="username"
+                    name="username"
                     placeholder="Enter username"
                     autocomplete="username"
                     required
                 >
+
             </div>
 
-            <div class="input-group">
-                <label for="password">Password</label>
 
-                <div class="password-box">
+            <!-- PASSWORD -->
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+
+                <div class="password-wrapper">
 
                     <input
                         type="password"
                         id="password"
+                        name="password"
                         placeholder="Enter password"
                         autocomplete="current-password"
                         required
                     >
 
+
                     <button
                         type="button"
-                        class="show-password"
-                        id="showPassword"
-                    >
+                        id="showPassword">
+
                         Show
+
                     </button>
 
                 </div>
+
             </div>
 
-            <button type="submit" class="login-btn">
-                LOGIN
+
+            <!-- LOGIN BUTTON -->
+
+            <button
+                type="submit"
+                class="login-button">
+
+                Login
+
             </button>
 
-            <div class="error" id="errorMessage">
-                Invalid username or password.
-            </div>
 
         </form>
 
+
+        <!-- ==================================
+             FOOTER
+        =================================== -->
+
         <div class="footer">
+
             Created by
+
             <a
                 href="https://www.instagram.com/be.like_sahil?stkn=MTF3eWhrZ3o1NWdzeQ=="
                 target="_blank"
-                rel="noopener noreferrer"
-            >
+                rel="noopener noreferrer">
+
                 @be.like_sahil
+
             </a>
+
         </div>
+
 
     </div>
 
-
-    <script>
-
-        // ==========================================
-        // CHANGE YOUR LOGIN DETAILS HERE
-        // ==========================================
-
-        const CORRECT_USERNAME = "admin";
-        const CORRECT_PASSWORD = "12345";
+</div>
 
 
-        // ==========================================
-        // LOGIN SYSTEM
-        // ==========================================
 
-        const loginForm = document.getElementById("loginForm");
-        const usernameInput = document.getElementById("username");
-        const passwordInput = document.getElementById("password");
-        const errorMessage = document.getElementById("errorMessage");
+<script>
 
-        loginForm.addEventListener("submit", function(event) {
+/* ==========================================
+   LOGIN DETAILS
+========================================== */
 
-            event.preventDefault();
+const CORRECT_USERNAME = "admin";
 
-            const username = usernameInput.value.trim();
-            const password = passwordInput.value;
-
-            if (
-                username === CORRECT_USERNAME &&
-                password === CORRECT_PASSWORD
-            ) {
-
-                // Save login state
-                sessionStorage.setItem("mya_logged_in", "true");
-
-                // Next page
-                window.location.href = "pdf.html";
-
-            } else {
-
-                errorMessage.style.display = "block";
-
-                passwordInput.value = "";
-
-                setTimeout(function() {
-                    errorMessage.style.display = "none";
-                }, 3000);
-            }
-
-        });
+const CORRECT_PASSWORD = "12345";
 
 
-        // ==========================================
-        // SHOW / HIDE PASSWORD
-        // ==========================================
+/* ==========================================
+   GET ELEMENTS
+========================================== */
 
-        const showPasswordButton =
-            document.getElementById("showPassword");
+const loginForm =
+    document.getElementById("loginForm");
 
-        showPasswordButton.addEventListener("click", function() {
+const usernameInput =
+    document.getElementById("username");
 
-            if (passwordInput.type === "password") {
+const passwordInput =
+    document.getElementById("password");
 
-                passwordInput.type = "text";
-                showPasswordButton.textContent = "Hide";
+const errorMessage =
+    document.getElementById("errorMessage");
 
-            } else {
+const showPasswordButton =
+    document.getElementById("showPassword");
 
-                passwordInput.type = "password";
-                showPasswordButton.textContent = "Show";
 
-            }
+/* ==========================================
+   LOGIN
+========================================== */
 
-        });
+loginForm.addEventListener(
+    "submit",
+    function(event){
 
-    </script>
+        event.preventDefault();
+
+
+        const username =
+            usernameInput.value.trim();
+
+        const password =
+            passwordInput.value;
+
+
+        /* CHECK LOGIN */
+
+        if(
+            username === CORRECT_USERNAME &&
+            password === CORRECT_PASSWORD
+        ){
+
+            /*
+             * Save login state.
+             */
+
+            sessionStorage.setItem(
+                "mya_logged_in",
+                "true"
+            );
+
+
+            /*
+             * IMPORTANT:
+             *
+             * pdf.html MUST be in the
+             * SAME folder as index.html.
+             */
+
+            window.location.assign(
+                "./pdf.html"
+            );
+
+
+        }else{
+
+            errorMessage.style.display =
+                "block";
+
+
+            passwordInput.value = "";
+
+
+            passwordInput.focus();
+
+
+            setTimeout(
+                function(){
+
+                    errorMessage.style.display =
+                        "none";
+
+                },
+                3000
+            );
+
+        }
+
+    }
+);
+
+
+/* ==========================================
+   SHOW / HIDE PASSWORD
+========================================== */
+
+showPasswordButton.addEventListener(
+    "click",
+    function(){
+
+        if(
+            passwordInput.type === "password"
+        ){
+
+            passwordInput.type = "text";
+
+            showPasswordButton.textContent =
+                "Hide";
+
+        }else{
+
+            passwordInput.type = "password";
+
+            showPasswordButton.textContent =
+                "Show";
+
+        }
+
+    }
+);
+
+</script>
+
 
 </body>
+
 </html>
