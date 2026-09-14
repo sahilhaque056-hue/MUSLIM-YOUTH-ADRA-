@@ -78,6 +78,68 @@ textarea {
     resize: vertical;
 }
 
+/* SCREENSHOT UPLOAD */
+
+.screenshot-box {
+    width: 100%;
+    background: rgba(255,255,255,0.06);
+    border: 1px dashed rgba(255,255,255,0.35);
+    border-radius: 10px;
+    padding: 14px;
+}
+
+.screenshot-box input[type="file"] {
+    background: white;
+    color: #111;
+    padding: 10px;
+}
+
+.preview-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.preview-item {
+    position: relative;
+    background: rgba(0,0,0,0.25);
+    border-radius: 9px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.15);
+}
+
+.preview-item img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    display: block;
+}
+
+.preview-name {
+    font-size: 10px;
+    padding: 7px;
+    color: #dce8e3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.remove-image {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 25px;
+    height: 25px;
+    margin: 0;
+    padding: 0;
+    border-radius: 50%;
+    background: #b00020;
+    color: white;
+    font-size: 14px;
+    line-height: 25px;
+}
+
 button {
     width: 100%;
     padding: 14px;
@@ -122,6 +184,25 @@ button:active {
     font-size: 11px;
     color: #91a49d;
 }
+
+@media (max-width: 480px) {
+
+    body {
+        padding: 12px;
+    }
+
+    .card {
+        padding: 18px;
+    }
+
+    .preview-container {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .preview-item img {
+        height: 120px;
+    }
+}
 </style>
 </head>
 
@@ -137,6 +218,7 @@ button:active {
     <div class="card">
 
         <label>Platform</label>
+
         <select id="platform">
             <option value="">Select Platform</option>
             <option>Facebook</option>
@@ -149,7 +231,9 @@ button:active {
             <option>Other</option>
         </select>
 
+
         <label>Content Type</label>
+
         <select id="contentType">
             <option value="">Select Content Type</option>
             <option>Post</option>
@@ -161,50 +245,96 @@ button:active {
             <option>Other</option>
         </select>
 
+
         <label>Date / Time of Observation</label>
-        <input type="datetime-local" id="dateTime">
+
+        <input
+            type="datetime-local"
+            id="dateTime"
+        >
+
 
         <label>Content URL</label>
+
         <input
             type="url"
             id="url"
             placeholder="https://..."
         >
 
+
         <label>Username / Page Name</label>
+
         <input
             type="text"
             id="username"
             placeholder="Username or page name"
         >
 
+
+        <label>Screenshot Evidence</label>
+
+        <div class="screenshot-box">
+
+            <input
+                type="file"
+                id="screenshots"
+                accept="image/jpeg,image/png,image/webp"
+                multiple
+            >
+
+            <div
+                class="preview-container"
+                id="previewContainer">
+            </div>
+
+        </div>
+
+
         <label>Reported Content / Statement</label>
+
         <textarea
             id="content"
             placeholder="Enter the exact statement or describe the content..."
         ></textarea>
 
+
         <label>Additional Notes</label>
+
         <textarea
             id="notes"
             placeholder="Add any additional factual information..."
         ></textarea>
 
-        <button class="generate" onclick="generatePDF()">
+
+        <button
+            class="generate"
+            onclick="generatePDF()">
             GENERATE EVIDENCE PDF
         </button>
 
-        <button class="portals" onclick="openPortals()">
+
+        <button
+            class="portals"
+            onclick="openPortals()">
             GOVERNMENT PORTALS
         </button>
 
-        <button class="logout" onclick="logout()">
+
+        <button
+            class="logout"
+            onclick="logout()">
             LOGOUT
         </button>
 
-        <div class="status" id="status"></div>
+
+        <div
+            class="status"
+            id="status">
+        </div>
 
     </div>
+
 
     <div class="footer">
         Created by MUSLIM YOUTH ADRA
@@ -212,19 +342,140 @@ button:active {
 
 </div>
 
+
 <script>
 
 /* LOGIN PROTECTION */
 
 if (sessionStorage.getItem("mya_logged_in") !== "true") {
+
     window.location.replace("./index.html");
+
+}
+
+
+/* SCREENSHOT STORAGE */
+
+let screenshotFiles = [];
+
+
+/* SCREENSHOT SELECTION */
+
+document
+    .getElementById("screenshots")
+    .addEventListener("change", function(event) {
+
+        const files = Array.from(event.target.files);
+
+        files.forEach(function(file) {
+
+            if (!file.type.startsWith("image/")) {
+                return;
+            }
+
+            screenshotFiles.push(file);
+
+        });
+
+        updatePreview();
+
+        /*
+         * Reset input so the same image can be selected again
+         * if required.
+         */
+
+        event.target.value = "";
+
+    });
+
+
+/* UPDATE SCREENSHOT PREVIEW */
+
+function updatePreview() {
+
+    const container =
+        document.getElementById("previewContainer");
+
+    container.innerHTML = "";
+
+
+    screenshotFiles.forEach(function(file, index) {
+
+        const item =
+            document.createElement("div");
+
+        item.className = "preview-item";
+
+
+        const img =
+            document.createElement("img");
+
+
+        const reader =
+            new FileReader();
+
+
+        reader.onload = function(e) {
+
+            img.src = e.target.result;
+
+        };
+
+
+        reader.readAsDataURL(file);
+
+
+        const name =
+            document.createElement("div");
+
+        name.className = "preview-name";
+
+        name.textContent =
+            file.name;
+
+
+        const remove =
+            document.createElement("button");
+
+        remove.className =
+            "remove-image";
+
+        remove.type =
+            "button";
+
+        remove.textContent =
+            "×";
+
+
+        remove.onclick = function() {
+
+            screenshotFiles.splice(index, 1);
+
+            updatePreview();
+
+        };
+
+
+        item.appendChild(img);
+
+        item.appendChild(name);
+
+        item.appendChild(remove);
+
+        container.appendChild(item);
+
+    });
+
 }
 
 
 /* OPEN GOVERNMENT PORTALS */
 
 function openPortals() {
-    window.location.href = "./portals.html";
+
+    window.location.href =
+        "./portals.html";
+
 }
 
 
@@ -232,9 +483,81 @@ function openPortals() {
 
 function logout() {
 
-    sessionStorage.removeItem("mya_logged_in");
+    sessionStorage.removeItem(
+        "mya_logged_in"
+    );
 
-    window.location.replace("./index.html");
+    window.location.replace(
+        "./index.html"
+    );
+
+}
+
+
+/* CONVERT IMAGE TO DATA */
+
+function fileToDataURL(file) {
+
+    return new Promise(function(resolve, reject) {
+
+        const reader =
+            new FileReader();
+
+        reader.onload =
+            function() {
+                resolve(reader.result);
+            };
+
+        reader.onerror =
+            function() {
+                reject(
+                    new Error(
+                        "Image could not be read."
+                    )
+                );
+            };
+
+        reader.readAsDataURL(file);
+
+    });
+
+}
+
+
+/* GET IMAGE DIMENSIONS */
+
+function getImageDimensions(dataURL) {
+
+    return new Promise(function(resolve, reject) {
+
+        const img =
+            new Image();
+
+        img.onload =
+            function() {
+
+                resolve({
+                    width: img.width,
+                    height: img.height
+                });
+
+            };
+
+        img.onerror =
+            function() {
+
+                reject(
+                    new Error(
+                        "Invalid image."
+                    )
+                );
+
+            };
+
+        img.src = dataURL;
+
+    });
+
 }
 
 
@@ -242,36 +565,59 @@ function logout() {
 
 async function generatePDF() {
 
-    const status = document.getElementById("status");
+    const status =
+        document.getElementById("status");
 
-    if (!window.jspdf || !window.jspdf.jsPDF) {
+
+    if (!window.jspdf ||
+        !window.jspdf.jsPDF) {
 
         status.textContent =
             "PDF library load nahi hui. Internet connection check karein.";
 
         return;
+
     }
+
 
     const platform =
         document.getElementById("platform").value;
 
+
     const contentType =
         document.getElementById("contentType").value;
+
 
     const dateTime =
         document.getElementById("dateTime").value;
 
+
     const url =
-        document.getElementById("url").value.trim();
+        document
+            .getElementById("url")
+            .value
+            .trim();
+
 
     const username =
-        document.getElementById("username").value.trim();
+        document
+            .getElementById("username")
+            .value
+            .trim();
+
 
     const content =
-        document.getElementById("content").value.trim();
+        document
+            .getElementById("content")
+            .value
+            .trim();
+
 
     const notes =
-        document.getElementById("notes").value.trim();
+        document
+            .getElementById("notes")
+            .value
+            .trim();
 
 
     if (!platform ||
@@ -283,45 +629,72 @@ async function generatePDF() {
             "Please fill Platform, Content Type, Date/Time and Content.";
 
         return;
+
     }
 
 
     try {
 
-        const { jsPDF } = window.jspdf;
+        const { jsPDF } =
+            window.jspdf;
 
-        const pdf = new jsPDF();
+
+        const pdf =
+            new jsPDF();
+
 
         let y = 20;
+
 
         /* HEADER */
 
         pdf.setFontSize(18);
-        pdf.setFont("helvetica", "bold");
+
+        pdf.setFont(
+            "helvetica",
+            "bold"
+        );
+
 
         pdf.text(
             "MUSLIM YOUTH ADRA",
             105,
             y,
-            { align: "center" }
+            {
+                align: "center"
+            }
         );
+
 
         y += 9;
 
+
         pdf.setFontSize(14);
+
 
         pdf.text(
             "SOCIAL MEDIA EVIDENCE REPORT",
             105,
             y,
-            { align: "center" }
+            {
+                align: "center"
+            }
         );
+
 
         y += 15;
 
+
         pdf.setLineWidth(0.5);
 
-        pdf.line(15, y, 195, y);
+
+        pdf.line(
+            15,
+            y,
+            195,
+            y
+        );
+
 
         y += 12;
 
@@ -329,13 +702,28 @@ async function generatePDF() {
         /* REPORT INFORMATION */
 
         pdf.setFontSize(11);
-        pdf.setFont("helvetica", "bold");
 
-        pdf.text("REPORT INFORMATION", 15, y);
+        pdf.setFont(
+            "helvetica",
+            "bold"
+        );
+
+
+        pdf.text(
+            "REPORT INFORMATION",
+            15,
+            y
+        );
+
 
         y += 8;
 
-        pdf.setFont("helvetica", "normal");
+
+        pdf.setFont(
+            "helvetica",
+            "normal"
+        );
+
 
         pdf.text(
             "Platform: " + platform,
@@ -343,7 +731,9 @@ async function generatePDF() {
             y
         );
 
+
         y += 7;
+
 
         pdf.text(
             "Content Type: " + contentType,
@@ -351,7 +741,9 @@ async function generatePDF() {
             y
         );
 
+
         y += 7;
+
 
         pdf.text(
             "Date / Time: " + dateTime,
@@ -359,7 +751,9 @@ async function generatePDF() {
             y
         );
 
+
         y += 7;
+
 
         pdf.text(
             "Username / Page: " +
@@ -368,14 +762,21 @@ async function generatePDF() {
             y
         );
 
+
         y += 7;
 
 
         /* URL */
 
-        pdf.text("Content URL:", 15, y);
+        pdf.text(
+            "Content URL:",
+            15,
+            y
+        );
+
 
         y += 6;
+
 
         const urlLines =
             pdf.splitTextToSize(
@@ -383,14 +784,26 @@ async function generatePDF() {
                 175
             );
 
-        pdf.text(urlLines, 15, y);
 
-        y += urlLines.length * 6 + 7;
+        pdf.text(
+            urlLines,
+            15,
+            y
+        );
+
+
+        y +=
+            urlLines.length * 6 +
+            7;
 
 
         /* CONTENT */
 
-        pdf.setFont("helvetica", "bold");
+        pdf.setFont(
+            "helvetica",
+            "bold"
+        );
+
 
         pdf.text(
             "REPORTED CONTENT / STATEMENT",
@@ -398,9 +811,15 @@ async function generatePDF() {
             y
         );
 
+
         y += 7;
 
-        pdf.setFont("helvetica", "normal");
+
+        pdf.setFont(
+            "helvetica",
+            "normal"
+        );
+
 
         const contentLines =
             pdf.splitTextToSize(
@@ -408,20 +827,54 @@ async function generatePDF() {
                 175
             );
 
+
+        /*
+         * Add page if content is too long.
+         */
+
+        if (
+            y +
+            contentLines.length * 6 >
+            245
+        ) {
+
+            pdf.addPage();
+
+            y = 20;
+
+        }
+
+
         pdf.text(
             contentLines,
             15,
             y
         );
 
-        y += contentLines.length * 6 + 10;
+
+        y +=
+            contentLines.length * 6 +
+            10;
 
 
         /* NOTES */
 
         if (notes) {
 
-            pdf.setFont("helvetica", "bold");
+            pdf.setFont(
+                "helvetica",
+                "bold"
+            );
+
+
+            if (y > 245) {
+
+                pdf.addPage();
+
+                y = 20;
+
+            }
+
 
             pdf.text(
                 "ADDITIONAL NOTES",
@@ -429,9 +882,15 @@ async function generatePDF() {
                 y
             );
 
+
             y += 7;
 
-            pdf.setFont("helvetica", "normal");
+
+            pdf.setFont(
+                "helvetica",
+                "normal"
+            );
+
 
             const noteLines =
                 pdf.splitTextToSize(
@@ -439,32 +898,252 @@ async function generatePDF() {
                     175
                 );
 
+
+            if (
+                y +
+                noteLines.length * 6 >
+                250
+            ) {
+
+                pdf.addPage();
+
+                y = 20;
+
+            }
+
+
             pdf.text(
                 noteLines,
                 15,
                 y
             );
 
-            y += noteLines.length * 6 + 10;
+
+            y +=
+                noteLines.length * 6 +
+                10;
+
+        }
+
+
+        /* SCREENSHOTS */
+
+        if (screenshotFiles.length > 0) {
+
+            pdf.addPage();
+
+            y = 20;
+
+
+            pdf.setFontSize(14);
+
+            pdf.setFont(
+                "helvetica",
+                "bold"
+            );
+
+
+            pdf.text(
+                "SCREENSHOT EVIDENCE",
+                105,
+                y,
+                {
+                    align: "center"
+                }
+            );
+
+
+            y += 12;
+
+
+            for (
+                let i = 0;
+                i < screenshotFiles.length;
+                i++
+            ) {
+
+                const file =
+                    screenshotFiles[i];
+
+
+                const dataURL =
+                    await fileToDataURL(file);
+
+
+                const dimensions =
+                    await getImageDimensions(
+                        dataURL
+                    );
+
+
+                /*
+                 * New page for every screenshot.
+                 * This keeps screenshots clear and readable.
+                 */
+
+                if (i > 0) {
+
+                    pdf.addPage();
+
+                    y = 20;
+
+                }
+
+
+                pdf.setFontSize(10);
+
+                pdf.setFont(
+                    "helvetica",
+                    "bold"
+                );
+
+
+                pdf.text(
+                    "Screenshot " +
+                    (i + 1) +
+                    " of " +
+                    screenshotFiles.length,
+                    15,
+                    y
+                );
+
+
+                y += 7;
+
+
+                pdf.setFont(
+                    "helvetica",
+                    "normal"
+                );
+
+
+                /*
+                 * Available PDF area
+                 */
+
+                const maxWidth = 180;
+
+                const maxHeight = 245;
+
+
+                let imgWidth =
+                    dimensions.width;
+
+                let imgHeight =
+                    dimensions.height;
+
+
+                /*
+                 * Scale image to fit page.
+                 */
+
+                const widthRatio =
+                    maxWidth /
+                    imgWidth;
+
+
+                const heightRatio =
+                    maxHeight /
+                    imgHeight;
+
+
+                const ratio =
+                    Math.min(
+                        widthRatio,
+                        heightRatio,
+                        1
+                    );
+
+
+                imgWidth *= ratio;
+
+                imgHeight *= ratio;
+
+
+                /*
+                 * Center image horizontally.
+                 */
+
+                const x =
+                    (210 - imgWidth) / 2;
+
+
+                pdf.addImage(
+                    dataURL,
+                    getImageFormat(file),
+                    x,
+                    y,
+                    imgWidth,
+                    imgHeight
+                );
+
+
+                /*
+                 * Screenshot filename.
+                 */
+
+                const captionY =
+                    Math.min(
+                        y +
+                        imgHeight +
+                        7,
+                        285
+                    );
+
+
+                pdf.setFontSize(8);
+
+
+                pdf.text(
+                    "File: " +
+                    file.name,
+                    15,
+                    captionY
+                );
+
+            }
+
         }
 
 
         /* DISCLAIMER */
 
-        if (y > 250) {
+        pdf.addPage();
 
-            pdf.addPage();
+        y = 20;
 
-            y = 20;
-        }
+
+        pdf.setFontSize(11);
+
+        pdf.setFont(
+            "helvetica",
+            "bold"
+        );
+
+
+        pdf.text(
+            "DOCUMENTATION NOTE",
+            15,
+            y
+        );
+
+
+        y += 8;
+
 
         pdf.setFontSize(9);
-        pdf.setFont("helvetica", "italic");
+
+        pdf.setFont(
+            "helvetica",
+            "italic"
+        );
+
 
         const disclaimer =
             "This report is a factual record prepared for documentation " +
             "and reporting purposes. Verify the original content and URL " +
             "before submitting a report to any authority.";
+
 
         const disclaimerLines =
             pdf.splitTextToSize(
@@ -472,10 +1151,11 @@ async function generatePDF() {
                 175
             );
 
+
         pdf.text(
             disclaimerLines,
             15,
-            270
+            y
         );
 
 
@@ -484,18 +1164,58 @@ async function generatePDF() {
         const filename =
             "MUSLIM_YOUTH_ADRA_Evidence_Report.pdf";
 
+
         pdf.save(filename);
+
 
         status.textContent =
             "PDF successfully generated.";
 
-    } catch (error) {
+    }
+
+    catch (error) {
 
         console.error(error);
 
+
         status.textContent =
             "PDF generate nahi hua. Please try again.";
+
     }
+
+}
+
+
+/* DETECT IMAGE FORMAT */
+
+function getImageFormat(file) {
+
+    if (
+        file.type ===
+        "image/png"
+    ) {
+
+        return "PNG";
+
+    }
+
+
+    if (
+        file.type ===
+        "image/webp"
+    ) {
+
+        /*
+         * jsPDF support can vary for WebP,
+         * so convert it through canvas.
+         */
+
+        return "JPEG";
+
+    }
+
+
+    return "JPEG";
 
 }
 
