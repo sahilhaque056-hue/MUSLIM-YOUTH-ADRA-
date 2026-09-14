@@ -1,404 +1,502 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>MUSLIM YOUTH ADRA — Evidence Report Generator</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script><style>
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Government Portals</title>
+
+<style>
 
 *{
-    box-sizing:border-box;
     margin:0;
     padding:0;
+    box-sizing:border-box;
 }
 
 body{
     font-family:Arial,Helvetica,sans-serif;
-    background:#f3f4f6;
-    color:#17202a;
+    background:#f1f5f9;
+    color:#172033;
 }
 
-header{
+/* HEADER */
+
+.header{
     background:#111827;
     color:white;
-    padding:28px 15px;
+    padding:25px 18px;
     text-align:center;
 }
 
-header h1{
-    font-size:28px;
+.header h1{
+    font-size:24px;
+    margin-bottom:7px;
 }
 
-header p{
-    margin-top:6px;
-    opacity:.8;
+.header p{
+    font-size:13px;
+    color:#cbd5e1;
 }
+
+
+/* MAIN */
 
 .container{
-    max-width:1050px;
+    max-width:850px;
     margin:25px auto;
     padding:0 15px;
 }
 
-.card{
-    background:#fff;
-    border-radius:12px;
-    padding:22px;
-    margin-bottom:20px;
-    box-shadow:0 3px 15px rgba(0,0,0,.07);
-}
 
-.card h2{
-    margin-bottom:18px;
-    font-size:20px;
-}
-
-.grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:15px;
-}
-
-.full{
-    grid-column:1/-1;
-}
-
-.field{
-    display:flex;
-    flex-direction:column;
-    gap:6px;
-}
-
-label{
-    font-weight:bold;
-    font-size:14px;
-}
-
-input,
-select,
-textarea{
-    width:100%;
-    padding:11px;
-    border:1px solid #cfd5dc;
-    border-radius:7px;
-    font-size:14px;
-}
-
-textarea{
-    min-height:110px;
-    resize:vertical;
-}
-
-input:focus,
-select:focus,
-textarea:focus{
-    outline:none;
-    border-color:#2563eb;
-}
+/* NOTICE */
 
 .notice{
-    background:#fff7ed;
-    border:1px solid #fed7aa;
+    background:#eff6ff;
+    border-left:5px solid #2563eb;
+    border-radius:9px;
     padding:14px;
-    border-radius:8px;
     margin-bottom:18px;
     font-size:13px;
+    line-height:1.5;
 }
 
-.evidence{
-    border:1px solid #dce1e7;
-    background:#fafbfc;
-    border-radius:10px;
-    padding:18px;
-    margin-bottom:15px;
-}
 
-.evidence-title{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:15px;
-}
-
-.badge{
-    background:#111827;
-    color:white;
-    padding:5px 10px;
-    border-radius:20px;
-    font-size:12px;
-}
-
-button{
-    border:0;
-    padding:12px 17px;
-    border-radius:7px;
-    cursor:pointer;
-    font-weight:bold;
-}
-
-.primary{
-    background:#111827;
-    color:white;
-}
-
-.blue{
-    background:#2563eb;
-    color:white;
-}
-
-.green{
-    background:#15803d;
-    color:white;
-}
-
-.red{
-    background:#dc2626;
-    color:white;
-}
-
-.buttons{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    margin-top:15px;
-}
-
-.preview-img{
-    max-width:180px;
-    max-height:180px;
-    display:none;
-    margin-top:10px;
-    border-radius:7px;
-}
-
-.portal-page{
-    display:none;
-    min-height:100vh;
-    background:#f3f4f6;
-}
-
-.portal-header{
-    background:#111827;
-    color:white;
-    text-align:center;
-    padding:28px 15px;
-}
-
-.portal-header h1{
-    font-size:26px;
-}
-
-.portal-header p{
-    margin-top:7px;
-    opacity:.8;
-}
-
-.portal-container{
-    max-width:950px;
-    margin:25px auto;
-    padding:0 15px;
-}
+/* PORTAL CARD */
 
 .portal-card{
     background:white;
-    border-radius:13px;
+    border-radius:15px;
     padding:20px;
     margin-bottom:15px;
-    box-shadow:0 3px 14px rgba(0,0,0,.07);
+
+    box-shadow:
+    0 7px 25px rgba(0,0,0,.07);
+
+    transition:.2s;
 }
 
-.portal-card h3{
-    margin-bottom:8px;
-    font-size:18px;
+.portal-card:hover{
+    transform:translateY(-2px);
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,.10);
 }
 
-.portal-card p{
-    color:#5b6470;
-    font-size:14px;
-    margin-bottom:14px;
+
+.portal{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:18px;
 }
 
-.portal-btn{
-    display:inline-block;
-    text-decoration:none;
-    background:#111827;
-    color:white;
-    padding:11px 16px;
-    border-radius:7px;
+
+.portal-info{
+    flex:1;
+}
+
+
+.portal-number{
+    display:inline-flex;
+
+    width:32px;
+    height:32px;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:#e0e7ff;
+    color:#3730a3;
+
     font-weight:bold;
+
+    margin-bottom:9px;
 }
 
-.portal-btn:hover{
-    opacity:.9;
+
+.portal-info h2{
+    font-size:17px;
+    margin-bottom:7px;
 }
 
-.back-btn{
+
+.portal-info p{
+    color:#64748b;
+    font-size:13px;
+    line-height:1.5;
+}
+
+
+/* BUTTON */
+
+.open-btn{
+    border:0;
+
     background:#2563eb;
     color:white;
-    margin-bottom:18px;
+
+    padding:12px 17px;
+
+    border-radius:9px;
+
+    font-size:14px;
+    font-weight:bold;
+
+    cursor:pointer;
+
+    white-space:nowrap;
 }
 
-.creator{
+
+.open-btn:hover{
+    background:#1d4ed8;
+}
+
+
+/* BACK BUTTON */
+
+.back-box{
     text-align:center;
-    padding:25px 10px 35px;
-    color:#6b7280;
+    margin-top:22px;
+}
+
+
+.back-btn{
+    border:0;
+
+    background:#e2e8f0;
+    color:#111827;
+
+    padding:12px 20px;
+
+    border-radius:9px;
+
+    font-size:14px;
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+
+.back-btn:hover{
+    background:#cbd5e1;
+}
+
+
+/* FOOTER */
+
+.footer{
+    text-align:center;
+
+    padding:25px 15px;
+
+    color:#64748b;
+
     font-size:13px;
 }
 
-.creator a{
-    color:#111827;
-    font-weight:bold;
+
+.footer a{
+    color:#2563eb;
+
     text-decoration:none;
+
+    font-weight:bold;
 }
 
-.creator a:hover{
+
+.footer a:hover{
     text-decoration:underline;
 }
 
-@media(max-width:700px){
 
-    .grid{
-        grid-template-columns:1fr;
+/* MOBILE */
+
+@media(max-width:650px){
+
+    .header h1{
+        font-size:21px;
     }
 
-    .full{
-        grid-column:auto;
+    .portal{
+        flex-direction:column;
+        align-items:stretch;
     }
 
-    header h1{
-        font-size:22px;
+    .open-btn{
+        width:100%;
     }
 
-    .evidence-title{
-        align-items:flex-start;
-        gap:10px;
+    .portal-card{
+        padding:18px;
     }
+
 }
 
-</style></head><body><!-- =========================
-     MAIN REPORT GENERATOR
-========================= --><div id="generatorPage"><header><h1>MUSLIM YOUTH ADRA</h1><p>
-Hate Speech / Incident Evidence Report Generator
-</p></header><div class="container"><div class="card"><div class="notice"><strong>Evidence documentation:</strong>
+</style>
 
-Use this form to document content that you have lawfully obtained
-or can legitimately access. Preserve original screenshots/files
-separately and do not alter the original evidence.
+</head>
 
-</div><h2>Report Information</h2><div class="grid"><div class="field"><label>Report ID</label>
 
-<input id="reportId" readonly></div><div class="field"><label>Report Date</label>
+<body>
 
-<input type="date" id="reportDate"></div><div class="field"><label>Reporter / Organization</label>
 
-<input id="reporter"
-value="MUSLIM YOUTH ADRA">
+<!-- HEADER -->
 
-</div><div class="field"><label>Contact Information</label>
+<div class="header">
 
-<input id="contact"
-placeholder="Optional">
+    <h1>
+        Government Cyber & Police Portals
+    </h1>
 
-</div><div class="field full"><label>Report Summary</label>
+    <p>
+        Official Government of India & West Bengal Government links
+    </p>
 
-<textarea id="summary"
-placeholder="Briefly describe what this report documents..."></textarea></div></div></div><div class="card"><h2>Evidence Items</h2><div id="evidenceContainer"></div><button class="blue"
-onclick="addEvidence()">
+</div>
 
-+ Add Evidence
 
-</button></div><div class="card"><h2>Declaration</h2><textarea id="declaration">
 
-I declare that the information contained in this report has been recorded to the best of my knowledge from the evidence available to me. The attached screenshots/files are intended to preserve the context of the reported content and should be independently verified where necessary.
+<div class="container">
 
-</textarea><div class="buttons"><button class="green"
-onclick="generatePDF()">
 
-📄 Generate PDF Report
+<!-- NOTICE -->
 
-</button><button class="primary"
-onclick="window.print()">
+<div class="notice">
 
-🖨 Print
+<strong>Important:</strong>
 
-</button></div></div></div></div><!-- =========================
-     GOVERNMENT PORTAL PAGE
-========================= --><div id="portalPage" class="portal-page"><div class="portal-header"><h1>Government Reporting Portals</h1><p>
-Official portals for reporting / submitting complaints
-</p></div><div class="portal-container"><button class="back-btn"
-onclick="showGenerator()">
+These buttons open the respective official government
+websites. Verify the website address after opening before
+submitting any sensitive information.
 
-← Back to Evidence Generator
+</div>
 
-</button><!-- NATIONAL CYBER CRIME --><div class="portal-card"><h3>
+
+
+<!-- 1 -->
+
+<div class="portal-card">
+
+<div class="portal">
+
+<div class="portal-info">
+
+<div class="portal-number">
+1
+</div>
+
+<h2>
 🇮🇳 National Cyber Crime Reporting Portal
-</h3><p>
-Government of India cybercrime reporting portal.
-Use the official portal to register and track eligible
-cybercrime complaints.
-</p><a
-class="portal-btn"
-href="https://www.cybercrime.gov.in/"
-target="_blank"
-rel="noopener noreferrer">
+</h2>
 
-Open Official Portal →
+<p>
+Government of India — National Cyber Crime Reporting Portal.
+Use this official portal for eligible cyber-crime complaints,
+tracking complaints and related cybercrime services.
+</p>
 
-</a></div><!-- WEST BENGAL CYBER --><div class="portal-card"><h3>
-🛡️ West Bengal Cyber Crime / Police
-</h3><p>
-Official West Bengal Police website and cybercrime-related
-citizen services.
-</p><a
-class="portal-btn"
-href="https://wbpolice.gov.in/"
-target="_blank"
-rel="noopener noreferrer">
+</div>
 
-Open West Bengal Police →
 
-</a></div><!-- CITIZEN PORTAL --><div class="portal-card"><h3>
-👮 West Bengal Police Citizen Portal
-</h3><p>
-Citizen services provided through the West Bengal Police
-CCTNS citizen portal.
-</p><a
-class="portal-btn"
-href="https://policesohaiyota.wbpolice.gov.in/"
-target="_blank"
-rel="noopener noreferrer">
+<button
+class="open-btn"
+onclick="openPortal('https://www.cybercrime.gov.in/')">
 
-Open Citizen Portal →
+Open Portal →
 
-</a></div><!-- ONLINE COMPLAINT --><div class="portal-card"><h3>
-📝 West Bengal Police — Online Citizen Services
-</h3><p>
-Access West Bengal Police citizen services, including
-available complaint / information services.
-</p><a
-class="portal-btn"
-href="https://policesohaiyota.wbpolice.gov.in/"
-target="_blank"
-rel="noopener noreferrer">
+</button>
 
-Open Online Services →
+</div>
 
-</a></div><!-- GRIEVANCE --><div class="portal-card"><h3>
+</div>
+
+
+
+<!-- 2 -->
+
+<div class="portal-card">
+
+<div class="portal">
+
+<div class="portal-info">
+
+<div class="portal-number">
+2
+</div>
+
+<h2>
+🛡️ West Bengal Cyber Crime Wing
+</h2>
+
+<p>
+Official Cyber Crime Wing of West Bengal Police.
+Provides cyber-crime related information, services,
+police station information and cybercrime resources.
+</p>
+
+</div>
+
+
+<button
+class="open-btn"
+onclick="openPortal('https://cybercrimewing.wb.gov.in/')">
+
+Open Portal →
+
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- 3 -->
+
+<div class="portal-card">
+
+<div class="portal">
+
+<div class="portal-info">
+
+<div class="portal-number">
+3
+</div>
+
+<h2>
+👮 West Bengal Police
+</h2>
+
+<p>
+Official website of West Bengal Police for police-related
+information and citizen services.
+</p>
+
+</div>
+
+
+<button
+class="open-btn"
+onclick="openPortal('https://wbpolice.gov.in/')">
+
+Open Portal →
+
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- 4 -->
+
+<div class="portal-card">
+
+<div class="portal">
+
+<div class="portal-info">
+
+<div class="portal-number">
+4
+</div>
+
+<h2>
+📋 West Bengal Police Citizen Portal
+</h2>
+
+<p>
+Access West Bengal Police citizen-oriented online services
+through the official police portal.
+</p>
+
+</div>
+
+
+<button
+class="open-btn"
+onclick="openPortal('https://policesohaiyota.wbpolice.gov.in/')">
+
+Open Portal →
+
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- 5 -->
+
+<div class="portal-card">
+
+<div class="portal">
+
+<div class="portal-info">
+
+<div class="portal-number">
+5
+</div>
+
+<h2>
 🏛️ West Bengal Government Public Grievance Portal
-</h3><p>
-Official West Bengal Government grievance lodging and
-monitoring service.
-</p><a
-class="portal-btn"
-href="https://finance.wb.gov.in/pgrs/page/login.aspx"
-target="_blank"
-rel="noopener noreferrer">
+</h2>
 
-Open Grievance Portal →
+<p>
+Public Grievance Redressal System of the Government of
+West Bengal for lodging and tracking grievances.
+</p>
 
-</a></div><div class="portal-card"><h3>⚠️ Important</h3><p>
-These links lead to external government websites.
-Verify the details and submit only accurate information
-and genuine evidence. Filing false or fabricated information
-may have legal consequences.
-</p></div></div><!-- CREATOR --><div class="creator">Created by
+</div>
+
+
+<button
+class="open-btn"
+onclick="openPortal('https://prdgrievance.wb.gov.in/')">
+
+Open Portal →
+
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- BACK -->
+
+<div class="back-box">
+
+<button
+class="back-btn"
+onclick="goBackToPDF()">
+
+← Back to PDF Generator
+
+</button>
+
+</div>
+
+
+</div>
+
+
+
+<!-- FOOTER -->
+
+<div class="footer">
+
+Created by
 
 <a
 href="https://www.instagram.com/be.like_sahil?stkn=MTF3eWhrZ3o1NWdzeQ=="
@@ -407,854 +505,52 @@ rel="noopener noreferrer">
 
 @be.like_sahil
 
-</a></div></div><script>
-
-const { jsPDF } = window.jspdf;
-
-let evidenceCount = 0;
-
-const images = {};
-
-
-
-function generateID(){
-
-    const d = new Date();
-
-    return "MYA-" +
-    d.getFullYear() +
-    String(d.getMonth()+1).padStart(2,"0") +
-    String(d.getDate()).padStart(2,"0") +
-    "-" +
-    Math.random()
-    .toString(36)
-    .substring(2,8)
-    .toUpperCase();
-
-}
-
-
-
-document.getElementById("reportId").value =
-generateID();
-
-
-
-document.getElementById("reportDate").value =
-new Date()
-.toISOString()
-.split("T")[0];
-
-
-
-function addEvidence(){
-
-    evidenceCount++;
-
-    const id = evidenceCount;
-
-    const box = document.createElement("div");
-
-    box.className="evidence";
-
-    box.id="evidence-"+id;
-
-
-    box.innerHTML=`
-
-    <div class="evidence-title">
-
-        <strong>
-        Evidence Item ${id}
-        </strong>
-
-        <span class="badge">
-        EVIDENCE ${id}
-        </span>
-
-    </div>
-
-
-    <div class="grid">
-
-
-        <div class="field">
-
-            <label>Platform</label>
-
-            <select class="platform">
-
-                <option>Facebook</option>
-                <option>Instagram</option>
-                <option>X / Twitter</option>
-                <option>YouTube</option>
-                <option>TikTok</option>
-                <option>WhatsApp</option>
-                <option>Telegram</option>
-                <option>Other</option>
-
-            </select>
-
-        </div>
-
-
-        <div class="field">
-
-            <label>Content Type</label>
-
-            <select class="contentType">
-
-                <option>Post</option>
-                <option>Comment</option>
-                <option>Video</option>
-                <option>Image</option>
-                <option>Story</option>
-                <option>Message</option>
-                <option>Other</option>
-
-            </select>
-
-        </div>
-
-
-        <div class="field">
-
-            <label>Account / Page Name</label>
-
-            <input class="account"
-            placeholder="Name shown on platform">
-
-        </div>
-
-
-        <div class="field">
-
-            <label>Username / Handle</label>
-
-            <input class="username"
-            placeholder="@username">
-
-        </div>
-
-
-        <div class="field full">
-
-            <label>Post / Content URL</label>
-
-            <input class="url"
-            placeholder="https://...">
-
-        </div>
-
-
-        <div class="field">
-
-            <label>Date Published / Observed</label>
-
-            <input type="date"
-            class="date">
-
-        </div>
-
-
-        <div class="field">
-
-            <label>Time</label>
-
-            <input type="time"
-            class="time">
-
-        </div>
-
-
-        <div class="field full">
-
-            <label>
-            Exact Statement / Reported Text
-            </label>
-
-            <textarea
-            class="statement"
-            placeholder="Copy the exact words as displayed. Do not paraphrase."></textarea>    </div>
-
-
-    <div class="field">
-
-        <label>Category</label>
-
-        <select class="category">
-
-            <option>
-            Anti-Muslim / Religious Hate
-            </option>
-
-            <option>
-            Threatening Content
-            </option>
-
-            <option>
-            Harassment
-            </option>
-
-            <option>
-            Incitement
-            </option>
-
-            <option>
-            Discriminatory Content
-            </option>
-
-            <option>
-            Other / Needs Review
-            </option>
-
-        </select>
-
-    </div>
-
-
-    <div class="field">
-
-        <label>Evidence Status</label>
-
-        <select class="status">
-
-            <option>
-            Original screenshot available
-            </option>
-
-            <option>
-            URL recorded
-            </option>
-
-            <option>
-            Both screenshot and URL
-            </option>
-
-            <option>
-            Other
-            </option>
-
-        </select>
-
-    </div>
-
-
-    <div class="field full">
-
-        <label>
-        Screenshot / Evidence Image
-        </label>
-
-        <input
-        type="file"
-        accept="image/*"
-        onchange="loadImage(event,${id})">
-
-
-        <img
-        id="preview-${id}"
-        class="preview-img">
-
-    </div>
-
-
-    <div class="field full">
-
-        <label>
-        Additional Notes
-        </label>
-
-        <textarea
-        class="notes"
-        placeholder="Context, observations, relevant details, etc."></textarea>
-
-    </div>
-
+</a>
 
 </div>
 
-`;
 
 
-document
-.getElementById("evidenceContainer")
-.appendChild(box);
+<script>
 
-}
+/*
+=========================================
+OPEN OFFICIAL GOVERNMENT PORTAL
+=========================================
+*/
 
-function loadImage(event,id){
+function openPortal(url){
 
-const file=event.target.files[0];
+    /*
+    Direct navigation is intentionally used
+    instead of window.open().
 
-if(!file)return;
+    This prevents mobile browsers and popup
+    blockers from opening the wrong page.
+    */
 
-
-const reader=new FileReader();
-
-
-reader.onload=function(e){
-
-    images[id]=e.target.result;
-
-    const preview=
-    document.getElementById("preview-"+id);
-
-    preview.src=e.target.result;
-
-    preview.style.display="block";
-
-};
-
-
-reader.readAsDataURL(file);
+    window.location.assign(url);
 
 }
-
-function getValue(box,selector){
-
-const el=box.querySelector(selector);
-
-return el ? el.value.trim() : "";
-
-}
-
-function wrapped(doc,text,x,y,width,lineHeight){
-
-const lines=
-doc.splitTextToSize(
-    text || "Not provided",
-    width
-);
-
-doc.text(lines,x,y);
-
-return y+(lines.length*lineHeight);
-
-}
-
-function header(doc,title){
-
-doc.setFont("helvetica","bold");
-
-doc.setFontSize(16);
-
-doc.text(title,20,20);
-
-doc.setDrawColor(150);
-
-doc.line(20,24,190,24);
-
-}
-
-function generatePDF(){
-
-const doc=new jsPDF({
-    orientation:"portrait",
-    unit:"mm",
-    format:"a4"
-});
-
-
-const reportId=
-document.getElementById("reportId").value;
-
-const reportDate=
-document.getElementById("reportDate").value;
-
-const reporter=
-document.getElementById("reporter").value;
-
-const contact=
-document.getElementById("contact").value;
-
-const summary=
-document.getElementById("summary").value;
-
-const declaration=
-document.getElementById("declaration").value;
-
-
-/* COVER */
-
-doc.setFont("helvetica","bold");
-
-doc.setFontSize(25);
-
-doc.text(
-    "MUSLIM YOUTH ADRA",
-    105,
-    55,
-    {align:"center"}
-);
-
-
-doc.setFontSize(18);
-
-doc.text(
-    "EVIDENCE REPORT",
-    105,
-    68,
-    {align:"center"}
-);
-
-
-doc.setFont("helvetica","normal");
-
-doc.setFontSize(11);
-
-doc.text(
-    "Hate Speech / Incident Documentation",
-    105,
-    78,
-    {align:"center"}
-);
-
-
-doc.setFontSize(12);
-
-doc.text(
-    "Report ID: "+reportId,
-    30,
-    105
-);
-
-
-doc.text(
-    "Report Date: "+reportDate,
-    30,
-    114
-);
-
-
-doc.text(
-    "Reporter / Organization: "+
-    (reporter || "Not provided"),
-    30,
-    123
-);
-
-
-if(contact){
-
-    doc.text(
-        "Contact: "+contact,
-        30,
-        132
-    );
-
-}
-
-
-doc.setFont("helvetica","bold");
-
-doc.text(
-    "Summary",
-    30,
-    150
-);
-
-
-doc.setFont("helvetica","normal");
-
-wrapped(
-    doc,
-    summary,
-    30,
-    159,
-    150,
-    5
-);
-
-
-doc.setFontSize(8);
-
-doc.text(
-    "Documentation only — verify evidence independently.",
-    30,
-    260
-);
-
-
-/* EVIDENCE PAGES */
-
-const boxes=
-document.querySelectorAll(".evidence");
-
-
-boxes.forEach((box,index)=>{
-
-    doc.addPage();
-
-    header(
-        doc,
-        "Evidence Item "+(index+1)
-    );
-
-
-    let y=35;
-
-
-    const platform=
-    getValue(box,".platform");
-
-    const type=
-    getValue(box,".contentType");
-
-    const account=
-    getValue(box,".account");
-
-    const username=
-    getValue(box,".username");
-
-    const url=
-    getValue(box,".url");
-
-    const date=
-    getValue(box,".date");
-
-    const time=
-    getValue(box,".time");
-
-    const category=
-    getValue(box,".category");
-
-    const status=
-    getValue(box,".status");
-
-    const statement=
-    getValue(box,".statement");
-
-    const notes=
-    getValue(box,".notes");
-
-
-    function field(label,value){
-
-        doc.setFont("helvetica","bold");
-
-        doc.text(
-            label+":",
-            20,
-            y
-        );
-
-
-        doc.setFont("helvetica","normal");
-
-        const lines=
-        doc.splitTextToSize(
-            value || "Not provided",
-            125
-        );
-
-
-        doc.text(
-            lines,
-            65,
-            y
-        );
-
-
-        y+=Math.max(
-            7,
-            lines.length*5
-        );
-
-    }
-
-
-    field("Platform",platform);
-
-    field("Content Type",type);
-
-    field("Account / Page",account);
-
-    field("Username",username);
-
-    field("URL",url);
-
-    field("Date",date);
-
-    field("Time",time);
-
-    field("Category",category);
-
-    field("Evidence Status",status);
-
-
-    y+=3;
-
-
-    doc.setFont("helvetica","bold");
-
-    doc.text(
-        "Exact Statement / Reported Text",
-        20,
-        y
-    );
-
-
-    y+=7;
-
-
-    doc.setFont("helvetica","normal");
-
-    y=wrapped(
-        doc,
-        statement,
-        20,
-        y,
-        170,
-        5
-    );
-
-
-    if(images[index+1]){
-
-        y+=8;
-
-        if(y>240){
-
-            doc.addPage();
-
-            header(
-                doc,
-                "Evidence Image — Continued"
-            );
-
-            y=35;
-
-        }
-
-
-        doc.setFont("helvetica","bold");
-
-        doc.text(
-            "Screenshot / Image Evidence",
-            20,
-            y
-        );
-
-
-        y+=6;
-
-
-        try{
-
-            const img=
-            images[index+1];
-
-            const props=
-            doc.getImageProperties(img);
-
-            let w=165;
-
-            let h=
-            (props.height/props.width)*w;
-
-
-            if(h>115){
-
-                h=115;
-
-                w=
-                (props.width/props.height)*h;
-
-            }
-
-
-            doc.addImage(
-                img,
-                "JPEG",
-                20,
-                y,
-                w,
-                h
-            );
-
-
-            y+=h+8;
-
-        }
-        catch(error){
-
-            doc.text(
-                "Image could not be embedded.",
-                20,
-                y
-            );
-
-            y+=8;
-
-        }
-
-    }
-
-
-    if(notes){
-
-        if(y>245){
-
-            doc.addPage();
-
-            header(
-                doc,
-                "Evidence Item "+(index+1)+" — Notes"
-            );
-
-            y=35;
-
-        }
-
-
-        doc.setFont("helvetica","bold");
-
-        doc.text(
-            "Additional Notes",
-            20,
-            y
-        );
-
-
-        y+=7;
-
-        doc.setFont("helvetica","normal");
-
-        wrapped(
-            doc,
-            notes,
-            20,
-            y,
-            170,
-            5
-        );
-
-    }
-
-});
-
-
-/* DECLARATION */
-
-doc.addPage();
-
-header(
-    doc,
-    "Declaration & Report Information"
-);
-
-
-let y=38;
-
-
-doc.setFont("helvetica","bold");
-
-doc.text(
-    "Declaration",
-    20,
-    y
-);
-
-
-y+=9;
-
-
-doc.setFont("helvetica","normal");
-
-y=wrapped(
-    doc,
-    declaration,
-    20,
-    y,
-    170,
-    5
-);
-
-
-y+=15;
-
-
-doc.setFont("helvetica","bold");
-
-doc.text(
-    "Evidence Handling",
-    20,
-    y
-);
-
-
-y+=9;
-
-
-doc.setFont("helvetica","normal");
-
-
-wrapped(
-    doc,
-    "Original evidence should be preserved separately. "
-    +"Screenshots may not contain all underlying metadata. "
-    +"URLs, timestamps, account information and other "
-    +"details should be independently verified where appropriate.",
-    20,
-    y,
-    170,
-    5
-);
-
-
-/* PAGE NUMBERS */
-
-const total=
-doc.internal.getNumberOfPages();
-
-
-for(let i=1;i<=total;i++){
-
-    doc.setPage(i);
-
-    doc.setFontSize(8);
-
-    doc.setFont("helvetica","normal");
-
-    doc.text(
-        "MUSLIM YOUTH ADRA • "+
-        reportId+
-        " • Page "+
-        i+
-        " of "+
-        total,
-        105,
-        290,
-        {align:"center"}
-    );
-
-}
-
-
-const filename=
-"MUSLIM_YOUTH_ADRA_"+
-reportId+
-"_Evidence_Report.pdf";
-
-
-doc.save(filename);
 
 
 /*
-   Open Government Portal Page
-   after PDF generation
+=========================================
+BACK TO PDF GENERATOR
+=========================================
 */
 
-setTimeout(function(){
+function goBackToPDF(){
 
-    showPortals();
-
-},700);
+    window.location.assign(
+        "pdf.html"
+    );
 
 }
 
-function showPortals(){
+</script>
 
-document
-.getElemen
+
+</body>
+
+</html>
